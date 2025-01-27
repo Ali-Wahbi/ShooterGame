@@ -29,7 +29,7 @@
                     "id": "f6f07fb2-ed9a-4580-9e2e-dfc029d103d2",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
@@ -221,7 +221,7 @@
                     "name": "",
                     "id": "886b61c7-a669-42e5-a904-0a5ea157c630",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Weapon1",

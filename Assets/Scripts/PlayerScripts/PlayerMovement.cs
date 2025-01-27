@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,15 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [SerializeField] private float movementSpeed;
-    [SerializeField] private CharacterController characterController;
-    [SerializeField] private GameObject cursor;
-    [SerializeField] private float cursorSensitivity = 0.1f;
-    PlayerAnim pAnimator;
 
-    // horizontal and vertical movement for the player
-    float horizon;
-    float vertic;
+    [SerializeField] private WeaponController weapon1;
+    [SerializeField] private WeaponController weapon2;
+
+    public WeaponType weapon1Type;
+    public WeaponType weapon2Type;
+    Rigidbody2D rb;
+    PlayerAnim playerAnim;
+    PlayerCursor cursorHandler;
 
     Vector2 directions;
     Vector2 mousePos;
@@ -22,7 +24,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        pAnimator = GetComponent<PlayerAnim>();
+        rb = GetComponent<Rigidbody2D>();
+        playerAnim = GetComponent<PlayerAnim>();
+        cursorHandler = GetComponent<PlayerCursor>();
+        cursorHandler.SetCursorSprite(weapon1Type);
     }
 
     void Update()
@@ -33,19 +38,28 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        characterController.Move(directions * movementSpeed * Time.deltaTime);
+
+        rb.velocity = directions * movementSpeed;
     }
 
     void Animate()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        SetCursorPos(mousePos);
+        cursorHandler.SetCursorPos(mousePos);
+        cursorHandler.SetCursorRot();
+        SetWeaponsRot();
         playerPos = transform.position;
 
 
         bool flip = mousePos.x < playerPos.x;
-        pAnimator.SetAnim(directions, flip);
+        playerAnim.SetAnim(directions, flip);
+    }
+
+    void SetWeaponsRot()
+    {
+        weapon1.RotateSprite(playerPos: playerPos);
+        weapon2.RotateSprite(playerPos: playerPos);
     }
 
     #region Input Sys
@@ -62,34 +76,26 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
-    #region Cursor
-    void SetCursorPos(Vector2 pos)
-    {
-        cursor.transform.position = pos * cursorSensitivity;
-    }
 
-    // Rotate the cursor based on angle from player to cursor
-    void SetCursorRot()
-    {
 
-    }
 
-    // Change the cursor sprite based on shooted weapon
-    void SetCursorSprite()
-    {
 
-    }
-    #endregion
+
 
     #region Weapons
     public void WeaponOneClicked()
     {
-        Debug.Log("Weapon 1 clicked");
+        // Debug.Log("Weapon 1 clicked");
+        cursorHandler.SetCursorSprite(weapon1.GetWeaponType());
+        weapon1.Attack();
+
     }
 
     public void WeaponTwoClicked()
     {
-        Debug.Log("Weapon 2 clicked");
+        // Debug.Log("Weapon 2 clicked");
+        cursorHandler.SetCursorSprite(weapon2.GetWeaponType());
+        weapon2.Attack();
 
     }
     #endregion
