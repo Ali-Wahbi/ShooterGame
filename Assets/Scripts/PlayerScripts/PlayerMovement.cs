@@ -9,11 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float movementSpeed;
 
-    [SerializeField] private WeaponController weapon1;
-    [SerializeField] private WeaponController weapon2;
+    [SerializeField] private WeaponController weaponsController;
 
-    public WeaponType weapon1Type;
-    public WeaponType weapon2Type;
     Rigidbody2D rb;
     PlayerAnim playerAnim;
     PlayerCursor cursorHandler;
@@ -22,12 +19,14 @@ public class PlayerMovement : MonoBehaviour
     Vector2 mousePos;
     Vector2 playerPos;
 
+    public bool flipWeapon = false;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<PlayerAnim>();
         cursorHandler = GetComponent<PlayerCursor>();
-        cursorHandler.SetCursorSprite(weapon1Type);
+        cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
     }
 
     void Update()
@@ -38,7 +37,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-
         rb.velocity = directions * movementSpeed;
     }
 
@@ -52,14 +50,28 @@ public class PlayerMovement : MonoBehaviour
         playerPos = transform.position;
 
 
-        bool flip = mousePos.x < playerPos.x;
-        playerAnim.SetAnim(directions, flip);
+        // bool flip = mousePos.x < playerPos.x;
+        bool flip = cursorHandler.GetCursorPos().x < playerPos.x;
+        if (flipWeapon != flip)
+        {
+            SetWeaponsControllerPos();
+            flipWeapon = flip;
+            playerAnim.SetAnim(directions, flip);
+        }
+    }
+
+    private void SetWeaponsControllerPos()
+    {
+        int rev = -1;
+        Transform wct = weaponsController.GetComponent<Transform>();
+
+        wct.position = wct.position.Multiply(x: rev);
     }
 
     void SetWeaponsRot()
     {
-        weapon1.RotateSprite(playerPos: playerPos);
-        weapon2.RotateSprite(playerPos: playerPos);
+        // weapon1.RotateSprite(playerPos: playerPos);
+        weaponsController.RotateSprite(playerPos: playerPos);
     }
 
     #region Input Sys
@@ -83,19 +95,27 @@ public class PlayerMovement : MonoBehaviour
 
 
     #region Weapons
-    public void WeaponOneClicked()
+    public void WeaponOneClicked(InputAction.CallbackContext context)
     {
         // Debug.Log("Weapon 1 clicked");
-        cursorHandler.SetCursorSprite(weapon1.GetWeaponType());
-        weapon1.Attack();
+        if (context.action.WasPressedThisFrame())
+        {
+
+            weaponsController.Weapon1Attack();
+            cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
+        }
 
     }
 
-    public void WeaponTwoClicked()
+    public void WeaponTwoClicked(InputAction.CallbackContext context)
     {
         // Debug.Log("Weapon 2 clicked");
-        cursorHandler.SetCursorSprite(weapon2.GetWeaponType());
-        weapon2.Attack();
+        if (context.action.WasPressedThisFrame())
+        {
+
+            weaponsController.Weapon2Attack();
+            cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
+        }
 
     }
     #endregion

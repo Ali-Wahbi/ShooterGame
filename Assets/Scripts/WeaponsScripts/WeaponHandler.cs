@@ -1,34 +1,73 @@
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
     public AttackingWeapon usedWeapon;
-    public SpriteRenderer sprite;
+    public AttackingWeapon weapon1;
+    public AttackingWeapon weapon2;
+    public SpriteRenderer GunSprite;
+    public SpriteRenderer SlashSprite;
+    // public SpriteRenderer StapSprite;
     public Transform cursor;
     public Transform bulletPointer;
 
     private void Start()
     {
+        SetUsedWeapon(weapon: weapon1);
         SetSprite();
     }
-    public void Attack()
+    void SetUsedWeapon(AttackingWeapon weapon)
+    {
+        usedWeapon = weapon;
+        SetSprite();
+    }
+    public void Weapon1Attack()
+    {
+        if (weapon1)
+        {
+            SetUsedWeapon(weapon1);
+            if (usedWeapon) Attack();
+        }
+    }
+    public void Weapon2Attack()
+    {
+        if (weapon2)
+        {
+            SetUsedWeapon(weapon2);
+            if (usedWeapon) Attack();
+        }
+    }
+    void Attack()
     {
         if (usedWeapon.canFire)
         {
-            Transform spriteTransform = sprite.GetComponent<Transform>();
-            // usedWeapon.Attack(startPos: bulletPointer.position, startRot: transform.rotation);
-            // try dynamic attack
+            Transform spriteTransform = GetSpriteTransform();
+
             // Refactor this dynamic to be the main attack
-            usedWeapon.DynamicAttack(startTran: bulletPointer, startRot: transform);
-            AttackAnim(spriteTransform);
+            usedWeapon.DynamicAttack(startTran: bulletPointer, startRot: transform, sprite: spriteTransform);
+
         }
 
     }
 
-    void AttackAnim(Transform anim)
+    Transform GetSpriteTransform()
     {
+        switch (usedWeapon.GetWeaponAnim())
+        {
+            case WeaponAnim.Stap:
+                return null;
 
+            case WeaponAnim.Slash:
+                return SlashSprite.GetComponent<Transform>();
+
+            case WeaponAnim.Shoot:
+                return GunSprite.GetComponent<Transform>();
+
+            default:
+                return null;
+        }
     }
 
     public void RotateSprite(Vector2 playerPos)
@@ -42,9 +81,8 @@ public class WeaponController : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, correctAngle);
 
         // set the vertical flip of the sprite
-        sprite.flipY = correctAngle > 90 && correctAngle < 270;
+        GunSprite.flipY = correctAngle > 90 && correctAngle < 270;
     }
-    public void Animate() { }
 
     public void SetWeapon(Weapon weapon)
     {
@@ -54,12 +92,36 @@ public class WeaponController : MonoBehaviour
 
     void SetSprite()
     {
-        sprite.sprite = usedWeapon.GetWeaponSprite();
+        if (usedWeapon)
+        {
+            switch (usedWeapon.GetWeaponAnim())
+            {
+                case WeaponAnim.Stap:
+                    break;
+                case WeaponAnim.Slash:
+                    SlashSprite.enabled = true;
+                    GunSprite.enabled = false;
+                    SlashSprite.sprite = usedWeapon.GetWeaponSprite();
+                    break;
+
+                case WeaponAnim.Shoot:
+                    GunSprite.enabled = true;
+                    SlashSprite.enabled = false;
+                    GunSprite.sprite = usedWeapon.GetWeaponSprite();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            GunSprite.sprite = null;
+            SlashSprite.sprite = null;
+        }
+
     }
 
-    public WeaponType GetWeaponType()
-    {
-        return usedWeapon.GetWeaponType();
-    }
+    public WeaponType GetWeaponType() => usedWeapon ? usedWeapon.GetWeaponType() : WeaponType.Bullets;
 
 }

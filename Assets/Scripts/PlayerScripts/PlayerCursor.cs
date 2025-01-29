@@ -21,7 +21,10 @@ public class PlayerCursor : MonoBehaviour
     {
         cursor.transform.position = pos * cursorSensitivity;
     }
-
+    public Vector3 GetCursorPos()
+    {
+        return cursor.transform.position;
+    }
     // Rotate the cursor based on angle from player to cursor
     public void SetCursorRot()
     {
