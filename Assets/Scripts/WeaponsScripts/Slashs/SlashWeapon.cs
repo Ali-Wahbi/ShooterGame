@@ -40,6 +40,7 @@ abstract public class SlashWeapon : AttackingWeapon
         StartCoroutine(AnimateSlashing(sprite));
     }
 
+
     IEnumerator AnimateSlashing(Transform sprite)
     {
         // sprite.position = new Vector3(sprite.position.x - 1f, sprite.position.y, sprite.position.z);
@@ -47,7 +48,7 @@ abstract public class SlashWeapon : AttackingWeapon
         sprite.Rotate(0, 0, one * rotateDeg);
         isFlibed = !isFlibed;
 
-        Debug.Log("Animating slashing: " + sprite);
+        // Debug.Log("Animating slashing: " + sprite);
         yield return new WaitForSeconds(0.3f);
         SetWeaponSprite(sprite);
     }

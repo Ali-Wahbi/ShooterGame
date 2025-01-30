@@ -16,9 +16,20 @@ public class SlashEffect : MonoBehaviour
         transform.position += transform.right * Time.deltaTime * speed;
     }
 
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Breakable")
+        {
+            other.gameObject.GetComponent<Breakable>().OnBreak();
+            Debug.Log("Hited Breakable on trigger ");
+        }
+    }
+
     public void OnAnimEnds()
     {
-        Debug.Log("Slash anim ended");
+        // Debug.Log("Slash anim ended");
         Destroy(gameObject);
     }
 

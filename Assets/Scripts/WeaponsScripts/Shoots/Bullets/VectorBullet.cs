@@ -21,7 +21,7 @@ public class VectorBullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (other.gameObject.tag == "Wall")
+        if (other.gameObject.tag == "Breakable")
         {
             //apply damage to enemies
         }

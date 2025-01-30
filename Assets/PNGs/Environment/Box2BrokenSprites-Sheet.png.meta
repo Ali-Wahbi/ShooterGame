@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e04688420367239448c73405352b283d
+guid: 2cb1aea960f48e44983f88280401f1e9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,11 +44,11 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-  spriteExtrude: 0
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Character idle1
+      name: Box2BrokenSprites-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 32
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,41 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eced7137250c2c248aaf9d54c809c813
-      internalID: 1421937344
+      spriteID: ef7a77d8755722a46823ecc705211797
+      internalID: -55063441
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character idle2
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bdcb944d5368b7646b96e4d27435559c
-      internalID: -251751613
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character idle3
+      name: Box2BrokenSprites-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
         y: 0
-        width: 16
-        height: 32
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,41 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc534c5719ebdac44a7104d2bbf1fd25
-      internalID: -836443694
+      spriteID: 3aefa529eb56c514b9e6a5fe0905ee89
+      internalID: 1099704502
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character idle4
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 0
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f630ff17c8611da45b83a8703842c8f5
-      internalID: 1405253469
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character walk1
+      name: Box2BrokenSprites-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 16
-        height: 32
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,41 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3e43503073bddf44384e6d9e06195c0f
-      internalID: -1707864905
+      spriteID: e9a2669f31a926647b5d6a07fc1b894c
+      internalID: -1514334431
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Character walk2
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9faa2813e7ec40b40a408e7a401d97b2
-      internalID: 480560695
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character walk3
+      name: Box2BrokenSprites-Sheet_3
       rect:
         serializedVersion: 2
         x: 96
         y: 0
-        width: 16
-        height: 32
+        width: 32
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,29 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8df8c3675ce962a4ea8046f90dac25ad
-      internalID: -346808165
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Character walk4
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b43230470e3dbed48afd74b668c2e025
-      internalID: 1363217993
+      spriteID: fbbe21758778ac344a6084770b0f395b
+      internalID: 921319135
       vertices: []
       indices: 
       edges: []
@@ -275,14 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Character idle1: 1421937344
-      Character idle2: -251751613
-      Character idle3: -836443694
-      Character idle4: 1405253469
-      Character walk1: -1707864905
-      Character walk2: 480560695
-      Character walk3: -346808165
-      Character walk4: 1363217993
+      Box2BrokenSprites-Sheet_0: -55063441
+      Box2BrokenSprites-Sheet_1: 1099704502
+      Box2BrokenSprites-Sheet_2: -1514334431
+      Box2BrokenSprites-Sheet_3: 921319135
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

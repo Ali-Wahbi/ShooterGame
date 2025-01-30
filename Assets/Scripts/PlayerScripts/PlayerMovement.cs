@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private WeaponController weaponsController;
 
+    [SerializeField] bool CanMove = true;
+
     Rigidbody2D rb;
     PlayerAnim playerAnim;
     PlayerCursor cursorHandler;
@@ -20,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     Vector2 playerPos;
 
     public bool flipWeapon = false;
+
+
 
     void Start()
     {
@@ -31,8 +35,11 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        Move();
-        Animate();
+        if (CanMove)
+        {
+            Move();
+            Animate();
+        }
     }
 
     void Move()
@@ -78,13 +85,19 @@ public class PlayerMovement : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         directions = context.ReadValue<Vector2>();
-        Debug.Log("Move called, context:");
+        // Debug.Log("Move called, context:");
     }
     public void OnAim(InputAction.CallbackContext context)
     {
         // Add later for further flexibilty
         // SetCursorPos(context.ReadValue<Vector2>());
         // Debug.Log(context.ReadValue<Vector2>());
+    }
+
+    public void PauseClicked()
+    {
+        Debug.Log("Pause Clicked");
+
     }
     #endregion
 
@@ -119,10 +132,4 @@ public class PlayerMovement : MonoBehaviour
 
     }
     #endregion
-
-    public void PauseClicked()
-    {
-        Debug.Log("Pause Clicked");
-
-    }
 }
