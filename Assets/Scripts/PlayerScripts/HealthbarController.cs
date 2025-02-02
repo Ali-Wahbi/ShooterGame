@@ -21,7 +21,7 @@ public class HealthbarController : MonoBehaviour
     {
         AddFirstFilled();
         // SetBackgroundLength();
-        IncMaxShield(6);
+        // IncMaxShield(6);
     }
 
     public void IncMaxShield(int shieldCount)
@@ -112,7 +112,7 @@ public class HealthbarController : MonoBehaviour
 
             //TODO: Destroy but add animation later
             Destroy(container.transform.GetChild(totalCount - 1).gameObject);
-            Debug.Log("Remove Child from : " + container + "  At index : " + (totalCount - 1));
+            // Debug.Log("Remove Child from : " + container + "  At index : " + (totalCount - 1));
             yield return new WaitForSeconds(0.1f);
 
         }

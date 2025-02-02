@@ -23,6 +23,9 @@ public class PlayerMovement : MonoBehaviour
 
     public bool flipWeapon = false;
 
+    bool canPickUp;
+    public PickupWeapon pickupWeapon;
+
 
 
     void Start()
@@ -61,18 +64,16 @@ public class PlayerMovement : MonoBehaviour
         bool flip = cursorHandler.GetCursorPos().x < playerPos.x;
         if (flipWeapon != flip)
         {
-            SetWeaponsControllerPos();
+            SetWeaponsControllerPos(flip);
             flipWeapon = flip;
-            playerAnim.SetAnim(directions, flip);
         }
+        playerAnim.SetAnim(directions, flip);
     }
 
-    private void SetWeaponsControllerPos()
+    private void SetWeaponsControllerPos(bool flip)
     {
-        int rev = -1;
-        Transform wct = weaponsController.GetComponent<Transform>();
-
-        wct.position = wct.position.Multiply(x: rev);
+        // int rev = -1
+        weaponsController.FlipSprite(flip);
     }
 
     void SetWeaponsRot()
@@ -94,6 +95,11 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log(context.ReadValue<Vector2>());
     }
 
+    public void OnSwitch(InputAction.CallbackContext context)
+    {
+        Debug.Log("Switching weapons");
+        if (context.action.WasPressedThisFrame()) weaponsController.SwitchUsedWeapon();
+    }
     public void PauseClicked()
     {
         Debug.Log("Pause Clicked");
@@ -103,19 +109,38 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-
+    public void SetPickupWeapon(PickupWeapon newWeapon, bool canPick)
+    {
+        pickupWeapon = newWeapon;
+        canPickUp = canPick;
+        Debug.Log("Set pickup weapon: " + pickupWeapon + " can pick: " + canPickUp);
+    }
 
 
 
     #region Weapons
+    bool canUseWeapon = true;
     public void WeaponOneClicked(InputAction.CallbackContext context)
     {
         // Debug.Log("Weapon 1 clicked");
         if (context.action.WasPressedThisFrame())
         {
+            if (canPickUp)
+            {
+                SwitchUsedWeapon();
+                canUseWeapon = false;
+                return;
+            }
+            if (canUseWeapon)
+            {
 
-            weaponsController.Weapon1Attack();
-            cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
+                weaponsController.Weapon1Attack();
+                cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
+            }
+            else
+            {
+                canUseWeapon = true;
+            }
         }
 
     }
@@ -125,11 +150,35 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log("Weapon 2 clicked");
         if (context.action.WasPressedThisFrame())
         {
-
-            weaponsController.Weapon2Attack();
-            cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
+            if (canPickUp)
+            {
+                SwitchUsedWeapon();
+                canUseWeapon = false;
+                return;
+            }
+            if (canUseWeapon)
+            {
+                weaponsController.Weapon2Attack();
+                cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
+            }
+            else
+            {
+                canUseWeapon = true;
+            }
         }
 
     }
+
+    private void SwitchUsedWeapon()
+    {
+        AttackingWeapon currentAttack = weaponsController.usedWeapon;
+        Debug.Log("Current weapon to switch: " + currentAttack?.weapon.WeaponName);
+
+        weaponsController.SetNewWeapon(pickupWeapon.GetPickWeapon());
+
+        pickupWeapon.SwitchAttackingWeapon(currentAttack);
+        canPickUp = false;
+    }
+
     #endregion
 }

@@ -49,7 +49,7 @@ abstract public class SlashWeapon : AttackingWeapon
         isFlibed = !isFlibed;
 
         // Debug.Log("Animating slashing: " + sprite);
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(GetWeaponReloadSpeed());
         SetWeaponSprite(sprite);
     }
 
