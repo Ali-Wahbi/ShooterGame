@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
     {
         pickupWeapon = newWeapon;
         canPickUp = canPick;
-        Debug.Log("Set pickup weapon: " + pickupWeapon + " can pick: " + canPickUp);
+        // Debug.Log("Set pickup weapon: " + pickupWeapon + " can pick: " + canPickUp);
     }
 
 

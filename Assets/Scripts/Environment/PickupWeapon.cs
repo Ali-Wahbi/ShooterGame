@@ -18,6 +18,7 @@ public class PickupWeapon : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && pickWeapon)
         {
+            OutlineVisability(visible: true);
             PlayerMovement pm = other.gameObject.GetComponent<PlayerMovement>();
             pm.SetPickupWeapon(this, true);
         }
@@ -27,9 +28,16 @@ public class PickupWeapon : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && pickWeapon)
         {
+            OutlineVisability(visible: false);
             PlayerMovement pm = other.gameObject.GetComponent<PlayerMovement>();
             pm.SetPickupWeapon(null, false);
         }
+    }
+
+    void OutlineVisability(bool visible)
+    {
+        int vis = visible ? 1 : 0;
+        GetComponent<Renderer>().material.SetInt("_ShowOutline", vis);
     }
 
     void SetSprite() => sp.sprite = pickWeapon.GetWeaponSprite();
