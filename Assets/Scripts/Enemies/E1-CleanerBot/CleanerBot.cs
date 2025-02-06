@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class CleanerBot : MonoBehaviour
 {
-    [SerializeField] int health;
     [SerializeField] int damage;
     [SerializeField] float movementSpeed;
-    CircleCollider2D detectionArea;
+    [SerializeField] GameObject bullet;
+    [SerializeField] CircleCollider2D detectionArea;
     Animator anim;
     SpriteRenderer sr;
     Rigidbody2D rb;
@@ -29,12 +29,14 @@ public class CleanerBot : MonoBehaviour
 
     bool canWalk = true;
     bool BotIsAggressive = false;
+    bool canAttack = true;
     public GameObject target;
+
+    bool BotIsDefeated = false;
 
 
     private void Start()
     {
-        detectionArea = GetComponent<CircleCollider2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         rb = GetComponent<Rigidbody2D>();
@@ -47,8 +49,8 @@ public class CleanerBot : MonoBehaviour
     void Update()
     {
         AnimateMovement();
+        if (BotIsDefeated) return;
 
-        Vector2 direction = roamingPos - transform.position;
         if (!BotIsAggressive)
         {
             if (canWalk)
@@ -88,6 +90,8 @@ public class CleanerBot : MonoBehaviour
                     currentState = EnemyStates.Attack;
                     Debug.Log("Current State: " + currentState);
                     // Attack with 3 bullets
+                    if (canAttack)
+                        FireBullets(transform, target.transform.position);
                 }
             }
             else
@@ -178,25 +182,81 @@ public class CleanerBot : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public void OnDetectEnterCollision(Collider2D other)
     {
-        if (other.gameObject.tag == "Player")
+        Debug.Log("Player entered detection area");
+        SetAnimationBool(isAggressive, true);
+        BotIsAggressive = true;
+        target = other.gameObject;
+
+    }
+
+    public void OnDetectExitCollision()
+    {
+        Debug.Log("Player entered detection area");
+        // set time before cooldown
+        SetAnimationBool(isAggressive, false);
+    }
+
+
+    public void FireBullets(Transform startTran, Vector3 target)
+    {
+        StartCoroutine(ShootBullets(startTran, target));
+    }
+
+
+    IEnumerator ShootBullets(Transform startTran, Vector3 target)
+    {
+        float bulletSpace = 0.2f;
+        float zAngle = Mathf.Atan2(target.y - transform.position.y, target.x - transform.position.x) * Mathf.Rad2Deg;
+        // shoot the bullet
+        SpawnBullet(startTran, zAngle);
+        yield return new WaitForSeconds(bulletSpace);
+
+        SpawnBullet(startTran, zAngle);
+        yield return new WaitForSeconds(bulletSpace);
+
+        SpawnBullet(startTran, zAngle);
+        yield return new WaitForSeconds(bulletSpace);
+
+        canAttack = false;
+
+        // start cooldown timer
+        AttackCooldown();
+
+    }
+
+    private void SpawnBullet(Transform startTran, float zAngle)
+    {
+        GameObject bult = Instantiate(bullet, position: startTran.position, Quaternion.identity);
+        bult.GetComponent<Transform>().eulerAngles = new Vector3(0, 0, zAngle);
+    }
+
+    void AttackCooldown()
+    {
+        StartCoroutine(coolDown());
+
+        IEnumerator coolDown()
         {
-            Debug.Log("Player entered detection area");
-            SetAnimationBool(isAggressive, true);
-            BotIsAggressive = true;
-            target = other.gameObject;
+            yield return new WaitForSeconds(3);
+            canAttack = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    public void HandleDefeat()
     {
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log("Player entered detection area");
-            SetAnimationBool(isAggressive, false);
-        }
+        canWalk = false;
+        canAttack = false;
+
+        // Disable box collider
+        GetComponent<BoxCollider2D>().enabled = false;
+        BotIsDefeated = true;
+        SetAnimationBool(isDefeated, true);
+        Destroy(gameObject, 2.5f);
     }
+
+
+
 }
 
 public enum EnemyStates

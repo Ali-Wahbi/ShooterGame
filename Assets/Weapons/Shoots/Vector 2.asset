@@ -15,5 +15,6 @@ MonoBehaviour:
   WeaponName: Vector 2
   WeaponSprite: {fileID: 21300000, guid: 6764557b651bd72458a060b95fd98b28, type: 3}
   WeaponType: 0
+  WeaponAnim: 2
   WeaponDamage: 6
   WeaponSpeed: 0.8

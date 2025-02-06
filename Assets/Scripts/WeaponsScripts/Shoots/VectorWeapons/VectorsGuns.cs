@@ -16,7 +16,6 @@ public class VectorsGuns : ShootingWeapon
 
     IEnumerator ShootDynamicBullets(Transform startTran, Transform startRot)
     {
-
         for (int i = 0; i < bulletCount; i++)
         {
             // shoot the bullet

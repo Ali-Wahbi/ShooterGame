@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: b304411071b077949b50354cead7e354, type: 2}
   canFire: 1
+  damage: 6
   MeleeNormal: {fileID: 21300000, guid: dea920744a8d44a4a8967ae34593ac64, type: 3}
   MeleeFlibed: {fileID: 21300000, guid: 41643496e2ecb7f4a82800d6564c8d0c, type: 3}
   slash: {fileID: 7461185612583562016, guid: b2213e49f420b044aad5f0efe7f81e24, type: 3}

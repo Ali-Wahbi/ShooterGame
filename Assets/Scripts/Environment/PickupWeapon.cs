@@ -12,6 +12,9 @@ public class PickupWeapon : MonoBehaviour
     {
         sp = GetComponent<SpriteRenderer>();
         SetSprite();
+
+        pickWeapon.canFire = true;
+        pickWeapon = Instantiate(pickWeapon, transform);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

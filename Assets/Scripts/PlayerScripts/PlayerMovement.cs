@@ -128,6 +128,7 @@ public class PlayerMovement : MonoBehaviour
             if (canPickUp)
             {
                 SwitchUsedWeapon();
+                // Prevent the player from attacking in the same frame when picking up the weapon
                 canUseWeapon = false;
                 return;
             }

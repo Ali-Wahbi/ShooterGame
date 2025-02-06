@@ -6,6 +6,8 @@ abstract public class SlashWeapon : AttackingWeapon
     bool isFlibed = false;
     float rotateDeg = 120;
 
+    public int damage;
+
     [SerializeField] Sprite MeleeNormal;
     [SerializeField] Sprite MeleeFlibed;
 
