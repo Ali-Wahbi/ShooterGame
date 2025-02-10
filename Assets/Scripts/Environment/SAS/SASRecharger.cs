@@ -41,7 +41,7 @@ public class SASRecharger : MonoBehaviour
 
                 int remainder = Mathf.Max(0, NumberOfCharges - missingShield);
                 player.RechargeShield(NumberOfCharges - remainder);
-                PopUpText.Create(damage: NumberOfCharges - remainder, pos: transform.position, color: PopupColor.Cyan);
+                PopUpText.Create(damage: NumberOfCharges - remainder, pos: transform.position, color: PopupColor.Cyan, randomDirection: false);
                 NumberOfCharges = remainder;
                 SetSprite();
             }

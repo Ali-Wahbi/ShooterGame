@@ -15,6 +15,7 @@ MonoBehaviour:
   WeaponName: Hammer
   WeaponSprite: {fileID: 21300000, guid: 41643496e2ecb7f4a82800d6564c8d0c, type: 3}
   WeaponType: 2
+  WeaponClass: 2
   WeaponAnim: 0
   WeaponDamage: 8
   WeaponSpeed: 1

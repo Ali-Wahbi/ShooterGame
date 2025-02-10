@@ -8,7 +8,7 @@ public class VectorsGuns : ShootingWeapon
     public int bulletCount = 1;
 
 
-    public override void DynamicFire(Transform startTran, Transform startRot)
+    public override void DynamicFire(Transform startTran, Transform startRot, Vector2 CursorPos = new Vector2())
     {
         StartCoroutine(ShootDynamicBullets(startTran, startRot));
     }

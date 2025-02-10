@@ -13,6 +13,8 @@ public class Breakable : MonoBehaviour
 
     BoxCollider2D breakableCollider;
     SpriteRenderer SR;
+
+    int spawnDropChance = 60;
     private void Reset()
     {
         gameObject.tag = "Breakable";
@@ -31,6 +33,7 @@ public class Breakable : MonoBehaviour
     {
         DisableCollider();
         SetRandomSprite();
+        SpawnDrops();
         // small exlposion then spawn drops
     }
 
@@ -46,6 +49,25 @@ public class Breakable : MonoBehaviour
         Sprite randomSprite = Broken[randomChoice];
         SR.sprite = randomSprite;
     }
+
+    private void SpawnDrops()
+    {
+        // spawn ammo
+        int chance = Random.Range(0, 100);
+        if (chance < spawnDropChance)
+        {
+            // spawn small ammo
+            Debug.Log("Spawn ammo");
+            Instantiate(GameAssets.g.AmmoPickUpPrefap, position: transform.position, rotation: Quaternion.identity);
+
+        }
+    }
+
+    public void MultDropChance(float amount)
+    {
+        spawnDropChance = (int)(spawnDropChance * amount);
+    }
+
     public void AtStart()
     {
         breakableCollider.enabled = true;

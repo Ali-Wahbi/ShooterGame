@@ -46,7 +46,11 @@ public class WeaponController : MonoBehaviour
             Transform spriteTransform = GetSpriteTransform();
 
             // Refactor this dynamic to be the main attack
-            usedWeapon.DynamicAttack(startTran: bulletPointer, startRot: transform, sprite: spriteTransform);
+            usedWeapon.DynamicAttack(
+                startTran: bulletPointer,
+                startRot: transform,
+                sprite: spriteTransform,
+                CursorPos: cursor.position);
 
         }
 
@@ -102,7 +106,12 @@ public class WeaponController : MonoBehaviour
         }
     }
 
-    public Weapon GetWeapon() => usedWeapon ? usedWeapon.weapon : null;
+    public WeaponType GetWeapon1Type() => weapon1 ? weapon1.weapon.WeaponType : WeaponType.Melee;
+    public int GetWeapon1Ammo() => weapon1 ? weapon1.weapon.WeaponAmmo : 0;
+    public WeaponType GetWeapon2Type() => weapon2 ? weapon2.weapon.WeaponType : WeaponType.Melee;
+    public int GetWeapon2Ammo() => weapon2 ? weapon2.weapon.WeaponAmmo : 0;
+
+    public bool GetWeaponCanFire() => usedWeapon ? usedWeapon.GetWeaponCanFire() : false;
 
     void SetSprite()
     {
@@ -162,4 +171,8 @@ public class WeaponController : MonoBehaviour
     }
     public WeaponType GetWeaponType() => usedWeapon ? usedWeapon.GetWeaponType() : WeaponType.Bullets;
 
+    public int GetWeaponAmmo()
+    {
+        return 1;
+    }
 }

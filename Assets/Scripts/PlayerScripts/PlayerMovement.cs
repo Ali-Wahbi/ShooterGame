@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     PlayerAnim playerAnim;
     PlayerCursor cursorHandler;
+    PlayerStats playerStats;
 
     Vector2 directions;
     Vector2 mousePos;
@@ -33,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<PlayerAnim>();
         cursorHandler = GetComponent<PlayerCursor>();
+        playerStats = GetComponent<PlayerStats>();
+
         cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
     }
 
@@ -120,6 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
     #region Weapons
     bool canUseWeapon = true;
+    bool useAmmo = true;
     public void WeaponOneClicked(InputAction.CallbackContext context)
     {
         // Debug.Log("Weapon 1 clicked");
@@ -134,6 +138,31 @@ public class PlayerMovement : MonoBehaviour
             }
             if (canUseWeapon)
             {
+                WeaponType WT = weaponsController.GetWeapon1Type();
+
+                // the ammo use of the weapon
+                int w1Ammo = weaponsController.GetWeapon1Ammo();
+                // the ammo the player has
+                int ammo = playerStats.GetAmmo(WT);
+
+                // no ammo
+                if (ammo <= 0) return;
+                // not enough ammo
+                if (ammo < w1Ammo) return;
+
+
+
+                // fix weapon uses ammo while on weapon cooldown
+                if (useAmmo && weaponsController.GetWeaponCanFire())
+                {
+                    playerStats.DecAmmo(WeaponType.Bullets, w1Ammo);
+                    Debug.Log("AmmoUsed: " + w1Ammo);
+                    useAmmo = false;
+                }
+                else
+                {
+                    useAmmo = true;
+                }
 
                 weaponsController.Weapon1Attack();
                 cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
@@ -151,6 +180,7 @@ public class PlayerMovement : MonoBehaviour
         // Debug.Log("Weapon 2 clicked");
         if (context.action.WasPressedThisFrame())
         {
+
             if (canPickUp)
             {
                 SwitchUsedWeapon();
@@ -159,6 +189,28 @@ public class PlayerMovement : MonoBehaviour
             }
             if (canUseWeapon)
             {
+                WeaponType WT = weaponsController.GetWeapon2Type();
+
+                // the ammo use of the weapon
+                int w2Ammo = weaponsController.GetWeapon2Ammo();
+                // the ammo the player has
+                int ammo = playerStats.GetAmmo(WT);
+
+                // no ammo
+                if (ammo <= 0) return;
+                // not enough ammo
+                if (ammo < w2Ammo) return;
+                if (useAmmo && weaponsController.GetWeaponCanFire())
+                {
+                    playerStats.DecAmmo(WeaponType.Bullets, w2Ammo);
+                    Debug.Log("AmmoUsed: " + w2Ammo);
+                    useAmmo = false;
+                }
+                else
+                {
+                    useAmmo = true;
+                }
+
                 weaponsController.Weapon2Attack();
                 cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
             }

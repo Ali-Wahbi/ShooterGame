@@ -47,5 +47,5 @@ MonoBehaviour:
   weapon: {fileID: 11400000, guid: 852242b2e734dad4496ac614974c0a08, type: 2}
   canFire: 1
   bullet: {fileID: 4194414263129192231, guid: cf02b51570cc7234d81d477d39a4f191, type: 3}
-  bulletSpeed: 25
+  bulletSpeed: 50
   bulletCount: 1

@@ -10,6 +10,13 @@ public class PickupWeapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // randomize the wepon for the player
+        GetRandomWeapon();
+        // Set the ouline color based on the weapon class
+        SetOutlineColor();
+        // rotate the weapon randomlly
+        SetRandomRotation();
+
         sp = GetComponent<SpriteRenderer>();
         SetSprite();
 
@@ -37,11 +44,43 @@ public class PickupWeapon : MonoBehaviour
         }
     }
 
+    #region  Outline
     void OutlineVisability(bool visible)
     {
         int vis = visible ? 1 : 0;
         GetComponent<Renderer>().material.SetInt("_ShowOutline", vis);
     }
+
+    void OutlineColor(Color color)
+    {
+        // Set _OutlineColor of the material
+        GetComponent<Renderer>().material.SetColor("_OutlineColor", color);
+    }
+
+    void SetOutlineColor()
+    {
+        Color color;
+
+        switch (pickWeapon.GetWeaponClass())
+        {
+            case WeaponClasses.White:
+                color = Color.white;
+                break;
+            case WeaponClasses.Green:
+                color = Color.green;
+                break;
+            case WeaponClasses.Orange:
+                color = Color.red;
+                break;
+            default:
+                color = Color.white;
+                break;
+        }
+
+        OutlineColor(color);
+    }
+
+    #endregion
 
     void SetSprite() => sp.sprite = pickWeapon.GetWeaponSprite();
 
@@ -63,5 +102,57 @@ public class PickupWeapon : MonoBehaviour
             SetSprite();
         }
     }
+
+
+    #region set up
+
+    string SlashWeapons = "Slashes";
+    string ShootWeapons = "Shoots";
+    string PreFolder = "Prefabs/Weapons/";
+    List<string> AllPaths = new List<string>();
+
+
+
+    void FillPathsList()
+    {
+        AllPaths.Clear();
+
+        AllPaths.Add(SlashWeapons);
+        AllPaths.Add(ShootWeapons);
+    }
+
+    string PickRandomFolder()
+    {
+        int index = Random.Range(0, AllPaths.Count);
+        return AllPaths[index];
+    }
+
+    void GetRandomWeapon()
+    {
+        // Fill the list of paths
+        FillPathsList();
+
+        // Pick a random folder for the weapon
+        string folder = PickRandomFolder();
+
+        string fullPath = PreFolder + folder;
+        GameObject[] AllWeapons = Resources.LoadAll<GameObject>(fullPath);
+
+        // Pick a random weapon
+        int ranIndex = Random.Range(0, AllWeapons.Length);
+        GameObject weapon = AllWeapons[ranIndex];
+
+        // assign the weapon to the pickweapon
+        AttackingWeapon attackingWeapon = weapon.GetComponent<AttackingWeapon>();
+        if (attackingWeapon) pickWeapon = attackingWeapon;
+    }
+
+    void SetRandomRotation()
+    {
+        float randRot = Random.Range(0f, 90f);
+
+        transform.Rotate(0, 0, randRot);
+    }
+    #endregion
 
 }

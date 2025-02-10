@@ -19,4 +19,6 @@ public class GameAssets : MonoBehaviour
     }
 
     public Transform PopupPrefap;
+
+    public Transform AmmoPickUpPrefap;
 }

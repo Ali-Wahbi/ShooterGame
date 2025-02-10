@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &83273953236986873
+--- !u!1 &750506497210247125
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4980259394314001725}
-  - component: {fileID: 7508240481770945132}
+  - component: {fileID: 6778110299248786609}
+  - component: {fileID: 7150600608153379491}
   m_Layer: 0
-  m_Name: Vector2
+  m_Name: Vector3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4980259394314001725
+--- !u!4 &6778110299248786609
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83273953236986873}
+  m_GameObject: {fileID: 750506497210247125}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.4716761, y: -0.12319875, z: -0.7905001}
@@ -32,20 +32,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7508240481770945132
+--- !u!114 &7150600608153379491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83273953236986873}
+  m_GameObject: {fileID: 750506497210247125}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab8de669df88f346816687ddef2013f, type: 3}
+  m_Script: {fileID: 11500000, guid: f6725170cb0916b45a4502c07e95329c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 3bb010e7276e2c74cb8e87d4419132ff, type: 2}
+  weapon: {fileID: 11400000, guid: 13c65bdaf5838c846ac36f6a73c30515, type: 2}
   canFire: 1
   bullet: {fileID: 4194414263129192231, guid: cf02b51570cc7234d81d477d39a4f191, type: 3}
-  bulletSpeed: 20
-  bulletCount: 2
+  bulletSpeed: 30
+  bulletCount: 3

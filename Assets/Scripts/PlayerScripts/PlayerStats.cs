@@ -4,7 +4,25 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    void Start()
+    {
+        Healthbar.AddFirstFilled();
+        // Set the UI start stats
+        Healthbar.IncMaxShield(MaxSheild);
+        Healthbar.DecFromShield(MissingShield);
 
+        CurrentShield = MaxSheild - MissingShield;
+
+        // set the shield start stat
+        shieldIsBroken = CurrentShield == 0;
+        shieldIsFull = CurrentShield == MaxSheild;
+
+
+        AmmoUIController.SetAmmo(WeaponType.Bullets, BulletsAmmo);
+        AmmoUIController.SetAmmo(WeaponType.Arrows, ArrowsAmmo);
+    }
+
+    #region SAS
     [SerializeField] private HealthbarController Healthbar;
 
     // remove public later
@@ -18,19 +36,8 @@ public class PlayerStats : MonoBehaviour
     // remove public later
     bool shieldIsBroken = false;
     bool shieldIsFull = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        // Set the UI start stats
-        Healthbar.IncMaxShield(MaxSheild);
-        Healthbar.DecFromShield(MissingShield);
 
-        CurrentShield = MaxSheild - MissingShield;
 
-        // set the shield start stat
-        shieldIsBroken = CurrentShield == 0;
-        shieldIsFull = CurrentShield == MaxSheild;
-    }
 
     public void TakeDamage(int damage)
     {
@@ -113,16 +120,80 @@ public class PlayerStats : MonoBehaviour
         // Handle UI
     }
 
-    // remove later
-    [ContextMenu("Dec3Shield")]
-    void DamagePlayer()
+    #endregion
+
+
+
+
+
+    #region AmmoUI
+    public int BulletsAmmo;
+    public int ArrowsAmmo;
+
+    [SerializeField] private AmmunitionUI AmmoUIController;
+
+    private void SetAmmo(WeaponType weaponType, int newAmmo)
     {
-        TakeDamage(3);
+        switch (weaponType)
+        {
+            case WeaponType.Bullets:
+
+                BulletsAmmo += newAmmo;
+                BulletsAmmo = Mathf.Clamp(BulletsAmmo, 0, 999);
+
+                AmmoUIController.SetAmmo(WeaponType.Bullets, BulletsAmmo);
+                break;
+            case WeaponType.Arrows:
+
+                ArrowsAmmo += newAmmo;
+                ArrowsAmmo = Mathf.Clamp(ArrowsAmmo, 0, 999);
+
+                AmmoUIController.SetAmmo(WeaponType.Arrows, ArrowsAmmo);
+                break;
+            default:
+                break;
+        }
     }
 
-    [ContextMenu("Inc3Shield")]
-    void RechargePlayer()
+
+    public void AddAmmo(WeaponType weaponType, int ammo)
     {
-        RechargeShield(2);
+        SetAmmo(weaponType, ammo);
+    }
+
+    public void DecAmmo(WeaponType weaponType, int ammo)
+    {
+        SetAmmo(weaponType, -ammo);
+    }
+
+
+    public int GetAmmo(WeaponType weaponType)
+    {
+        switch (weaponType)
+        {
+            case WeaponType.Bullets:
+                return BulletsAmmo;
+            case WeaponType.Arrows:
+                return ArrowsAmmo;
+            case WeaponType.Melee:
+                return 1;
+            default:
+                return 0;
+        }
+    }
+
+    #endregion
+
+
+    [ContextMenu("Inc30Bullets")]
+    void RechargeBullets()
+    {
+        AddAmmo(WeaponType.Bullets, 30);
+    }
+
+    [ContextMenu("Inc30Arrows")]
+    void RechargeArrows()
+    {
+        AddAmmo(WeaponType.Arrows, 30);
     }
 }

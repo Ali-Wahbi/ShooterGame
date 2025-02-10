@@ -16,7 +16,7 @@ public class EnemyBullet1 : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 7f);
+        Destroy(gameObject, 5f);
     }
 
     //  Detect the bullet collision
@@ -28,6 +28,7 @@ public class EnemyBullet1 : MonoBehaviour
         }
         if (other.gameObject.tag == "Breakable")
         {
+            other.gameObject.GetComponent<Breakable>().OnBreak();
             Destroy(gameObject);
         }
 

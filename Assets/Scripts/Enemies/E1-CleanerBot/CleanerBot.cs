@@ -33,6 +33,7 @@ public class CleanerBot : MonoBehaviour
     public GameObject target;
 
     bool BotIsDefeated = false;
+    int spawnDropChance = 30;
 
 
     private void Start()
@@ -64,7 +65,7 @@ public class CleanerBot : MonoBehaviour
                 {
                     canWalk = false;
                     currentState = EnemyStates.Idle;
-                    Debug.Log("Current State: " + currentState);
+                    // Debug.Log("Current State: " + currentState);
                     roamingPos = GetRoamingPosition();
                     CalculateNewRoaming();
                 }
@@ -88,7 +89,7 @@ public class CleanerBot : MonoBehaviour
                 {
                     canWalk = false;
                     currentState = EnemyStates.Attack;
-                    Debug.Log("Current State: " + currentState);
+                    // Debug.Log("Current State: " + currentState);
                     // Attack with 3 bullets
                     if (canAttack)
                         FireBullets(transform, target.transform.position);
@@ -104,9 +105,27 @@ public class CleanerBot : MonoBehaviour
         }
     }
 
+
+    private void FixedUpdate()
+    {
+
+        Vector2 endPos = target ? target.transform.position : roamingPos;
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, endPos, distance: 5);
+        Debug.DrawRay(transform.position, endPos, Color.yellow);
+        if (hit)
+        {
+            if (hit.transform.tag == "Wall" || hit.transform.tag == "Breakable")
+            {
+                distance = 0;
+            }
+        }
+    }
+
+
     void CalculateNewRoaming()
     {
-        Debug.Log("Set new Roaming");
+        // Debug.Log("Set new Roaming");
         if (currentState == EnemyStates.Idle)
         {
             StartCoroutine(SetNewRoam());
@@ -133,7 +152,7 @@ public class CleanerBot : MonoBehaviour
         {
             bool flip = moveDirection == -1;
             DoFlipBody(flip);
-            Debug.Log("moveDirection changed.");
+            // Debug.Log("moveDirection changed.");
             prevMoveDirection = moveDirection;
         }
     }
@@ -165,7 +184,24 @@ public class CleanerBot : MonoBehaviour
         anim.SetBool(boolName, boolValue);
     }
 
+    private void SpawnDrops()
+    {
+        // spawn ammo
+        int chance = Random.Range(0, 100);
+        if (chance < spawnDropChance)
+        {
+            // spawn small ammo
+            Debug.Log("Enemy Spawn ammo");
+            Instantiate(GameAssets.g.AmmoPickUpPrefap, position: transform.position, rotation: Quaternion.identity);
 
+        }
+    }
+
+
+    public void MultDropChance(float amount)
+    {
+        spawnDropChance = (int)(spawnDropChance * amount);
+    }
 
 
     Vector3 GetRoamingPosition()
@@ -184,7 +220,7 @@ public class CleanerBot : MonoBehaviour
 
     public void OnDetectEnterCollision(Collider2D other)
     {
-        Debug.Log("Player entered detection area");
+        // Debug.Log("Player entered detection area");
         SetAnimationBool(isAggressive, true);
         BotIsAggressive = true;
         target = other.gameObject;
@@ -193,11 +229,34 @@ public class CleanerBot : MonoBehaviour
 
     public void OnDetectExitCollision()
     {
-        Debug.Log("Player entered detection area");
+        // Debug.Log("Player exited detection area");
         // set time before cooldown
-        SetAnimationBool(isAggressive, false);
+        if (currentState != EnemyStates.Defeated)
+            StartCalmingDown();
     }
 
+    int incRadius = 3;
+    void StartCalmingDown()
+    {
+        StartCoroutine(CalmingDown());
+
+        IEnumerator CalmingDown()
+        {
+            yield return new WaitForSeconds(3f);
+            SetAnimationBool(isAggressive, false);
+
+            BotIsAggressive = false;
+            target = null;
+
+            if (isExpanded)
+            {
+
+                isExpanded = false;
+                detectionArea.radius /= incRadius;
+
+            }
+        }
+    }
 
     public void FireBullets(Transform startTran, Vector3 target)
     {
@@ -251,8 +310,21 @@ public class CleanerBot : MonoBehaviour
         // Disable box collider
         GetComponent<BoxCollider2D>().enabled = false;
         BotIsDefeated = true;
-        SetAnimationBool(isDefeated, true);
+        currentState = EnemyStates.Defeated;
+        SpawnDrops();
         Destroy(gameObject, 2.5f);
+    }
+
+    bool isExpanded = false;
+    public void HandleHit()
+    {
+        if (!isExpanded)
+        {
+            isExpanded = true;
+            detectionArea.radius *= incRadius;
+        }
+
+
     }
 
 

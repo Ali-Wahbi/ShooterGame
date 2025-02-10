@@ -17,12 +17,6 @@ public class HealthbarController : MonoBehaviour
     [SerializeField] float BackgroundPadding = 32;
     public int numberOfBars;
 
-    private void Start()
-    {
-        AddFirstFilled();
-        // SetBackgroundLength();
-        // IncMaxShield(6);
-    }
 
     public void IncMaxShield(int shieldCount)
     {
@@ -91,7 +85,7 @@ public class HealthbarController : MonoBehaviour
         GameObject bar = Instantiate(prefap);
         bar.transform.SetParent(FilledContainers.transform, false);
     }
-    void AddFirstFilled()
+    public void AddFirstFilled()
     {
         AddToFilledContaier(HpPrefap);
         AddToEmptyContainer();

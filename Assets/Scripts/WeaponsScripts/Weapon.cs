@@ -6,7 +6,9 @@ public class Weapon : ScriptableObject
     public string WeaponName;
     public Sprite WeaponSprite;
     public WeaponType WeaponType;
+    public WeaponClasses WeaponClass;
     public WeaponAnim WeaponAnim;
+    public int WeaponAmmo;
     public float WeaponDamage;
     public float WeaponSpeed;
 

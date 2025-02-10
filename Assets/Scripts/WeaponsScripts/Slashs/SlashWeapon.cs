@@ -12,7 +12,7 @@ abstract public class SlashWeapon : AttackingWeapon
     [SerializeField] Sprite MeleeFlibed;
 
     [SerializeField] public GameObject slash;
-    public override void DynamicAttack(Transform startTran, Transform startRot, Transform sprite)
+    public override void DynamicAttack(Transform startTran, Transform startRot, Transform sprite, Vector2 CursorPos = new Vector2())
     {
         canFire = false;
         DynamicSlash(startTran, startRot);

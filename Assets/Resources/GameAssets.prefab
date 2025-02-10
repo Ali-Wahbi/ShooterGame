@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PopupPrefap: {fileID: 1116547057180357795, guid: 11294cba285de0442ba86a0f57946492, type: 3}
+  AmmoPickUpPrefap: {fileID: 222887902486005596, guid: 843f397abb621dd449596b378f846a83, type: 3}
