@@ -7,7 +7,8 @@ public class Hammer : SlashWeapon
     public override void DynamicSlash(Transform startTran, Transform startRot)
     {
         // instantaite the slash here 
-        Instantiate(slash, startTran.position, startRot.rotation);
+        GameObject _slash = Instantiate(slash, startTran.position, startRot.rotation);
+        _slash.GetComponent<SlashEffect>().Setup(damage: damage);
 
     }
 

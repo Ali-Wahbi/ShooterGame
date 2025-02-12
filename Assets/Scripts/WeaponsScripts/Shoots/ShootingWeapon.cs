@@ -9,15 +9,15 @@ abstract public class ShootingWeapon : AttackingWeapon
     public float bulletSpeed;
 
 
-    public override void DynamicAttack(Transform startTran, Transform startRot, Transform sprite)
+    public override void DynamicAttack(Transform startTran, Transform startRot, Transform sprite, Vector2 CursorPos = new Vector2())
     {
         canFire = false;
-        DynamicFire(startTran, startRot);
+        DynamicFire(startTran, startRot, CursorPos);
         AnimataGun(sprite);
         Timer();
     }
 
-    abstract public void DynamicFire(Transform startTran, Transform startRot);
+    abstract public void DynamicFire(Transform startTran, Transform startRot, Vector2 CursorPos = new Vector2());
     void Timer()
     {
         StartCoroutine(StartTimer());

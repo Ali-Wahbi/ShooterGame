@@ -21,9 +21,17 @@ public class VectorBullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (other.gameObject.tag == "Wall")
+        if (other.tag == "Breakable")
+        {
+            other.gameObject.GetComponent<Breakable>().OnBreak();
+            Destroy(gameObject);
+        }
+        if (other.gameObject.tag == "Enemy")
         {
             //apply damage to enemies
+            other.GetComponent<EnemyStats>().TakeDamage((int)bulletDamage);
+            PopUpText.Create(damage: (int)bulletDamage, pos: transform.position);
+            Destroy(gameObject);
         }
     }
 

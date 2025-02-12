@@ -26,3 +26,8 @@ public enum WeaponAnim
 {
     Slash, Stap, Shoot
 }
+
+public enum WeaponClasses
+{
+    White, Green, Orange
+}

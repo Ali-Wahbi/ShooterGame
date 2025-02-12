@@ -6,11 +6,13 @@ abstract public class SlashWeapon : AttackingWeapon
     bool isFlibed = false;
     float rotateDeg = 120;
 
+    public int damage;
+
     [SerializeField] Sprite MeleeNormal;
     [SerializeField] Sprite MeleeFlibed;
 
     [SerializeField] public GameObject slash;
-    public override void DynamicAttack(Transform startTran, Transform startRot, Transform sprite)
+    public override void DynamicAttack(Transform startTran, Transform startRot, Transform sprite, Vector2 CursorPos = new Vector2())
     {
         canFire = false;
         DynamicSlash(startTran, startRot);
@@ -40,6 +42,7 @@ abstract public class SlashWeapon : AttackingWeapon
         StartCoroutine(AnimateSlashing(sprite));
     }
 
+
     IEnumerator AnimateSlashing(Transform sprite)
     {
         // sprite.position = new Vector3(sprite.position.x - 1f, sprite.position.y, sprite.position.z);
@@ -47,8 +50,8 @@ abstract public class SlashWeapon : AttackingWeapon
         sprite.Rotate(0, 0, one * rotateDeg);
         isFlibed = !isFlibed;
 
-        Debug.Log("Animating slashing: " + sprite);
-        yield return new WaitForSeconds(0.3f);
+        // Debug.Log("Animating slashing: " + sprite);
+        yield return new WaitForSeconds(GetWeaponReloadSpeed());
         SetWeaponSprite(sprite);
     }
 

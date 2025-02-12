@@ -8,7 +8,7 @@ abstract public class AttackingWeapon : MonoBehaviour
     public bool canFire = true;
 
     // abstract public void Attack(Vector3 startPos, Quaternion startRot);
-    abstract public void DynamicAttack(Transform startTran, Transform startRot, Transform sprite);
+    abstract public void DynamicAttack(Transform startTran, Transform startRot, Transform sprite, Vector2 CursorPos = new Vector2());
 
     public float GetWeaponDamage() => weapon.WeaponDamage;
 
@@ -17,7 +17,14 @@ abstract public class AttackingWeapon : MonoBehaviour
 
     public WeaponAnim GetWeaponAnim() => weapon.WeaponAnim;
 
+    public WeaponClasses GetWeaponClass() => weapon.WeaponClass;
+    public int GetWeaponAmmo() => weapon.WeaponAmmo;
+
     public Sprite GetWeaponSprite() => weapon.WeaponSprite;
 
     public float GetWeaponReloadSpeed() => weapon.WeaponSpeed;
+
+    public bool GetWeaponCanFire() => canFire;
+
+
 }

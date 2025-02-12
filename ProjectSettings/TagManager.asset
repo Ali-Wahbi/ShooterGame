@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Wall
+  - Breakable
+  - Enemy
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -15,7 +18,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - PopUp
   - 
   - 
   - 
@@ -39,6 +42,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 193126799
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Boxes
+    uniqueID: 1503676219
+    locked: 0
+  - name: Walls
+    uniqueID: 872854999
+    locked: 0
+  - name: Pickups
+    uniqueID: 1689865093
     locked: 0
