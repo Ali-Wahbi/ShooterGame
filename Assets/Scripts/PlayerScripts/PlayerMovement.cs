@@ -41,6 +41,12 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            playerStats.AddAmmo(WeaponType.Bullets, 100);
+            playerStats.AddAmmo(WeaponType.Arrows, 100);
+        }
+
         if (CanMove)
         {
             Move();
@@ -155,7 +161,8 @@ public class PlayerMovement : MonoBehaviour
                 // fix weapon uses ammo while on weapon cooldown
                 if (useAmmo && weaponsController.GetWeaponCanFire())
                 {
-                    playerStats.DecAmmo(WeaponType.Bullets, w1Ammo);
+                    weaponsController.Weapon1Attack();
+                    playerStats.DecAmmo(weaponsController.GetWeapon1Type(), w1Ammo);
                     Debug.Log("AmmoUsed: " + w1Ammo);
                     useAmmo = false;
                 }
@@ -164,7 +171,6 @@ public class PlayerMovement : MonoBehaviour
                     useAmmo = true;
                 }
 
-                weaponsController.Weapon1Attack();
                 cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
             }
             else
@@ -202,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
                 if (ammo < w2Ammo) return;
                 if (useAmmo && weaponsController.GetWeaponCanFire())
                 {
-                    playerStats.DecAmmo(WeaponType.Bullets, w2Ammo);
+                    playerStats.DecAmmo(weaponsController.GetWeapon2Type(), w2Ammo);
                     Debug.Log("AmmoUsed: " + w2Ammo);
                     useAmmo = false;
                 }

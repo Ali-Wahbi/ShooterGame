@@ -14,7 +14,8 @@ public class Breakable : MonoBehaviour
     BoxCollider2D breakableCollider;
     SpriteRenderer SR;
 
-    int spawnDropChance = 60;
+    int spawnDropChance = 10;
+    int weaponDropChance = 5;
     private void Reset()
     {
         gameObject.tag = "Breakable";
@@ -59,7 +60,15 @@ public class Breakable : MonoBehaviour
             // spawn small ammo
             Debug.Log("Spawn ammo");
             Instantiate(GameAssets.g.AmmoPickUpPrefap, position: transform.position, rotation: Quaternion.identity);
+            return;
+        }
 
+        if (chance < weaponDropChance)
+        {
+            // spawn a weapon
+            Debug.Log("Enemy Spawn weapon");
+            Instantiate(GameAssets.g.pickUpWeaponPrefap, position: transform.position.With(z: -0.1f), rotation: Quaternion.identity);
+            return;
         }
     }
 

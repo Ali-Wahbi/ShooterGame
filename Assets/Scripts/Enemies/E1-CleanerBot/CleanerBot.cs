@@ -33,7 +33,8 @@ public class CleanerBot : MonoBehaviour
     public GameObject target;
 
     bool BotIsDefeated = false;
-    int spawnDropChance = 30;
+    int spawnDropChance = 10;
+    int weaponDropChance = 5;
 
 
     private void Start()
@@ -193,7 +194,14 @@ public class CleanerBot : MonoBehaviour
             // spawn small ammo
             Debug.Log("Enemy Spawn ammo");
             Instantiate(GameAssets.g.AmmoPickUpPrefap, position: transform.position, rotation: Quaternion.identity);
-
+            return;
+        }
+        if (chance < weaponDropChance)
+        {
+            // spawn a weapon
+            Debug.Log("Enemy Spawn weapon");
+            Instantiate(GameAssets.g.pickUpWeaponPrefap, position: transform.position.With(z: -0.1f), rotation: Quaternion.identity);
+            return;
         }
     }
 
@@ -201,6 +209,7 @@ public class CleanerBot : MonoBehaviour
     public void MultDropChance(float amount)
     {
         spawnDropChance = (int)(spawnDropChance * amount);
+        weaponDropChance = (int)(weaponDropChance * amount);
     }
 
 

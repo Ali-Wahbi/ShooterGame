@@ -5,7 +5,7 @@ using UnityEngine.Rendering;
 
 public class PickupWeapon : MonoBehaviour
 {
-    [SerializeField] AttackingWeapon pickWeapon;
+    AttackingWeapon pickWeapon;
     SpriteRenderer sp;
     // Start is called before the first frame update
     void Start()
