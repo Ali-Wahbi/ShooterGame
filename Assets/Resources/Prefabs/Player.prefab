@@ -195,8 +195,8 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3561510578823224556}
-  - {fileID: 6107235099585975444}
   - {fileID: 1801156310248252807}
+  - {fileID: 6107235099585975444}
   - {fileID: 1913712356966215378}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -319,6 +319,9 @@ MonoBehaviour:
   MaxSheild: 6
   CurrentShield: 0
   MissingShield: 0
+  BulletsAmmo: 0
+  ArrowsAmmo: 0
+  AmmoUIController: {fileID: 0}
 --- !u!114 &4736511633445609472
 MonoBehaviour:
   m_ObjectHideFlags: 0

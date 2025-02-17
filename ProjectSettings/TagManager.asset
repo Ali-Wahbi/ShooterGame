@@ -8,6 +8,8 @@ TagManager:
   - Breakable
   - Enemy
   - EnemyBullet
+  - Room
+  - Path
   layers:
   - Default
   - TransparentFX

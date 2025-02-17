@@ -7,7 +7,6 @@ public class PickupWeapon : MonoBehaviour
 {
     AttackingWeapon pickWeapon;
     SpriteRenderer sp;
-    // Start is called before the first frame update
     void Start()
     {
         // randomize the wepon for the player
@@ -16,6 +15,7 @@ public class PickupWeapon : MonoBehaviour
         SetOutlineColor();
         // rotate the weapon randomlly
         SetRandomRotation();
+
 
         sp = GetComponent<SpriteRenderer>();
         SetSprite();
@@ -99,6 +99,7 @@ public class PickupWeapon : MonoBehaviour
         else
         {
             pickWeapon = newAttackWeapon;
+            SetOutlineColor();
             SetSprite();
         }
     }
@@ -119,6 +120,7 @@ public class PickupWeapon : MonoBehaviour
 
         AllPaths.Add(SlashWeapons);
         AllPaths.Add(ShootWeapons);
+        // AllPaths.Add(NewPath);
     }
 
     string PickRandomFolder()

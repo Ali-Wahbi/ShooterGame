@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -41,12 +42,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // cheat code
         if (Input.GetKeyDown(KeyCode.H))
         {
             playerStats.AddAmmo(WeaponType.Bullets, 100);
             playerStats.AddAmmo(WeaponType.Arrows, 100);
         }
 
+        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
         if (CanMove)
         {
             Move();
