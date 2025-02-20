@@ -23,4 +23,6 @@ public class GameAssets : MonoBehaviour
     public Transform AmmoPickUpPrefap;
 
     public Transform pickUpWeaponPrefap;
+
+    public Transform WeaponInfo;
 }

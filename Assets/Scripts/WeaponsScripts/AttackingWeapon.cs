@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 abstract public class AttackingWeapon : MonoBehaviour
 {
@@ -12,6 +13,8 @@ abstract public class AttackingWeapon : MonoBehaviour
 
     public float GetWeaponDamage() => weapon.WeaponDamage;
 
+    public string GetWeaponName() => weapon.WeaponName;
+    public string GetWeaponDescription() => weapon.WeaponDiscription;
 
     public WeaponType GetWeaponType() => weapon.WeaponType;
 

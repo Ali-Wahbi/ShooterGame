@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &988552072499361710
+--- !u!1 &8249462539228217074
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6985449027706112191}
-  - component: {fileID: 1776210672630311695}
+  - component: {fileID: 1969027956594002253}
+  - component: {fileID: 3178638899149066531}
   m_Layer: 0
-  m_Name: GameAssets
+  m_Name: LevelReloader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6985449027706112191
+--- !u!4 &1969027956594002253
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988552072499361710}
+  m_GameObject: {fileID: 8249462539228217074}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8951414, y: 0.84849685, z: -0.015910663}
+  m_LocalPosition: {x: 0.42040646, y: 69.35897, z: 0.03753041}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1776210672630311695
+--- !u!114 &3178638899149066531
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 988552072499361710}
+  m_GameObject: {fileID: 8249462539228217074}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5fa9ee6e954d2348a42ca6ae551c76a, type: 3}
+  m_Script: {fileID: 11500000, guid: 22cd5fd0f8588af47b0c39cfba8e63bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PopupPrefap: {fileID: 1116547057180357795, guid: 11294cba285de0442ba86a0f57946492, type: 3}
-  AmmoPickUpPrefap: {fileID: 222887902486005596, guid: 843f397abb621dd449596b378f846a83, type: 3}
-  pickUpWeaponPrefap: {fileID: 7496498228760001417, guid: 74766e750c5d95345b3f23653b87b2c5, type: 3}
-  WeaponInfo: {fileID: 9094075432796242107, guid: eacf0b2b3efd2004795661b5767e253f, type: 3}

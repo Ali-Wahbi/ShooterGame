@@ -51,13 +51,19 @@ public class RandomRoomsGenerator : MonoBehaviour
     {
         GenerateRooms();
         GenerateEmptyPaths();
-        GenerateClosedWalls();
+        GenerateAllWalls();
+        // GenerateConnectedPaths();
+        // GenerateClosedWalls();
     }
+
+
+
     public void GenerateRooms()
     {
         ClearChildren();
         GenerateSpecialRooms();
         GenerateBattleRooms();
+        GeneratePaths();
         GeneratePaths();
     }
     public void GenerateEmptyPaths()
@@ -65,10 +71,32 @@ public class RandomRoomsGenerator : MonoBehaviour
         pathOrganizer.CheckEmpty();
     }
 
+    void GenerateAllWalls()
+    {
+        StartCoroutine(GenerateWalls());
+
+        IEnumerator GenerateWalls()
+        {
+            yield return new WaitForSeconds(0.1f);
+            GenerateConnectedPaths();
+            GenerateClosedWalls();
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    public void GenerateConnectedPaths()
+    {
+        foreach (GameObject path in ConnectedPaths)
+        {
+            path.GetComponent<PathsSpawner>().SetPathObject();
+        }
+
+    }
     public void GenerateClosedWalls()
     {
         pathOrganizer.CheckClosedWalls();
     }
+
 
     /// <summary>
     /// Clear all children of the current object
@@ -101,6 +129,7 @@ public class RandomRoomsGenerator : MonoBehaviour
 
             // Instantiate the room with parent: transform to keep the hierarchy organized in the Unity editor
             Instantiate(roomPrefab, room.position, Quaternion.identity, parent: transform);
+
         }
     }
 
@@ -151,6 +180,8 @@ public class RandomRoomsGenerator : MonoBehaviour
         }
     }
 
+    [SerializeField] List<GameObject> ConnectedPaths = new List<GameObject>();
+
     private void CreatePath(Vector2Int from, Vector2Int to)
     {
         int gridSize = 3;
@@ -163,8 +194,8 @@ public class RandomRoomsGenerator : MonoBehaviour
             Vector2 midpoint = (RoomsPositions[fromIndex].position + RoomsPositions[toIndex].position) / 2;
 
             // Instantiate the path at the midpoint
-            Instantiate(Path, midpoint, Quaternion.identity, transform);
-
+            GameObject p = Instantiate(Path, midpoint, Quaternion.identity, transform);
+            ConnectedPaths.Add(p);
 
         }
         else

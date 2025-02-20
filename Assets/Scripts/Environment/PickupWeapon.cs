@@ -5,12 +5,13 @@ using UnityEngine.Rendering;
 
 public class PickupWeapon : MonoBehaviour
 {
-    AttackingWeapon pickWeapon;
+    public AttackingWeapon pickWeapon;
+    public bool Randomize = true;
     SpriteRenderer sp;
     void Start()
     {
         // randomize the wepon for the player
-        GetRandomWeapon();
+        if (Randomize) GetRandomWeapon();
         // Set the ouline color based on the weapon class
         SetOutlineColor();
         // rotate the weapon randomlly
@@ -29,6 +30,8 @@ public class PickupWeapon : MonoBehaviour
         if (other.gameObject.tag == "Player" && pickWeapon)
         {
             OutlineVisability(visible: true);
+            //Test here
+            ShowInfoBox();
             PlayerMovement pm = other.gameObject.GetComponent<PlayerMovement>();
             pm.SetPickupWeapon(this, true);
         }
@@ -39,6 +42,7 @@ public class PickupWeapon : MonoBehaviour
         if (other.gameObject.tag == "Player" && pickWeapon)
         {
             OutlineVisability(visible: false);
+            HideInfoBox();
             PlayerMovement pm = other.gameObject.GetComponent<PlayerMovement>();
             pm.SetPickupWeapon(null, false);
         }
@@ -81,6 +85,30 @@ public class PickupWeapon : MonoBehaviour
     }
 
     #endregion
+
+    #region Info
+    Transform infoBox;
+    [SerializeField] float infoOffsetY = 3;
+    private void ShowInfoBox()
+    {
+        if (pickWeapon)
+        {
+            infoBox = Instantiate(
+                GameAssets.g.WeaponInfo,
+                transform.position.Add(y: infoOffsetY),
+                Quaternion.identity
+                );
+
+            infoBox.GetComponent<WeaponInfo>().ShowInfo(pickWeapon);
+        }
+    }
+
+    void HideInfoBox()
+    {
+        if (infoBox) infoBox.GetComponent<WeaponInfo>().HideInfo();
+    }
+    #endregion
+
 
     void SetSprite() => sp.sprite = pickWeapon.GetWeaponSprite();
 

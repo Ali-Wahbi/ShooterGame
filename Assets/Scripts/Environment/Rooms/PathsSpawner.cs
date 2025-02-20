@@ -7,6 +7,7 @@ public class PathsSpawner : MonoBehaviour
 
     [SerializeField] Sprite horizontalPath;
     [SerializeField] Sprite verticalPath;
+    [SerializeField] GameObject HorizonPath, VericPath;
     [SerializeField] float rayLenght;
     public List<Collider2D> cols;
     // public List<GameObject> pathsCols;
@@ -18,6 +19,8 @@ public class PathsSpawner : MonoBehaviour
     Vector2Int down = new Vector2Int(0, -1);
     Vector2Int right = new Vector2Int(1, 0);
     Vector2Int left = new Vector2Int(-1, 0);
+
+    public bool isHoriz, isVert;
 
     void Start()
     {
@@ -74,13 +77,14 @@ public class PathsSpawner : MonoBehaviour
         foreach (Vector2Int dire in directions)
         {
             //spawn a raycast in that direction
-            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, dire, 0.2f);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, dire, 5f);
 
             foreach (var hit in hits)
             {
                 if (hit.collider.gameObject.tag == "Path")
                 {
                     Destroy(gameObject);
+                    break;
                 }
             }
 
@@ -118,12 +122,33 @@ public class PathsSpawner : MonoBehaviour
 
     private void SetVerticalPath()
     {
+        // InstantiateGameObject(_gameObject: VericPath);
         sp.sprite = verticalPath;
+        isVert = true;
+
     }
 
     private void SetHorizontalPath()
     {
+        // InstantiateGameObject(_gameObject: HorizonPath);
         sp.sprite = horizontalPath;
+        isHoriz = true;
+    }
+
+    [ContextMenu("SetPath")]
+    public void SetPathObject()
+    {
+
+        if (isHoriz) InstantiateGameObject(_gameObject: HorizonPath);
+
+        if (isVert) InstantiateGameObject(_gameObject: VericPath);
+
+        Destroy(gameObject);
+    }
+
+    void InstantiateGameObject(GameObject _gameObject)
+    {
+        Instantiate(_gameObject, transform.position, Quaternion.identity);
     }
 }
 

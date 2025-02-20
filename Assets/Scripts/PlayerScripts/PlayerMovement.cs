@@ -49,7 +49,6 @@ public class PlayerMovement : MonoBehaviour
             playerStats.AddAmmo(WeaponType.Arrows, 100);
         }
 
-        if (Input.GetKeyDown(KeyCode.R)) SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
         if (CanMove)
         {

@@ -101,12 +101,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   horizontalPath: {fileID: -145432084, guid: eba775c07fe473d4885be1e660112288, type: 3}
   verticalPath: {fileID: -858734430, guid: eba775c07fe473d4885be1e660112288, type: 3}
-  rayLenght: 25
+  HorizonPath: {fileID: 3746223358214784803, guid: 1d1091266d268f347aedc4263a941133, type: 3}
+  VericPath: {fileID: 6836030359684198990, guid: d2cca24d12709ea42aeb8e2dbb8693de, type: 3}
+  rayLenght: 20
   cols: []
-  pathsCols: []
   rooms: 
-  fromRoom: {fileID: 0}
-  toRoom: {fileID: 0}
+  isHoriz: 0
+  isVert: 0
 --- !u!61 &1247356728398799119
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -136,7 +137,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -170,3 +171,10 @@ MonoBehaviour:
   WallRight: {fileID: -66715189, guid: 4d08c01d01d65a44594290accbc89280, type: 3}
   WallHorizontal: {fileID: -239110783, guid: 4728babba6cc52646afa0f8a4c77160a, type: 3}
   WallVertical: {fileID: 1388853027, guid: 4728babba6cc52646afa0f8a4c77160a, type: 3}
+  WallUpGO: {fileID: 4702756644466559136, guid: 58276e0ea1e154b48af3e73ea6358a79, type: 3}
+  WallDownGO: {fileID: 11016985615192594, guid: 132764864f9ccef4eb8bb8e166edf5c4, type: 3}
+  WallLeftGO: {fileID: 6406232957255731142, guid: 6c1f68215f6594444833ddb7f2cad55b, type: 3}
+  WallRightGO: {fileID: 2688191978292820860, guid: fc98e9e0a568f694b9734c36997abbd4, type: 3}
+  WallHorizontalGO: {fileID: 4816132006465531095, guid: cd620bb054705994eaa208221eaf9a97, type: 3}
+  WallVerticalGO: {fileID: 5484792490351515264, guid: a5f0ec4b4038b2b4baf7adc6fe9c6c61, type: 3}
+  asset: {fileID: 0}
