@@ -15,6 +15,9 @@ MonoBehaviour:
   WeaponName: Sword
   WeaponSprite: {fileID: 21300000, guid: 20909ffa5ca69f94791f32c2d64c47ff, type: 3}
   WeaponType: 2
+  WeaponClass: 0
   WeaponAnim: 0
+  WeaponAmmo: 0
   WeaponDamage: 4
   WeaponSpeed: 0.5
+  WeaponDiscription: perfect for all your electronic pest control needs!

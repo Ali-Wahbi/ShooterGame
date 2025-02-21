@@ -135,3 +135,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickWeapon: {fileID: 8504007228485975113, guid: 44e09c580b07e4846ae570ab2feb2120, type: 3}
   Randomize: 1
+  infoOffsetY: 5

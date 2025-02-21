@@ -47,6 +47,7 @@ abstract public class SlashWeapon : AttackingWeapon
         // sprite.position = new Vector3(sprite.position.x - 1f, sprite.position.y, sprite.position.z);
         int one = isFliped ? 1 : -1;
         sprite.Rotate(0, 0, one * rotateDeg);
+        // reverse the filp
         isFliped = !isFliped;
 
         // Debug.Log("Animating slashing: " + sprite);

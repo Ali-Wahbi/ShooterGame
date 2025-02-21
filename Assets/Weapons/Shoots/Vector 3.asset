@@ -20,3 +20,5 @@ MonoBehaviour:
   WeaponAmmo: 3
   WeaponDamage: 8
   WeaponSpeed: 1
+  WeaponDiscription: "Three bullets per trigger pull \u2014 because some robots just
+    need a little extra \u2018persuasion\u2019 to explode!"

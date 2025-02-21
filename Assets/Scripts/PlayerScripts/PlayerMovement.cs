@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
-
+    // rename to player handler
     [SerializeField] private float movementSpeed;
 
     [SerializeField] private WeaponController weaponsController;
@@ -49,7 +49,9 @@ public class PlayerMovement : MonoBehaviour
             playerStats.AddAmmo(WeaponType.Arrows, 100);
         }
 
+        // close the game, needs rework
         if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
+        // movement and animations
         if (CanMove)
         {
             Move();
@@ -94,6 +96,7 @@ public class PlayerMovement : MonoBehaviour
         weaponsController.RotateSprite(playerPos: playerPos);
     }
 
+    // input handling area
     #region Input Sys
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -129,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-
+    // weapon handling area
     #region Weapons
     bool canUseWeapon = true;
     bool useAmmo = true;

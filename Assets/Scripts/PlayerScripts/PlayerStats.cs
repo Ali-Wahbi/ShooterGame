@@ -54,7 +54,7 @@ public class PlayerStats : MonoBehaviour
         // Take Damage unitll 0 
         if (CurrentShield - damage <= 0)
         {
-
+            // Decrease all the shield, no extra damage
             Healthbar.DecFromShield(CurrentShield);
 
             CurrentShield = 0;
@@ -64,7 +64,7 @@ public class PlayerStats : MonoBehaviour
             return;
         }
 
-        // Normal dec for the shield
+        // Normal decrease of the shield
         CurrentShield -= damage;
         SetMissingShield();
         Healthbar.DecFromShield(damage);
@@ -127,8 +127,11 @@ public class PlayerStats : MonoBehaviour
 
 
     #region AmmoUI
+    // defaults to 0
     public int BulletsAmmo;
     public int ArrowsAmmo;
+    int maxBullets = 999;
+    int maxArrows = 999;
 
     [SerializeField] private AmmunitionUI AmmoUIController;
 
@@ -139,14 +142,14 @@ public class PlayerStats : MonoBehaviour
             case WeaponType.Bullets:
 
                 BulletsAmmo += newAmmo;
-                BulletsAmmo = Mathf.Clamp(BulletsAmmo, 0, 999);
+                BulletsAmmo = Mathf.Clamp(BulletsAmmo, 0, maxBullets);
 
                 AmmoUIController.SetAmmo(WeaponType.Bullets, BulletsAmmo);
                 break;
             case WeaponType.Arrows:
 
                 ArrowsAmmo += newAmmo;
-                ArrowsAmmo = Mathf.Clamp(ArrowsAmmo, 0, 999);
+                ArrowsAmmo = Mathf.Clamp(ArrowsAmmo, 0, maxArrows);
 
                 AmmoUIController.SetAmmo(WeaponType.Arrows, ArrowsAmmo);
                 break;

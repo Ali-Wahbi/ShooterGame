@@ -171,8 +171,4 @@ public class WeaponController : MonoBehaviour
     }
     public WeaponType GetWeaponType() => usedWeapon ? usedWeapon.GetWeaponType() : WeaponType.Bullets;
 
-    public int GetWeaponAmmo()
-    {
-        return 1;
-    }
 }

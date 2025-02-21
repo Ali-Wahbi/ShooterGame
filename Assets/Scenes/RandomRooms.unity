@@ -4002,6 +4002,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1425269087}
     m_Modifications:
+    - target: {fileID: 1855488971308932197, guid: 918bb13b30645e64d8e6e4ddc8d56ebb, type: 3}
+      propertyPath: ammoBoxesAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2703177828173221363, guid: 918bb13b30645e64d8e6e4ddc8d56ebb, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -4859,10 +4863,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1969027956594002253, guid: 30806b50ebc61fc408af3ac5ffe72a1d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3178638899149066531, guid: 30806b50ebc61fc408af3ac5ffe72a1d, type: 3}
-      propertyPath: isEnabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8249462539228217074, guid: 30806b50ebc61fc408af3ac5ffe72a1d, type: 3}

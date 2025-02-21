@@ -30,7 +30,6 @@ public class PickupWeapon : MonoBehaviour
         if (other.gameObject.tag == "Player" && pickWeapon)
         {
             OutlineVisability(visible: true);
-            //Test here
             ShowInfoBox();
             PlayerMovement pm = other.gameObject.GetComponent<PlayerMovement>();
             pm.SetPickupWeapon(this, true);
@@ -99,10 +98,13 @@ public class PickupWeapon : MonoBehaviour
                 Quaternion.identity
                 );
 
-            infoBox.GetComponent<WeaponInfo>().ShowInfo(pickWeapon);
+            UpdateInfoBox();
         }
     }
-
+    private void UpdateInfoBox()
+    {
+        if (infoBox) infoBox.GetComponent<WeaponInfo>().SetInfo(pickWeapon);
+    }
     void HideInfoBox()
     {
         if (infoBox) infoBox.GetComponent<WeaponInfo>().HideInfo();
@@ -122,11 +124,13 @@ public class PickupWeapon : MonoBehaviour
         {
             pickWeapon = null;
             sp.sprite = null;
+            HideInfoBox();
             return;
         }
         else
         {
             pickWeapon = newAttackWeapon;
+            UpdateInfoBox();
             SetOutlineColor();
             SetSprite();
         }
