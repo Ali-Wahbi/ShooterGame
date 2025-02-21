@@ -8,7 +8,7 @@ public class Hammer : SlashWeapon
     {
         // instantaite the slash here 
         GameObject _slash = Instantiate(slash, startTran.position, startRot.rotation);
-        _slash.GetComponent<SlashEffect>().Setup(damage: damage);
+        _slash.GetComponent<SlashEffect>().Setup(damage: (int)GetWeaponDamage());
 
     }
 

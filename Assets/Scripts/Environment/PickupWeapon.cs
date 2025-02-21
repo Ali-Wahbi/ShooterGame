@@ -5,17 +5,18 @@ using UnityEngine.Rendering;
 
 public class PickupWeapon : MonoBehaviour
 {
-    AttackingWeapon pickWeapon;
+    public AttackingWeapon pickWeapon;
+    public bool Randomize = true;
     SpriteRenderer sp;
-    // Start is called before the first frame update
     void Start()
     {
         // randomize the wepon for the player
-        GetRandomWeapon();
+        if (Randomize) GetRandomWeapon();
         // Set the ouline color based on the weapon class
         SetOutlineColor();
         // rotate the weapon randomlly
         SetRandomRotation();
+
 
         sp = GetComponent<SpriteRenderer>();
         SetSprite();
@@ -29,6 +30,7 @@ public class PickupWeapon : MonoBehaviour
         if (other.gameObject.tag == "Player" && pickWeapon)
         {
             OutlineVisability(visible: true);
+            ShowInfoBox();
             PlayerMovement pm = other.gameObject.GetComponent<PlayerMovement>();
             pm.SetPickupWeapon(this, true);
         }
@@ -39,6 +41,7 @@ public class PickupWeapon : MonoBehaviour
         if (other.gameObject.tag == "Player" && pickWeapon)
         {
             OutlineVisability(visible: false);
+            HideInfoBox();
             PlayerMovement pm = other.gameObject.GetComponent<PlayerMovement>();
             pm.SetPickupWeapon(null, false);
         }
@@ -82,6 +85,33 @@ public class PickupWeapon : MonoBehaviour
 
     #endregion
 
+    #region Info
+    Transform infoBox;
+    [SerializeField] float infoOffsetY = 3;
+    private void ShowInfoBox()
+    {
+        if (pickWeapon)
+        {
+            infoBox = Instantiate(
+                GameAssets.g.WeaponInfo,
+                transform.position.Add(y: infoOffsetY),
+                Quaternion.identity
+                );
+
+            UpdateInfoBox();
+        }
+    }
+    private void UpdateInfoBox()
+    {
+        if (infoBox) infoBox.GetComponent<WeaponInfo>().SetInfo(pickWeapon);
+    }
+    void HideInfoBox()
+    {
+        if (infoBox) infoBox.GetComponent<WeaponInfo>().HideInfo();
+    }
+    #endregion
+
+
     void SetSprite() => sp.sprite = pickWeapon.GetWeaponSprite();
 
     public AttackingWeapon GetPickWeapon() => pickWeapon;
@@ -94,11 +124,14 @@ public class PickupWeapon : MonoBehaviour
         {
             pickWeapon = null;
             sp.sprite = null;
+            HideInfoBox();
             return;
         }
         else
         {
             pickWeapon = newAttackWeapon;
+            UpdateInfoBox();
+            SetOutlineColor();
             SetSprite();
         }
     }
@@ -119,6 +152,7 @@ public class PickupWeapon : MonoBehaviour
 
         AllPaths.Add(SlashWeapons);
         AllPaths.Add(ShootWeapons);
+        // AllPaths.Add(NewPath);
     }
 
     string PickRandomFolder()

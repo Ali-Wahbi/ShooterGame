@@ -47,3 +47,4 @@ MonoBehaviour:
   PopupPrefap: {fileID: 1116547057180357795, guid: 11294cba285de0442ba86a0f57946492, type: 3}
   AmmoPickUpPrefap: {fileID: 222887902486005596, guid: 843f397abb621dd449596b378f846a83, type: 3}
   pickUpWeaponPrefap: {fileID: 7496498228760001417, guid: 74766e750c5d95345b3f23653b87b2c5, type: 3}
+  WeaponInfo: {fileID: 9094075432796242107, guid: eacf0b2b3efd2004795661b5767e253f, type: 3}

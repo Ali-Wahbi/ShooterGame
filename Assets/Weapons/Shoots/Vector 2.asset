@@ -20,3 +20,4 @@ MonoBehaviour:
   WeaponAmmo: 2
   WeaponDamage: 6
   WeaponSpeed: 0.8
+  WeaponDiscription: '"Double the shots, Twice the fall!"'

@@ -3,10 +3,9 @@ using UnityEngine;
 
 abstract public class SlashWeapon : AttackingWeapon
 {
-    bool isFlibed = false;
+    protected bool isFliped = false;
     float rotateDeg = 120;
 
-    public int damage;
 
     [SerializeField] Sprite MeleeNormal;
     [SerializeField] Sprite MeleeFlibed;
@@ -46,9 +45,10 @@ abstract public class SlashWeapon : AttackingWeapon
     IEnumerator AnimateSlashing(Transform sprite)
     {
         // sprite.position = new Vector3(sprite.position.x - 1f, sprite.position.y, sprite.position.z);
-        int one = isFlibed ? 1 : -1;
+        int one = isFliped ? 1 : -1;
         sprite.Rotate(0, 0, one * rotateDeg);
-        isFlibed = !isFlibed;
+        // reverse the filp
+        isFliped = !isFliped;
 
         // Debug.Log("Animating slashing: " + sprite);
         yield return new WaitForSeconds(GetWeaponReloadSpeed());
@@ -61,7 +61,7 @@ abstract public class SlashWeapon : AttackingWeapon
 
         if (sr)
         {
-            if (isFlibed)
+            if (isFliped)
             {
                 sr.sprite = MeleeFlibed;
             }

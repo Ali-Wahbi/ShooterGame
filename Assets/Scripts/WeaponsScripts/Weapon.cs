@@ -11,5 +11,7 @@ public class Weapon : ScriptableObject
     public int WeaponAmmo;
     public float WeaponDamage;
     public float WeaponSpeed;
+    [TextArea(3, 7)]
+    public string WeaponDiscription;
 
 }

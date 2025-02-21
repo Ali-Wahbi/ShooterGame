@@ -17,5 +17,8 @@ MonoBehaviour:
   WeaponType: 2
   WeaponClass: 2
   WeaponAnim: 0
+  WeaponAmmo: 0
   WeaponDamage: 8
   WeaponSpeed: 1
+  WeaponDiscription: "Perfect for zombies with anger issues\u2014turn fancy robots
+    into futuristic pancakes with one satisfying whomp!"

@@ -20,3 +20,5 @@ MonoBehaviour:
   WeaponAmmo: 1
   WeaponDamage: 4
   WeaponSpeed: 0.2
+  WeaponDiscription: "One bullet, one bot\u2014assuming your aim isn\u2019t as rotten
+    as your flesh!"
