@@ -321,7 +321,30 @@ public class CleanerBot : MonoBehaviour
         BotIsDefeated = true;
         currentState = EnemyStates.Defeated;
         SpawnDrops();
-        Destroy(gameObject, 2.5f);
+        HandleDissolve();
+    }
+    public float i = 0.01f;
+    // handle dissolve disappear
+    public void HandleDissolve()
+    {
+        // Material mat = GetComponent<SpriteRenderer>().material;
+        // dissolve the enemy
+        StartCoroutine(DissolveEnemy());
+
+        IEnumerator DissolveEnemy()
+        {
+            yield return new WaitForSeconds(2f);
+            // dissolve the enemy
+            i = 0.01f;
+            while (i < 1.1f)
+            {
+                i += Time.deltaTime * 2f;
+                sr.material.SetFloat("_Fade", i);
+                yield return null;
+            }
+            Debug.Log("Robot fully disappeared");
+            Destroy(gameObject);
+        }
     }
 
     bool isExpanded = false;
