@@ -5,7 +5,7 @@ using UnityEngine;
 public class SlashEffect : MonoBehaviour
 {
     [SerializeField] Animator anim;
-    public float speed = 1.2f;
+    [SerializeField] float speed = 1.2f;
     int damage;
     public List<GameObject> HitedTargets = new List<GameObject>();
     private void Start()
@@ -13,10 +13,10 @@ public class SlashEffect : MonoBehaviour
         anim.Play("SlashAnim");
     }
 
-    public void Setup(int damage, float speed = 1.2f)
+    public void Setup(int damage)
     {
         this.damage = damage;
-        this.speed = speed;
+        // this.speed = speed;
     }
 
     private void Update()
