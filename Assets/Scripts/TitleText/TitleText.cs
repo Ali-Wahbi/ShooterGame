@@ -7,7 +7,7 @@ public class TitleText : MonoBehaviour
 {
     [SerializeField] private Animator animationController;
     [SerializeField] private TextMeshProUGUI textMesh;
-
+    [SerializeField] private bool PlayAtSart = true;
 
     // called when the object is created
     public void SetUpText(string text, float duration = 2.5f)
@@ -15,9 +15,9 @@ public class TitleText : MonoBehaviour
         // Set the text
         textMesh.text = text;
 
+        if (!PlayAtSart) return;
 
-        // Start the animation
-        animationController.SetTrigger("PlayIn");
+        PlayInAnim();
 
         StartCoroutine(WaitForOut(duration));
     }
@@ -29,6 +29,13 @@ public class TitleText : MonoBehaviour
         animationController.SetTrigger("PlayOut");
     }
 
+    public void PlayInAnim()
+    {
+        // Start the animation
+        animationController.SetTrigger("PlayIn");
+    }
+
+    // Called at the end of the out animation by the animator
     public void OnOutAnimEnds()
     {
         // Destroy the game object

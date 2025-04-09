@@ -12,24 +12,64 @@ public class RandomRoomsGenerator : MonoBehaviour
 
     [SerializeField] List<GameObject> AllRooms;
     [SerializeField] GameObject Path;
-    [SerializeField] GameObject SpecialRoom;
-    [SerializeField, Tooltip("Number of special rooms to spawn")] int SpecialRoomCount;
 
     [Space]
+    [Header("Special Rooms")]
+
+    [SerializeField] GameObject[] SpecialRooms;
+    [SerializeField, Tooltip("Number of special rooms to spawn")] int SpecialRoomsCount;
+
+    [Space]
+    [Header("Level Organizing")]
+    [SerializeField] Biomes biome;
+    [SerializeField] RoomDifficulty roomDifficulty;
+    [SerializeField] bool UseFolderName = true;
     [SerializeField] string folderName;
     string PreFolder = "Prefabs/Environment/Rooms/";
-    string RoomsFolder;
+    [SerializeField] string RoomsFolder;
 
     HashSet<Vector2> usedPositions = new HashSet<Vector2>();
     PathOrganizer pathOrganizer;
     private void Start()
     {
         pathOrganizer = GetComponent<PathOrganizer>();
-        RoomsFolder = PreFolder + folderName;
+        if (UseFolderName) RoomsFolder = PreFolder + folderName;
+        else RoomsFolder = PreFolder + GetRoomFolder();
 
         GenerateAll();
     }
+    string GetRoomFolder()
+    {
+        string result = "";
 
+
+        switch (biome)
+        {
+            case Biomes.Lap:
+                result = "Lap/";
+                break;
+            case Biomes.City:
+                result = "City/";
+                break;
+            default:
+                break;
+        }
+        switch (roomDifficulty)
+        {
+            case RoomDifficulty.Easy:
+                result += "Easy/";
+                break;
+            case RoomDifficulty.Medium:
+                result += "Medium/";
+                break;
+            case RoomDifficulty.Hard:
+                result += "Hard/";
+                break;
+            default:
+                break;
+        }
+        return result;
+    }
     private void FillAllRooms()
     {
         AllRooms.Clear();
@@ -210,17 +250,34 @@ public class RandomRoomsGenerator : MonoBehaviour
     private void GenerateSpecialRooms()
     {
         usedPositions.Clear(); // clear the used positions list
-        for (int i = 0; i < SpecialRoomCount;)
+        SpecialRoomsCount = SpecialRooms.Length; // set the number of special rooms to spawn
+        for (int i = 0; i < SpecialRoomsCount;)
         {
+            // set at random position in the map
             int ranIndex = Random.Range(0, RoomsPositions.Count);
             if (usedPositions.Contains(RoomsPositions[ranIndex].position)) continue;
 
             usedPositions.Add(RoomsPositions[ranIndex].position);
 
-            Instantiate(SpecialRoom, RoomsPositions[ranIndex].position, Quaternion.identity, parent: transform);
+            GameObject spRoom = SpecialRooms[SpecialRoomsCount - 1];
+            // Check if the special room is null
+            if (!spRoom) continue;
+
+            // Instantiate the special room with parent: transform to keep the hierarchy organized in the Unity editor
+            Instantiate(spRoom, RoomsPositions[ranIndex].position, Quaternion.identity, parent: transform);
             i++;
         }
     }
 
 
+}
+
+public enum Biomes
+{
+    Lap, City,
+}
+
+public enum RoomDifficulty
+{
+    Easy, Medium, Hard,
 }

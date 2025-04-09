@@ -29,4 +29,7 @@ public class GameAssets : MonoBehaviour
 
     [Tooltip("pick up weapon info box.")]
     public Transform WeaponInfo;
+
+    [Tooltip("End Screen Prefap appears when the player dies.")]
+    public Transform EndScreenPrefap;
 }

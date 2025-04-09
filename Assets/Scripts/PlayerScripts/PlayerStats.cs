@@ -46,6 +46,8 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.Log("Player Died");
             Healthbar.DecFromShield(1);
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            ShowEndScreen();
             return;
         }
 
@@ -118,6 +120,11 @@ public class PlayerStats : MonoBehaviour
     {
         MaxSheild -= subtraction;
         // Handle UI
+    }
+
+    void ShowEndScreen()
+    {
+        FindAnyObjectByType<EndScreen>()?.PlayInAnim();
     }
 
     #endregion
