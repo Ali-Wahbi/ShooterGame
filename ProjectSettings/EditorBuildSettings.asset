@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/RandomRooms.unity
+    path: Assets/Scenes/LapLevel-1.unity
     guid: 1def5f2a4816c3e438d2d727218083a3
   - enabled: 1
     path: Assets/Scenes/RoomMaking.unity

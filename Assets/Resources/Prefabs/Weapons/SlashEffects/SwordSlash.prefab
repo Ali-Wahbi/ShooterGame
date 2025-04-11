@@ -84,6 +84,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 3555903341312730048}
   speed: 1.2
+  HitedTargets: []
 --- !u!212 &4469993479365462537
 SpriteRenderer:
   m_ObjectHideFlags: 0

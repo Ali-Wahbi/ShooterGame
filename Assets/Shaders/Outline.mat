@@ -56,10 +56,10 @@ Material:
     m_Floats:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
-    - _ShowOutline: 0
-    - _outlineWidth: 0.02
+    - _ShowOutline: 1
+    - _outlineWidth: 0.009
     m_Colors:
-    - _OutlineColor: {r: 1, g: 1, b: 1, a: 0}
+    - _OutlineColor: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1894917792752392312
 MonoBehaviour:

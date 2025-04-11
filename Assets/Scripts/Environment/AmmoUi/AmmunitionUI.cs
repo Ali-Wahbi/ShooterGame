@@ -18,6 +18,7 @@ public class AmmunitionUI : MonoBehaviour
 
     private void Start()
     {
+
         // Set the original color of the texts UI
         SetTextColor(BullesText, originBulletColor);
         SetTextColor(ArrowsText, originArrowColor);

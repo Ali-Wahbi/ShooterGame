@@ -11,11 +11,21 @@ public class PlayerCursor : MonoBehaviour
     [Header("Sprites: ")]
     [SerializeField] SpriteRenderer cursorSprite;
 
+
+
     public Sprite BulletSprite;
     public Sprite ArrowSprite;
     public Sprite MeleeSprite;
 
     #region Cursor
+
+    private void Start()
+    {
+        // Hide the pointer
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
 
     public void SetCursorPos(Vector2 pos)
     {
