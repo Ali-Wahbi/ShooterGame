@@ -37,12 +37,15 @@ public class PlayerStats : MonoBehaviour
     bool shieldIsBroken = false;
     bool shieldIsFull = false;
 
+    //Testinig only
+    bool canDie = false;
+
 
 
     public void TakeDamage(int damage)
     {
         // Player dies if hit while shield is broken
-        if (shieldIsBroken)
+        if (shieldIsBroken && canDie)
         {
             Debug.Log("Player Died");
             Healthbar.DecFromShield(1);

@@ -37,6 +37,11 @@ public class EnemyStats : MonoBehaviour
 
     }
 
+    public void AddToOnDestroy(UnityAction action)
+    {
+        DefeatEvents.AddListener(action);
+    }
+
     void StartFlash()
     {
         // Stop the Coroutine if it is started
