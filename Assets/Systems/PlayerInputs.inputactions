@@ -304,6 +304,17 @@
                 {
                     "name": "",
                     "id": "ae85d153-a7de-4c82-9798-a88032d5c416",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3275fa22-7614-435d-8274-eb8ece571abb",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",

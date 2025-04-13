@@ -115,9 +115,13 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("Switching weapons");
         if (context.action.WasPressedThisFrame()) weaponsController.SwitchUsedWeapon();
     }
-    public void PauseClicked()
+    public void PauseClicked(InputAction.CallbackContext context)
     {
-        Debug.Log("Pause Clicked");
+        if (context.action.WasPressedThisFrame())
+        {
+            Debug.Log("Pause Clicked");
+            PauseScreen.p.PauseGame();
+        }
 
     }
     #endregion
