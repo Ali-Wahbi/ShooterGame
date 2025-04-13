@@ -104,7 +104,7 @@ public class RandomRoomsGenerator : MonoBehaviour
         GenerateSpecialRooms();
         GenerateBattleRooms();
         GeneratePaths();
-        GeneratePaths();
+        // GeneratePaths();
     }
     public void GenerateEmptyPaths()
     {
@@ -179,6 +179,7 @@ public class RandomRoomsGenerator : MonoBehaviour
     /// </summary>
     private void GeneratePaths()
     {
+        //TODO: rework
         int gridSize = 3;
         bool[,] visited = new bool[gridSize, gridSize];
         List<Vector2Int> directions = new List<Vector2Int>

@@ -348,7 +348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &29661968
 Transform:
   m_ObjectHideFlags: 0
@@ -3760,7 +3760,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4860,8 +4860,12 @@ PrefabInstance:
       value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 8546836795124931671, guid: 918bb13b30645e64d8e6e4ddc8d56ebb, type: 3}
+      propertyPath: m_Lens.Dutch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8546836795124931671, guid: 918bb13b30645e64d8e6e4ddc8d56ebb, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8770634079246739723, guid: 918bb13b30645e64d8e6e4ddc8d56ebb, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
