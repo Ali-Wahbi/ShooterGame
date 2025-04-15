@@ -6,7 +6,7 @@ public class RandomRoomsGenerator : MonoBehaviour
 {
     [SerializeField] bool AllowRepeatition = false;
     [Space]
-    [SerializeField] List<Transform> RoomsPositions;
+    [SerializeField] public List<Transform> RoomsPositions;
 
 
 

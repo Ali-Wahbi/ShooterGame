@@ -5,7 +5,7 @@ using UnityEngine;
 public class PathOrganizer : MonoBehaviour
 {
     [SerializeField]
-    List<PathsSpawner> paths;
+    public List<PathsSpawner> paths;
     // Start is called before the first frame update
     public void CheckEmpty()
     {
