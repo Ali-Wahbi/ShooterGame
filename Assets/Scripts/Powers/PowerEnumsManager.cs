@@ -9,6 +9,7 @@ public class Power
 {
     public string PowerName;
     public Sprite PowerIcon;
+    public Sprite PowerOutlinedIcon;
 
     [TextArea(3, 7)]
     public string PowerDescription;
@@ -17,10 +18,10 @@ public class Power
 
 public enum WeaponPowersType
 {
-    None, SixFingers, Resoncane
+    None, SixFingers, Resonance, GreedyAmmo, PositiveFeedback
 }
 
 public enum PlayerPowersType
 {
-    None, ExtraSAS, ExtraMagazine
+    None, SASExtension, ExtraMagazine, Binoculars, EnhancedSprinters, RechargableBatteries
 }

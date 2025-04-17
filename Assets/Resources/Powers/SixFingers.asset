@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 36ff89eee5fe86e46aac2bae4a23c1e4, type: 3}
-  m_Name: WeaponPowerOne
+  m_Name: SixFingers
   m_EditorClassIdentifier: 
-  weaponPower: 1
   power:
     PowerName: Six Fingers
     PowerIcon: {fileID: 1315281172, guid: ea71b4c79bce65b408737122c2bd64a4, type: 3}
-    PowerDescription: Add range to the melee weapons
+    PowerOutlinedIcon: {fileID: 1130034548, guid: 008669319cec4f24e8e64c88e8201102, type: 3}
+    PowerDescription: Add extra range to the melee weapons
+  weaponPower: 1

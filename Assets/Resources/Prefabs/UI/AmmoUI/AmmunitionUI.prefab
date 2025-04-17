@@ -178,7 +178,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294049536
-  m_fontColor: {r: 0, g: 1, b: 0.9463024, a: 1}
+  m_fontColor: {r: 0, g: 0.92204285, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BullesText: {fileID: 8641183272017265680}
+  originBulletColor: {r: 0, g: 0, b: 0, a: 0}
   ArrowsText: {fileID: 1928197294448210384}
+  originArrowColor: {r: 0, g: 0.92156863, b: 1, a: 1}
   NoAmmoColor: {r: 1, g: 0, b: 0, a: 1}
-  bult: 1
-  arrow: 0

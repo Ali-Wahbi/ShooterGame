@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +14,7 @@ public class PowerButton : MonoBehaviour
     // static fields are used among all the instances of this class
     static PowerScriptableParent CurrentSelectedPower = null;
     static List<PowerScriptableParent> PowersChoices = new List<PowerScriptableParent>();
-    static PowerScriptableParent[] LoadedPowers;
+    static HashSet<PowerScriptableParent> LoadedPowers;
 
     public PowerScriptableParent SelectedPower;
 
@@ -24,25 +25,23 @@ public class PowerButton : MonoBehaviour
     public void SetImage(Sprite sprite)
     {
         imageHolder.sprite = sprite;
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
         if (LoadedPowers == null) LoadAllPowers();
-        while (!PowersChoices.Contains(SelectedPower))
-        {
-            PickRandomPower();
-        }
+        PickRandomPower();
         PowersChoices.Add(SelectedPower);
         SetImage(SelectedPower.power.PowerIcon);
     }
 
     void LoadAllPowers()
     {
-        LoadedPowers = Resources.LoadAll<PowerScriptableParent>("Powers");
+        LoadedPowers = Resources.LoadAll<PowerScriptableParent>("Powers").ToHashSet();
 
-        if (LoadedPowers.Length == 0)
+        if (LoadedPowers.Count == 0)
         {
             Debug.LogError("No powers found in Resources/Powers folder.");
         }
@@ -50,12 +49,14 @@ public class PowerButton : MonoBehaviour
 
     void PickRandomPower()
     {
-        int randomIndex = Random.Range(0, LoadedPowers.Length);
-        SelectedPower = LoadedPowers[randomIndex];
+        int randomIndex = Random.Range(0, LoadedPowers.Count);
+        SelectedPower = LoadedPowers.ElementAt(randomIndex);
+        LoadedPowers.RemoveWhere(p => p == SelectedPower);
+
     }
 
 
-    public void OnClick()
+    public async void OnClick()
     {
         if (CurrentSelectedPower == SelectedPower)
         {
@@ -64,7 +65,10 @@ public class PowerButton : MonoBehaviour
         else
         {
             CurrentSelectedPower = SelectedPower;
-            if (manager) manager.SetSelectedPowerText(SelectedPower.power.PowerDescription);
+            if (manager) await manager.SetSelectedPower(
+                pName: SelectedPower.power.PowerName,
+                Pdesc: SelectedPower.power.PowerDescription,
+                position: transform.position);
         }
     }
 
@@ -73,20 +77,18 @@ public class PowerButton : MonoBehaviour
     {
         if (SelectedPower is WeaponPower)
         {
-            // PowerManager.Instance.SetSelectedPower(SelectedPower);
-            // Debug.Log("Weapon Power Selected: " + SelectedPower.name);
             WeaponPowersSingleton.Instance.UsePower(((WeaponPower)SelectedPower).weaponPower);
         }
         else if (SelectedPower is PlayerPower)
         {
-            // PowerManager.Instance.SetSelectedPower(SelectedPower);
-            // Debug.Log("Player Power Selected: " + SelectedPower.name);
-
             PlayerPowersSingleton.Instance.UsePower(((PlayerPower)SelectedPower).playerPower);
         }
         else
         {
             Debug.Log("Power not found: " + SelectedPower.name);
         }
+
+        if (manager) manager.onSelectionMade(SelectedPower.power.PowerOutlinedIcon);
+        else Debug.LogError("PowerChoicesManager not assigned.");
     }
 }

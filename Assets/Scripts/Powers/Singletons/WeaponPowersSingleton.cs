@@ -20,6 +20,9 @@ public class WeaponPowersSingleton : MonoBehaviour
 
     public List<WeaponPowersType> weaponPowers = new List<WeaponPowersType>();
 
+    // variables to be saved later
+
+
     public void UsePower(WeaponPowersType powerType)
     {
         weaponPowers.Add(powerType);
@@ -30,10 +33,19 @@ public class WeaponPowersSingleton : MonoBehaviour
                 // Implement logic for SixFingers power
                 Debug.Log("SixFingers power used");
                 break;
-            case WeaponPowersType.Resoncane:
+            case WeaponPowersType.Resonance:
                 // Implement logic for Resoncanec power
                 Debug.Log("Resoncanee power used");
                 break;
+            case WeaponPowersType.GreedyAmmo:
+                // Implement logic for GreedyAmmo power
+                Debug.Log("GreedyAmmo power used");
+                break;
+            case WeaponPowersType.PositiveFeedback:
+                // Implement logic for PositiveFeedback power
+                Debug.Log("PositiveFeedback power used");
+                break;
+
             default:
                 Debug.LogWarning("Unknown weapon power type: " + powerType);
                 break;

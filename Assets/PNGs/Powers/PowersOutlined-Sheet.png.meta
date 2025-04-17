@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ea71b4c79bce65b408737122c2bd64a4
+guid: 008669319cec4f24e8e64c88e8201102
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Powers-BG
+      name: PowersOutlined-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -105,20 +105,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d99432bc1dc8fac43a7b825719fa2ec4
-      internalID: 1346456126
+      spriteID: 627a4b4a9add8864a9557e5d7e3194ce
+      internalID: -1818272534
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Powers-SixFingers
+      name: PowersOutlined-1
       rect:
         serializedVersion: 2
         x: 32
@@ -126,20 +126,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9f2f7484b2383104e90c7325c1f241b0
-      internalID: 1315281172
+      spriteID: 8a998cf979551034aae8777c19df09f0
+      internalID: 1130034548
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Powers-SasExtinsion
+      name: PowersOutlined_2
       rect:
         serializedVersion: 2
         x: 64
@@ -147,20 +147,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fb417931b15e11449cbdc9b6af5ee5f
-      internalID: -925530073
+      spriteID: 30889e5360cb1194c91731075c7cb6de
+      internalID: -1716935624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Powers-MoreAmmo
+      name: PowersOutlined_3
       rect:
         serializedVersion: 2
         x: 96
@@ -168,20 +168,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d1849d35e0396446b74b04977f24b6e
-      internalID: 276302324
+      spriteID: 4fa01e9cc873a0a4f8180405eed32669
+      internalID: -1735064331
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Powers-MoreMagazine
+      name: PowersOutlined_4
       rect:
         serializedVersion: 2
         x: 128
@@ -189,20 +189,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5af3214cb8964f4e984636519c75c31
-      internalID: 1357671097
+      spriteID: c62feb4fbcbdf38498ea5b0e6ff7641c
+      internalID: 1532961452
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Powers-Resonance
+      name: PowersOutlined_5
       rect:
         serializedVersion: 2
         x: 160
@@ -210,20 +210,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e9064c2c1980a14ebd928342688e4c7
-      internalID: -713393840
+      spriteID: 1dd40b6c903b97f4db0e1dc472b2bd0b
+      internalID: 153433282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Powers-Binoculars
+      name: PowersOutlined_6
       rect:
         serializedVersion: 2
         x: 192
@@ -231,20 +231,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: aaf5c01d5860d464196fc9e5add70e4c
-      internalID: 1334742328
+      spriteID: fa6d8a8dca62241468820ab500fbbf76
+      internalID: 1953634625
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Powers-EnhancedBoots
+      name: PowersOutlined-_7
       rect:
         serializedVersion: 2
         x: 224
@@ -252,20 +252,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3363342c4a410e4a9bdca94befacdba
-      internalID: -1526307847
+      spriteID: 05b70222ed13d9f41a00a0e76f796cce
+      internalID: -381022819
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Powers-RechargableBatteries
+      name: PowersOutlined_8
       rect:
         serializedVersion: 2
         x: 256
@@ -273,20 +273,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d4bcaead9b129143b40727bd1b5744c
-      internalID: -659297728
+      spriteID: e03803156fbe10f4eb2b1b98c1b7bcb4
+      internalID: -465785094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Powers-PositiveFeedback
+      name: PowersOutlined_9
       rect:
         serializedVersion: 2
         x: 288
@@ -294,14 +294,14 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e77eb7dd4784d164c960f95a0f571f05
-      internalID: 1550613518
+      spriteID: 6db500329bb25a648b3769e4bdea4a30
+      internalID: -865158788
       vertices: []
       indices: 
       edges: []
@@ -317,16 +317,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Powers-BG: 1346456126
-      Powers-Binoculars: 1334742328
-      Powers-EnhancedBoots: -1526307847
-      Powers-MoreAmmo: 276302324
-      Powers-MoreMagazine: 1357671097
-      Powers-PositiveFeedback: 1550613518
-      Powers-RechargableBatteries: -659297728
-      Powers-Resonance: -713393840
-      Powers-SasExtinsion: -925530073
-      Powers-SixFingers: 1315281172
+      PowersOutlined-1: 1130034548
+      PowersOutlined-Sheet_0: -1818272534
+      PowersOutlined-_7: -381022819
+      PowersOutlined_2: -1716935624
+      PowersOutlined_3: -1735064331
+      PowersOutlined_4: 1532961452
+      PowersOutlined_5: 153433282
+      PowersOutlined_6: 1953634625
+      PowersOutlined_8: -465785094
+      PowersOutlined_9: -865158788
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

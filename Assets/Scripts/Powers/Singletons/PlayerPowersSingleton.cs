@@ -28,13 +28,25 @@ public class PlayerPowersSingleton : MonoBehaviour
 
         switch (powerType)
         {
-            case PlayerPowersType.ExtraSAS:
+            case PlayerPowersType.SASExtension:
                 // Implement logic for ExtraSAS power
                 Debug.Log("ExtraSAS power used");
                 break;
             case PlayerPowersType.ExtraMagazine:
                 // Implement logic for ExtraMagazine power
                 Debug.Log("ExtraMagazine power used");
+                break;
+            case PlayerPowersType.Binoculars:
+                // Implement logic for Binoculars power
+                Debug.Log("Binoculars power used");
+                break;
+            case PlayerPowersType.EnhancedSprinters:
+                // Implement logic for EnhancedSprinters power
+                Debug.Log("EnhancedSprinters power used");
+                break;
+            case PlayerPowersType.RechargableBatteries:
+                // Implement logic for RechargableBatteries power
+                Debug.Log("RechargableBatteries power used");
                 break;
             default:
                 Debug.LogWarning("Unknown player power type: " + powerType);
