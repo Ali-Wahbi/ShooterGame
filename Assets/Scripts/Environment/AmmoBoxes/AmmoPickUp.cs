@@ -23,13 +23,27 @@ public class AmmoPickUp : MonoBehaviour
 
     float radius = 1f;
 
-    float ammmoInc = 1f;
+    float ammmoInc
+    {
+        get
+        {
+            return WeaponPowersSingleton.Instance.AmmoPower;
+        }
+    }
 
     int arowwAmmount
     {
         get
         {
-            return (int)ammoAmount / 2;
+            return bulletAmmount / 2;
+        }
+    }
+
+    int bulletAmmount
+    {
+        get
+        {
+            return (int)(ammoAmount * ammmoInc);
         }
     }
 
@@ -82,7 +96,7 @@ public class AmmoPickUp : MonoBehaviour
 
     void HandleCollisionWithPlayer()
     {
-        target.GetComponent<PlayerStats>().AddAmmo(WeaponType.Bullets, ammoAmount);
+        target.GetComponent<PlayerStats>().AddAmmo(WeaponType.Bullets, bulletAmmount);
         target.GetComponent<PlayerStats>().AddAmmo(WeaponType.Arrows, arowwAmmount);
         SendPopUp();
         sp.enabled = false;
@@ -121,11 +135,11 @@ public class AmmoPickUp : MonoBehaviour
     {
         if (sp.sprite == BigDrop)
         {
-            ammoAmount = BigAmmo * (int)ammmoInc;
+            ammoAmount = BigAmmo;
         }
         else if (sp.sprite == SmallDrop)
         {
-            ammoAmount = SmallAmmo * (int)ammmoInc;
+            ammoAmount = SmallAmmo;
         }
     }
 
@@ -135,7 +149,7 @@ public class AmmoPickUp : MonoBehaviour
 
         IEnumerator ShowPopUp()
         {
-            PopUpText.Create(displayText: $"+{ammoAmount} Bullets", pos: transform.position, color: PopupColor.Yellow, randomDirection: false);
+            PopUpText.Create(displayText: $"+{bulletAmmount} Bullets", pos: transform.position, color: PopupColor.Yellow, randomDirection: false);
             yield return new WaitForSeconds(waitAmount);
 
             PopUpText.Create(displayText: $"+{arowwAmmount} Arrows", pos: transform.position, color: PopupColor.Cyan, randomDirection: false);
@@ -146,10 +160,6 @@ public class AmmoPickUp : MonoBehaviour
     public void IncreasePickRadius()
     {
         radius *= 1.5f;
-    }
-    public void IncreaseAmmoAmount()
-    {
-        ammoAmount *= 2;
     }
 
     void SetRadius()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VectorBullet : MonoBehaviour
 {
-
+    [SerializeField] private GameObject EnemyBulletPrefab;
     float bulletSpeed = 7;
     float bulletDamage;
 
@@ -39,5 +39,16 @@ public class VectorBullet : MonoBehaviour
     void Update()
     {
         transform.position += transform.right * Time.deltaTime * bulletSpeed;
+    }
+
+    public void ReflectBullet()
+    {
+        float newZAngle = transform.eulerAngles.z + 180f;
+        GameObject bult = Instantiate(EnemyBulletPrefab, position: transform.position, Quaternion.identity);
+        bult.GetComponent<Transform>().eulerAngles = new Vector3(0, 0, newZAngle);
+
+
+        //Set up
+        bult.GetComponent<EnemyBullet>().SetBulletSpeedAndDamage(bulletSpeed * 1.25f, bulletDamage);
     }
 }

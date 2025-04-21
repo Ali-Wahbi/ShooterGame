@@ -33,8 +33,27 @@ public class EnemyStats : MonoBehaviour
 
         Debug.Log(name + " took damage, health: " + health);
 
-        if (health <= 0) DefeatEvents.Invoke();
+        if (health <= 0) OnEnemyDefeat();
 
+    }
+
+    void OnEnemyDefeat()
+    {
+        DefeatEvents.Invoke();
+
+        HandleRechargeableBatteriesPower();
+    }
+
+    void HandleRechargeableBatteriesPower()
+    {
+        bool canRecharge = PlayerPowersSingleton.Instance.RechargableBatteriesActive;
+
+        float chance = Random.Range(0f, 100f);
+        float chanceToRecharge = 14f; // should be 14% chance to recharge
+        if (canRecharge && chance <= chanceToRecharge)
+        {
+            PlayerPowersSingleton.Instance.OnRechargeBatteriesCalled(transform.position);
+        }
     }
 
     public void AddToOnDestroy(UnityAction action)

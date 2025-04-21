@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet1 : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
+
+    [SerializeField] private GameObject PlayerBulletPrefab;
     // Refactor bullets
     float bulletSpeed = 7;
     float bulletDamage = 2;
@@ -45,5 +47,17 @@ public class EnemyBullet1 : MonoBehaviour
     void Update()
     {
         transform.position += transform.right * Time.deltaTime * bulletSpeed;
+    }
+
+    public void ReflectBullet()
+    {
+        if (PlayerBulletPrefab == null) return;
+        float newZAngle = transform.eulerAngles.z + 180f;
+
+        GameObject bult = Instantiate(PlayerBulletPrefab, position: transform.position, Quaternion.identity);
+        bult.GetComponent<Transform>().eulerAngles = new Vector3(0, 0, newZAngle);
+
+        //Set up
+        bult.GetComponent<VectorBullet>().SetBulletSpeedAndDamage(bulletSpeed * 1.4f, bulletDamage * 0.5f);
     }
 }

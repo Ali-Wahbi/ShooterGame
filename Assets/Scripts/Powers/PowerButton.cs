@@ -9,32 +9,24 @@ public class PowerButton : MonoBehaviour
 
 
     [SerializeField] Image imageHolder;
+
+    [SerializeField] Animator animator;
     private PowerChoicesManager manager;
 
     // static fields are used among all the instances of this class
     static PowerScriptableParent CurrentSelectedPower = null;
-    static List<PowerScriptableParent> PowersChoices = new List<PowerScriptableParent>();
     static HashSet<PowerScriptableParent> LoadedPowers;
 
     public PowerScriptableParent SelectedPower;
 
-    public void SetManager(PowerChoicesManager manager)
-    {
-        this.manager = manager;
-    }
-    public void SetImage(Sprite sprite)
-    {
-        imageHolder.sprite = sprite;
-
-    }
-
+    #region Setup
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        if (LoadedPowers == null) LoadAllPowers();
+        // Remove OR condition to avoid loading powers multiple times
+        if (LoadedPowers == null || LoadedPowers.Count == 0) LoadAllPowers();
         PickRandomPower();
-        PowersChoices.Add(SelectedPower);
-        SetImage(SelectedPower.power.PowerIcon);
+        SetImage();
     }
 
     void LoadAllPowers()
@@ -55,20 +47,70 @@ public class PowerButton : MonoBehaviour
 
     }
 
+    #endregion
 
+
+
+    #region Utilities
+    public void SetManager(PowerChoicesManager manager)
+    {
+        this.manager = manager;
+    }
+    void SetImage()
+    {
+        imageHolder.sprite = SelectedPower.power.PowerIcon;
+    }
+
+    public string GetPowerName()
+    {
+        return SelectedPower.power.PowerName;
+    }
+    public string GetPowerDescription()
+    {
+        return SelectedPower.power.PowerDescription;
+    }
+    #endregion
+    #region Animations
+    /// <summary>
+    /// Selects the power button with an animation.
+    /// </summary>
+    void SelectAnimation()
+    {
+        string select = "Select";
+        animator.SetTrigger(select);
+    }
+    // called by the parent manager when the power is unselected
+    /// <summary>
+    /// Unselects the power button with an animation.
+    /// </summary>
+    public void UnSelectAnimation()
+    {
+        string unSelect = "UnSelect";
+        animator.SetTrigger(unSelect);
+    }
+    /// <summary>
+    /// Hides the power button with an animation.
+    /// </summary>
+    public void HideAnimation()
+    {
+        GetComponentInChildren<CanvasGroup>().interactable = false;
+        string hide = "Hide";
+        animator.SetTrigger(hide);
+    }
+    #endregion
     public async void OnClick()
     {
         if (CurrentSelectedPower == SelectedPower)
         {
+            // assign the power to the player
             AssignPower();
         }
         else
         {
+            // select the power
+            SelectAnimation();
             CurrentSelectedPower = SelectedPower;
-            if (manager) await manager.SetSelectedPower(
-                pName: SelectedPower.power.PowerName,
-                Pdesc: SelectedPower.power.PowerDescription,
-                position: transform.position);
+            if (manager) await manager.SetSelectedPower(this);
         }
     }
 
@@ -88,7 +130,7 @@ public class PowerButton : MonoBehaviour
             Debug.Log("Power not found: " + SelectedPower.name);
         }
 
-        if (manager) manager.onSelectionMade(SelectedPower.power.PowerOutlinedIcon);
+        if (manager) manager.OnSelectionMade(SelectedPower.power.PowerOutlinedIcon);
         else Debug.LogError("PowerChoicesManager not assigned.");
     }
 }

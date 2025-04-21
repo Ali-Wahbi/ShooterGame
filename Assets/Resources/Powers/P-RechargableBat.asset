@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d722d0b73c3b9149bf7c5ef76e74550, type: 3}
-  m_Name: ExtraMagazine
+  m_Name: P-RechargableBat
   m_EditorClassIdentifier: 
   power:
-    PowerName: Magazine Bag
-    PowerIcon: {fileID: 1357671097, guid: ea71b4c79bce65b408737122c2bd64a4, type: 3}
-    PowerOutlinedIcon: {fileID: 1532961452, guid: 008669319cec4f24e8e64c88e8201102, type: 3}
-    PowerDescription: More Ammo capacity
-  playerPower: 2
+    PowerName: Rechargable Batteries
+    PowerIcon: {fileID: -659297728, guid: ea71b4c79bce65b408737122c2bd64a4, type: 3}
+    PowerOutlinedIcon: {fileID: -465785094, guid: 008669319cec4f24e8e64c88e8201102, type: 3}
+    PowerDescription: Chance to get SAS charges from defeating robots
+  playerPower: 5

@@ -14,6 +14,14 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] bool CanMove = true;
 
+    float MovementSpeedMultiplier
+    {
+        get
+        {
+            return PlayerPowersSingleton.Instance.PlayerSpeedMultiplier;
+        }
+    }
+
     Rigidbody2D rb;
     PlayerAnim playerAnim;
     PlayerCursor cursorHandler;
@@ -61,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        rb.velocity = directions * movementSpeed;
+        rb.velocity = directions * movementSpeed * MovementSpeedMultiplier;
     }
 
     void Animate()

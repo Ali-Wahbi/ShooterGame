@@ -38,6 +38,7 @@ public class PauseScreen : MonoBehaviour
         Cursor.visible = true;
         Time.timeScale = 0f;
         animator.SetTrigger("Show");
+        // show the power list when the game is paused
     }
 
     public void OnResumeButtonClicked()
@@ -45,7 +46,7 @@ public class PauseScreen : MonoBehaviour
         // resume the game and hide the pause screen
         Time.timeScale = 1f;
         animator.SetTrigger("Hide");
-
+        // hide the power list when the game is resumed
 
         Cursor.visible = false;
     }

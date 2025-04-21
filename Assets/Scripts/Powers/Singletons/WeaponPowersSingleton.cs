@@ -20,8 +20,29 @@ public class WeaponPowersSingleton : MonoBehaviour
 
     public List<WeaponPowersType> weaponPowers = new List<WeaponPowersType>();
 
-    // variables to be saved later
+    [Header("Weapon Powers")]
 
+    /// <summary>
+    /// <b>Six fingers power:</b> increases the speed of the slash effect
+    /// </summary>
+    public float SlashSpeedMultiplierPower = 1f;
+
+    /// <summary>
+    /// <b>Resonance power:</b> allows the player to reflect bullets
+    /// </summary>
+    public bool CanReflect = false;
+
+
+    /// <summary>
+    /// <b>Greedy ammo power:</b> increases the amount of ammo picked up up to 50%
+    /// </summary>
+    public float AmmoPower = 1f;
+
+    /// <summary>
+    /// <b>Positive feedback power:</b> chance to returns ammo to the player when the weapon is reloaded
+    /// </summary>
+    public bool ReturnAmmo = false;
+    //TODO: Apply the powers to the weapon
 
     public void UsePower(WeaponPowersType powerType)
     {
@@ -30,20 +51,19 @@ public class WeaponPowersSingleton : MonoBehaviour
         switch (powerType)
         {
             case WeaponPowersType.SixFingers:
-                // Implement logic for SixFingers power
-                Debug.Log("SixFingers power used");
+                SlashSpeedMultiplierPower = 3f;
                 break;
+
             case WeaponPowersType.Resonance:
-                // Implement logic for Resoncanec power
-                Debug.Log("Resoncanee power used");
+                CanReflect = true;
                 break;
+
             case WeaponPowersType.GreedyAmmo:
-                // Implement logic for GreedyAmmo power
-                Debug.Log("GreedyAmmo power used");
+                AmmoPower = 1.5f;
                 break;
+
             case WeaponPowersType.PositiveFeedback:
-                // Implement logic for PositiveFeedback power
-                Debug.Log("PositiveFeedback power used");
+                ReturnAmmo = true;
                 break;
 
             default:
@@ -52,6 +72,14 @@ public class WeaponPowersSingleton : MonoBehaviour
         }
     }
 
+    public void ResetPowers()
+    {
+        weaponPowers.Clear();
+        SlashSpeedMultiplierPower = 1f;
+        CanReflect = false;
+        AmmoPower = 1f;
+        ReturnAmmo = false;
+    }
     private void OnEnable()
     {
         Debug.Log("WeaponPowersSingleton enabled");

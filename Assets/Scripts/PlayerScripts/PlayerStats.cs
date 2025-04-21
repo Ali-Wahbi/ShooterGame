@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -8,8 +9,7 @@ public class PlayerStats : MonoBehaviour
     {
         Healthbar.AddFirstFilled();
         // Set the UI start stats
-        Healthbar.IncMaxShield(MaxSheild);
-        Healthbar.DecFromShield(MissingShield);
+        SetMaxShield(MaxSheild);
 
         CurrentShield = MaxSheild - MissingShield;
 
@@ -20,6 +20,9 @@ public class PlayerStats : MonoBehaviour
 
         AmmoUIController.SetAmmo(WeaponType.Bullets, BulletsAmmo);
         AmmoUIController.SetAmmo(WeaponType.Arrows, ArrowsAmmo);
+
+        // set the camera zoom
+        SetCameraZoom();
     }
 
     #region SAS
@@ -40,6 +43,20 @@ public class PlayerStats : MonoBehaviour
     //Testinig only
     bool canDie = false;
 
+    int ShieldExtra
+    {
+        get
+        {
+            return PlayerPowersSingleton.Instance.ShieldExtra;
+        }
+    }
+
+    public void SetMaxShield(int maxShield = 0)
+    {
+        Healthbar.IncMaxShield(maxShield + ShieldExtra);
+        // TODO: fix adding empty sheild
+        Healthbar.DecFromShield(MissingShield - ShieldExtra);
+    }
 
 
     public void TakeDamage(int damage)
@@ -140,8 +157,23 @@ public class PlayerStats : MonoBehaviour
     // defaults to 0
     public int BulletsAmmo;
     public int ArrowsAmmo;
-    int maxBullets = 999;
-    int maxArrows = 999;
+    bool CanReturnAmmo
+    {
+        get
+        {
+            return WeaponPowersSingleton.Instance.ReturnAmmo;
+        }
+    }
+    int maxBullets = 100;
+    int maxArrows = 60;
+
+    float MaxMagazineMultiplier
+    {
+        get
+        {
+            return PlayerPowersSingleton.Instance.MaxMagazineSizeMultiplier;
+        }
+    }
 
     [SerializeField] private AmmunitionUI AmmoUIController;
 
@@ -152,14 +184,14 @@ public class PlayerStats : MonoBehaviour
             case WeaponType.Bullets:
 
                 BulletsAmmo += newAmmo;
-                BulletsAmmo = Mathf.Clamp(BulletsAmmo, 0, maxBullets);
+                BulletsAmmo = Mathf.Clamp(BulletsAmmo, 0, (int)(maxBullets * MaxMagazineMultiplier));
 
                 AmmoUIController.SetAmmo(WeaponType.Bullets, BulletsAmmo);
                 break;
             case WeaponType.Arrows:
 
                 ArrowsAmmo += newAmmo;
-                ArrowsAmmo = Mathf.Clamp(ArrowsAmmo, 0, maxArrows);
+                ArrowsAmmo = Mathf.Clamp(ArrowsAmmo, 0, (int)(maxArrows * MaxMagazineMultiplier));
 
                 AmmoUIController.SetAmmo(WeaponType.Arrows, ArrowsAmmo);
                 break;
@@ -177,6 +209,19 @@ public class PlayerStats : MonoBehaviour
     public void DecAmmo(WeaponType weaponType, int ammo)
     {
         SetAmmo(weaponType, -ammo);
+
+        int returnAmmoChance = 7;
+        // Return ammo if the power is active
+        if (CanReturnAmmo)
+        {
+            int chance = Random.Range(0, 100);
+            if (chance < returnAmmoChance)
+            {
+                AddAmmo(weaponType, ammo);
+                PopUpText.Create(displayText: "Ammo Saved", pos: transform.position, color: PopupColor.White, randomDirection: false);
+            }
+
+        }
     }
 
 
@@ -194,6 +239,19 @@ public class PlayerStats : MonoBehaviour
                 return 0;
         }
     }
+
+    #endregion
+
+    #region Camera
+    [SerializeField] private CinemachineVirtualCamera VirtualCamera;
+
+
+    public void SetCameraZoom()
+    {
+        float CameraZoom = PlayerPowersSingleton.Instance.DefaultCameraZoom;
+        VirtualCamera.m_Lens.OrthographicSize = CameraZoom;
+    }
+
 
     #endregion
 

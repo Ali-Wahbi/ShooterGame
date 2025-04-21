@@ -21,4 +21,14 @@ public class PowerDisplayer : MonoBehaviour
         child.AddComponent<Image>();
         child.GetComponent<Image>().sprite = sprite;
     }
+
+
+    public void ResetDisplay()
+    {
+        // remove all children from the display
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 }

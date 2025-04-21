@@ -22,39 +22,46 @@ public class PowerChoicesManager : MonoBehaviour
     [SerializeField] Color RangedColor;
 
     Animator animator;
+    PowerButton currentSelectedPowerButton = null;
+    HashSet<PowerButton> powerButtonsSet;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        ShowPowerChoices();
+        powerButtonsSet = new HashSet<PowerButton>();
+        // ShowPowerChoices();
     }
-
-    public void ShowPowerChoices()
+    PowerChamber chamber;
+    public void ShowPowerChoices(PowerChamber _chamber)
     {
+        chamber = _chamber;
         Info.SetActive(true);
         animator.SetTrigger("ShowInfo");
 
-        AddPowerChoices();
+        StartCoroutine(AddPowerChoices());
     }
 
-    void AddPowerChoices()
+    IEnumerator AddPowerChoices()
     {
         // Clear existing power buttons
         foreach (Transform child in powerButtonHolder)
         {
             Destroy(child.gameObject);
         }
-
+        powerButtonsSet.Clear();
+        // Instantiate new power buttons
         for (int i = 0; i < numberOfPowers; i++)
         {
             // Instantiate a new power button
             GameObject powerButton = Instantiate(powerButtonPrefab, powerButtonHolder);
             PowerButton buttonScript = powerButton.GetComponent<PowerButton>();
 
+            powerButtonsSet.Add(buttonScript);
             // Setup
             powerButton.name = "PowerButton_" + i;
             buttonScript.SetManager(this);
+            yield return new WaitForSeconds(0.1f); // Optional delay for better visual effect
         }
     }
 
@@ -62,6 +69,20 @@ public class PowerChoicesManager : MonoBehaviour
     public async Task SetSelectedPower(string pName, string Pdesc, Vector2 position)
     {
         await SetSelectedPowerText(pName, Pdesc);
+    }
+    public async Task SetSelectedPower(PowerButton button)
+    {
+        UnSelectCurrentPowerButton();
+        currentSelectedPowerButton = button;
+        await SetSelectedPowerText(button.GetPowerName(), button.GetPowerDescription());
+    }
+
+    public void UnSelectCurrentPowerButton()
+    {
+        if (currentSelectedPowerButton != null)
+        {
+            currentSelectedPowerButton.UnSelectAnimation();
+        }
     }
     public async Task SetSelectedPowerText(string pName, string Pdesc)
     {
@@ -89,6 +110,11 @@ public class PowerChoicesManager : MonoBehaviour
     {
         animator.SetTrigger("Hide");
     }
+    /// <summary>
+    /// Formats the text to include color codes for specific words.
+    /// </summary>
+    /// <param name="textToFormat">the text string to return formatted</param>
+    /// <returns>the string formatted to appear colorized</returns>
     string FormatText(string textToFormat)
     {
         string SasColorHex = ColorUtility.ToHtmlStringRGBA(SASColor);
@@ -106,15 +132,36 @@ public class PowerChoicesManager : MonoBehaviour
         return formattedText;
     }
 
-
-    public void onSelectionMade(Sprite sprite)
+    /// <summary>
+    /// Called when a power is selected from the UI.
+    /// </summary>
+    /// <param name="sprite"></param>
+    public void OnSelectionMade(Sprite sprite)
     {
+        onPowerChoicesFinished();
+
         // Hide the power selection UI
-        Debug.Log("Add child to power displayer");
         PowerDisplayer dis = FindObjectOfType<PowerDisplayer>();
+
 
         if (dis) dis.AddPowerSprite(sprite);
         else Debug.LogError("PowerDisplayer not found in the scene.");
+    }
+
+    public void onPowerChoicesFinished()
+    {
+
+        HideAllPowerButtons();
+        HideText();
+
+        chamber.ChoicesFinished();
+    }
+    void HideAllPowerButtons()
+    {
+        foreach (PowerButton button in powerButtonsSet)
+        {
+            button.HideAnimation();
+        }
     }
 
     private void OnEnable()
