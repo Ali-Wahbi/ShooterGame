@@ -22,21 +22,11 @@ public class MainMenu : MonoBehaviour
         Cursor.visible = true;
     }
 
-    async void LoadFirstRoom()
+    void LoadFirstRoom()
     {
         // Load the game scene
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
-        asyncLoad.allowSceneActivation = false;
-        while (!asyncLoad.isDone)
-        {
-            // Update the progress bar value and text
-            progressBarController.SetSliderValue(asyncLoad.progress);
-            if (asyncLoad.progress >= 0.9f)
-            {
-                asyncLoad.allowSceneActivation = true;
-            }
-            await Task.Delay(100);
-        }
+        Debug.Log("Loading First Room");
+        SceneChangeManager.Scm.LoadLevel(1);
     }
 
 
@@ -45,10 +35,6 @@ public class MainMenu : MonoBehaviour
         // Load the game scene
         Debug.Log("Play Clicked");
 
-        // Load Game Scene - WIP
-        if (progressBarController == null) return;
-
-        progressBarController.gameObject.SetActive(true);
         GetComponentInChildren<Canvas>().gameObject.SetActive(false);
         LoadFirstRoom();
     }

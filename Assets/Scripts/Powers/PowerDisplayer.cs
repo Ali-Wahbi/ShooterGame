@@ -5,7 +5,30 @@ using UnityEngine.UI;
 
 public class PowerDisplayer : MonoBehaviour
 {
+    [SerializeField] private GameObject powerDisplayPrefab;
+    [SerializeField] private GameObject powerDisplayContainer;
 
+
+    private static PowerDisplayer _pd;
+
+    public static PowerDisplayer Pd
+    {
+        get
+        {
+            if (_pd == null)
+            {
+                _pd = Instantiate(Resources.Load<PowerDisplayer>("Prefabs/Environment/Rooms/StaticRooms/PowersUI"));
+            }
+            return _pd;
+        }
+    }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+        SceneChangeManager.Scm.AddToRetryEvents(ResetDisplay);
+        SceneChangeManager.Scm.AddToQuitEvents(ResetDisplay);
+    }
     public HashSet<Sprite> PowerSprites;
 
     public void AddPowerSprite(Sprite sprite)
@@ -17,7 +40,8 @@ public class PowerDisplayer : MonoBehaviour
 
         GameObject child = new GameObject();
 
-        child.transform.SetParent(this.transform);
+        child.name = sprite.name;
+        child.transform.SetParent(powerDisplayContainer.transform);
         child.AddComponent<Image>();
         child.GetComponent<Image>().sprite = sprite;
     }
@@ -31,4 +55,5 @@ public class PowerDisplayer : MonoBehaviour
             Destroy(child.gameObject);
         }
     }
+
 }

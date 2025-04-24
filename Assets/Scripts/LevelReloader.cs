@@ -10,6 +10,7 @@ public class LevelReloader : MonoBehaviour
     {
         //reset current scene
         if (Input.GetKeyDown(KeyCode.R) && isEnabled)
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneChangeManager.Scm.LoadLevel(SceneManager.GetActiveScene().buildIndex);
     }
 }

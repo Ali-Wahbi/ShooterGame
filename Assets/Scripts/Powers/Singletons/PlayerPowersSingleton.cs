@@ -17,6 +17,10 @@ public class PlayerPowersSingleton : MonoBehaviour
             return _instance;
         }
     }
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
 
     PlayerStats playerStats;
 

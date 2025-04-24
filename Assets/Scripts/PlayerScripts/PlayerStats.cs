@@ -7,6 +7,7 @@ public class PlayerStats : MonoBehaviour
 {
     void Start()
     {
+        SetUiElements();
         Healthbar.AddFirstFilled();
         // Set the UI start stats
         SetMaxShield(MaxSheild);
@@ -25,6 +26,18 @@ public class PlayerStats : MonoBehaviour
         SetCameraZoom();
     }
 
+    void SetUiElements()
+    {
+        UIController uiController = FindObjectOfType<UIController>();
+        if (uiController == null)
+        {
+            Debug.LogError("UIController not found in the scene.");
+            return;
+        }
+        Healthbar = uiController.GetHealthbarController();
+        AmmoUIController = uiController.GetAmmoUi();
+    }
+
     #region SAS
     [SerializeField] private HealthbarController Healthbar;
 
@@ -41,7 +54,7 @@ public class PlayerStats : MonoBehaviour
     bool shieldIsFull = false;
 
     //Testinig only
-    bool canDie = false;
+    public bool canDie = false;
 
     int ShieldExtra
     {
@@ -144,7 +157,8 @@ public class PlayerStats : MonoBehaviour
 
     void ShowEndScreen()
     {
-        FindAnyObjectByType<EndScreen>()?.PlayInAnim();
+        // FindAnyObjectByType<EndScreen>()?.PlayInAnim();
+        EndScreen.Es.PlayInAnim();
     }
 
     #endregion

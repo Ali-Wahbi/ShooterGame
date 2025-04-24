@@ -144,8 +144,7 @@ public class PowerChoicesManager : MonoBehaviour
         PowerDisplayer dis = FindObjectOfType<PowerDisplayer>();
 
 
-        if (dis) dis.AddPowerSprite(sprite);
-        else Debug.LogError("PowerDisplayer not found in the scene.");
+        PowerDisplayer.Pd.AddPowerSprite(sprite);
     }
 
     public void onPowerChoicesFinished()

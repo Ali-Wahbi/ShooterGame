@@ -54,7 +54,7 @@ public class PauseScreen : MonoBehaviour
     public void OnQuitButtonClicked()
     {
         Debug.Log("Quit Clicked");
-        // quit the game
+        SceneChangeManager.Scm.QuitToMainScreen();
         // Show Quit Menu - WIP 
     }
 

@@ -17,7 +17,10 @@ public class WeaponPowersSingleton : MonoBehaviour
             return _instance;
         }
     }
-
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
     public List<WeaponPowersType> weaponPowers = new List<WeaponPowersType>();
 
     [Header("Weapon Powers")]

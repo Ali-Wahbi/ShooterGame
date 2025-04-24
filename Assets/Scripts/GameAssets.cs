@@ -32,4 +32,7 @@ public class GameAssets : MonoBehaviour
 
     [Tooltip("End Screen Prefap appears when the player dies.")]
     public Transform EndScreenPrefap;
+
+    [Tooltip("used to show the progress bar when loading a scene.")]
+    public Transform ProgressBarPrefap;
 }
