@@ -50,10 +50,12 @@ public class PowerDisplayer : MonoBehaviour
     public void ResetDisplay()
     {
         // remove all children from the display
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
+        // foreach (Transform child in transform)
+        // {
+        //     Destroy(child.gameObject);
+        // }
+
+        Destroy(gameObject);
     }
 
 }

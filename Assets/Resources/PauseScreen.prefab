@@ -120,7 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af61c1eae967a82489c387b86a725b4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 2485130956097945876}
+  panelImage: {fileID: 5927979723127389088}
+  canvasGroup: {fileID: 3073486009102448687}
+  resume: {fileID: 4318320686161474232}
+  options: {fileID: 609380075433453595}
+  quit: {fileID: 1002180235604297465}
 --- !u!1 &6071697272229486435
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +138,6 @@ GameObject:
   - component: {fileID: 5293200430698171052}
   - component: {fileID: 6953564886836135692}
   - component: {fileID: 3073486009102448687}
-  - component: {fileID: 2485130956097945876}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -240,27 +243,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!95 &2485130956097945876
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6071697272229486435}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 296e3ca3f39aa2e4386009a667193d8e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 2
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2072774477598743326
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -473,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2823256341083384230, guid: 9199fcd760722704cacd86579b82ce2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -416.6
+      value: -284
       objectReference: {fileID: 0}
     - target: {fileID: 2823256341083384230, guid: 9199fcd760722704cacd86579b82ce2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -611,7 +593,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2823256341083384230, guid: 9199fcd760722704cacd86579b82ce2c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -216
+      value: -160
       objectReference: {fileID: 0}
     - target: {fileID: 2823256341083384230, guid: 9199fcd760722704cacd86579b82ce2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

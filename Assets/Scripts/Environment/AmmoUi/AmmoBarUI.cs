@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using DG.Tweening;
 
 public class AmmoBarUI : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class AmmoBarUI : MonoBehaviour
     {
         MaxAmmo = maxAmmo;
         MinAmmo = minAmmo;
+        UpdateBar(CurrentAmmo);
     }
 
     public void SetAmmo(int newAmmo)
@@ -40,10 +42,20 @@ public class AmmoBarUI : MonoBehaviour
     void UpdateBar(float value)
     {
         float ammoPercentage = (value - MinAmmo) / (MaxAmmo - MinAmmo);
-        Holder.fillAmount = ammoPercentage;
+        // Debug.Log("Ammo Percentage: " + ammoPercentage);
+        SetFillAmount(ammoPercentage);
         AmmoTextForeground.text = ((int)value).ToString("0");
         AmmoTextBackground.text = ((int)value).ToString("0");
     }
-
+    DOTween tween;
+    void SetFillAmount(float value)
+    {
+        if (tween != null)
+        {
+            // tween.;
+        }
+        DOTween.To(() => Holder.fillAmount, x => Holder.fillAmount = x, value, 0.5f).SetEase(Ease.OutSine);
+        // Holder.fillAmount = value;
+    }
 
 }

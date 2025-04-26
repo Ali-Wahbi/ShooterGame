@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 using System;
 using UnityEngine.UI;
 
@@ -85,7 +86,11 @@ public class ProgressBarController : MonoBehaviour
     /// </summary> 
     public void SetSliderValue(float value)
     {
-        slider.value = Mathf.Lerp(slider.value, value, Time.deltaTime * 5.0f);
+        // slider.value = Mathf.Lerp(slider.value, value, Time.deltaTime * 5.0f);
+        var startValue = slider.value;
+
+        DOTween.To(() => startValue, x => slider.value = x, value, 0.4f);
+
     }
 
     /// <summary>

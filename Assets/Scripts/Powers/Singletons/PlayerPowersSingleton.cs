@@ -20,6 +20,8 @@ public class PlayerPowersSingleton : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        SceneChangeManager.Scm.AddToRetryEvents(ResetPowers);
+        SceneChangeManager.Scm.AddToQuitEvents(DestroySingleton);
     }
 
     PlayerStats playerStats;
@@ -69,6 +71,7 @@ public class PlayerPowersSingleton : MonoBehaviour
 
             case PlayerPowersType.ExtraMagazine:
                 MaxMagazineSizeMultiplier = 1.5f;
+                playerStats?.SetupMaxAmmo();
                 break;
 
             case PlayerPowersType.Binoculars:
@@ -94,6 +97,7 @@ public class PlayerPowersSingleton : MonoBehaviour
 
     public void ResetPowers()
     {
+        Debug.Log("Resetting player powers");
         playerPowers.Clear();
         ShieldExtra = 0;
         MaxMagazineSizeMultiplier = 1f;
@@ -101,7 +105,15 @@ public class PlayerPowersSingleton : MonoBehaviour
         PlayerSpeedMultiplier = 1f;
         RechargableBatteriesActive = false;
     }
-
+    void DestroySingleton()
+    {
+        Debug.Log("Destroying player powers singleton");
+        if (_instance != null)
+        {
+            Destroy(_instance.gameObject);
+            _instance = null;
+        }
+    }
     public void OnRechargeBatteriesCalled(Vector3 pos)
     {
         int RechargeAmount = 2; // Amount to recharge
@@ -110,13 +122,5 @@ public class PlayerPowersSingleton : MonoBehaviour
         PopUpText.Create(displayText: $"+{RechargeAmount} charges", pos: pos, color: PopupColor.Cyan, randomDirection: false);
     }
 
-    private void OnEnable()
-    {
-        Debug.Log("PlayerPowersSingleton enabled");
-    }
 
-    private void OnDisable()
-    {
-        Debug.Log("PlayerPowersSingleton disabled");
-    }
 }

@@ -20,6 +20,8 @@ public class WeaponPowersSingleton : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        SceneChangeManager.Scm.AddToRetryEvents(ResetPowers);
+        SceneChangeManager.Scm.AddToQuitEvents(DestroySingleton);
     }
     public List<WeaponPowersType> weaponPowers = new List<WeaponPowersType>();
 
@@ -75,22 +77,22 @@ public class WeaponPowersSingleton : MonoBehaviour
         }
     }
 
-    public void ResetPowers()
+    void ResetPowers()
     {
+        Debug.Log("Resetting weapon powers");
         weaponPowers.Clear();
         SlashSpeedMultiplierPower = 1f;
         CanReflect = false;
         AmmoPower = 1f;
         ReturnAmmo = false;
     }
-    private void OnEnable()
+    void DestroySingleton()
     {
-        Debug.Log("WeaponPowersSingleton enabled");
+        Debug.Log("Destroying weapon powers singleton");
+        if (_instance != null)
+        {
+            Destroy(_instance.gameObject);
+            _instance = null;
+        }
     }
-
-    private void OnDisable()
-    {
-        Debug.Log("WeaponPowersSingleton disabled");
-    }
-
 }

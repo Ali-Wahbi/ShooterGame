@@ -21,6 +21,20 @@ public class AmmunitionUI : MonoBehaviour
                 break;
         }
     }
+    public void SetMaxAmmo(WeaponType weaponType, int maxAmmo)
+    {
+        switch (weaponType)
+        {
+            case WeaponType.Bullets:
+                BulletBarUI.SetupBar(maxAmmo, 0);
+                break;
+            case WeaponType.Arrows:
+                ArrowBarUI.SetupBar(maxAmmo, 0);
+                break;
+            default:
+                break;
+        }
+    }
 
 
 }

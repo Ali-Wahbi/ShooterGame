@@ -22,8 +22,11 @@ public class PlayerStats : MonoBehaviour
         AmmoUIController.SetAmmo(WeaponType.Bullets, BulletsAmmo);
         AmmoUIController.SetAmmo(WeaponType.Arrows, ArrowsAmmo);
 
+        SetupMaxAmmo();
         // set the camera zoom
         SetCameraZoom();
+
+        // save and load the player stats
     }
 
     void SetUiElements()
@@ -190,6 +193,13 @@ public class PlayerStats : MonoBehaviour
     }
 
     [SerializeField] private AmmunitionUI AmmoUIController;
+
+    public void SetupMaxAmmo()
+    {
+        // Set the max ammo for the UI
+        AmmoUIController.SetMaxAmmo(WeaponType.Bullets, (int)(maxBullets * MaxMagazineMultiplier));
+        AmmoUIController.SetMaxAmmo(WeaponType.Arrows, (int)(maxArrows * MaxMagazineMultiplier));
+    }
 
     private void SetAmmo(WeaponType weaponType, int newAmmo)
     {
