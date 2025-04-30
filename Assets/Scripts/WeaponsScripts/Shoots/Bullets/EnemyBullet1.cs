@@ -49,15 +49,17 @@ public class EnemyBullet : MonoBehaviour
         transform.position += transform.right * Time.deltaTime * bulletSpeed;
     }
 
-    public void ReflectBullet()
+    public void ReflectBullet(float newZAngle)
     {
         if (PlayerBulletPrefab == null) return;
-        float newZAngle = transform.eulerAngles.z + 180f;
+        // float newZAngle = CalculateTanAngle(transform.position, endPoint) * Mathf.Rad2Deg;
 
         GameObject bult = Instantiate(PlayerBulletPrefab, position: transform.position, Quaternion.identity);
         bult.GetComponent<Transform>().eulerAngles = new Vector3(0, 0, newZAngle);
 
         //Set up
-        bult.GetComponent<VectorBullet>().SetBulletSpeedAndDamage(bulletSpeed * 1.4f, bulletDamage * 0.5f);
+        bult.GetComponent<VectorBullet>().SetBulletSpeedAndDamage(bulletSpeed * 0.75f, bulletDamage * 0.5f);
     }
+
+
 }

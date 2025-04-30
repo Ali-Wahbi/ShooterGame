@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
+// [RequireComponent(typeof(BotMovement))]
 public class EnemyStats : MonoBehaviour
 {
 
@@ -10,12 +11,18 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] bool UseFlash = true;
     [SerializeField, Range(0, 1)] float FlashDuration;
     [SerializeField] Material FlashMaterial;
+    [SerializeField] bool UseDissolve = true;
     private Material OriginalMaterial;
     private Coroutine FlashCoroutine;
     private SpriteRenderer sp;
     [Header("Events: ")]
     [SerializeField] UnityEvent DefeatEvents;
     [SerializeField] UnityEvent HittedEvents;
+
+    private void Reset()
+    {
+        gameObject.tag = "Enemy";
+    }
 
     private void Start()
     {
@@ -41,6 +48,7 @@ public class EnemyStats : MonoBehaviour
     {
         DefeatEvents.Invoke();
 
+        if (UseDissolve) HandleDissolve();
         HandleRechargeableBatteriesPower();
     }
 
@@ -82,5 +90,28 @@ public class EnemyStats : MonoBehaviour
         sp.material = OriginalMaterial;
 
         FlashCoroutine = null;
+    }
+
+    public void HandleDissolve()
+    {
+        // Material mat = GetComponent<SpriteRenderer>().material;
+        // dissolve the enemy
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        StartCoroutine(DissolveEnemy());
+
+        IEnumerator DissolveEnemy()
+        {
+            yield return new WaitForSeconds(2f);
+            // dissolve the enemy
+            float i = 0.01f;
+            while (i < 1.1f)
+            {
+                i += Time.deltaTime * 2f;
+                sr.material.SetFloat("_Fade", i);
+                yield return null;
+            }
+            Debug.Log("Robot fully disappeared");
+            Destroy(gameObject);
+        }
     }
 }

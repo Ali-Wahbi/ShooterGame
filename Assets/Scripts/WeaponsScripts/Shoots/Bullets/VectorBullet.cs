@@ -41,14 +41,52 @@ public class VectorBullet : MonoBehaviour
         transform.position += transform.right * Time.deltaTime * bulletSpeed;
     }
 
+    /// <summary>
+    /// reflect the bullet with reverse direction
+    /// </summary>
     public void ReflectBullet()
     {
         float newZAngle = transform.eulerAngles.z + 180f;
+        InstantiateReverseBullet(newZAngle);
+    }
+
+
+    /// <summary>
+    /// reflect the bullet with the given direction
+    /// </summary>
+    /// <param name="newZAngle">the angle of the reflected bullet</param>
+    public void ReflectBullet(float newZAngle)
+    {
+        InstantiateReverseBullet(newZAngle);
+    }
+
+    /// <summary>
+    /// reflect the bullet with direction calculated from the given points
+    /// </summary>
+    /// <param name="startPoint"></param>
+    /// <param name="endPoint"></param>
+    public void ReflectBullet(Vector3 startPoint, Vector3 endPoint)
+    {
+        float newZAngle = CalculateTanAngle(startPoint, endPoint) * Mathf.Rad2Deg;
+        InstantiateReverseBullet(newZAngle);
+
+    }
+
+    private void InstantiateReverseBullet(float newZAngle)
+    {
         GameObject bult = Instantiate(EnemyBulletPrefab, position: transform.position, Quaternion.identity);
         bult.GetComponent<Transform>().eulerAngles = new Vector3(0, 0, newZAngle);
 
 
         //Set up
-        bult.GetComponent<EnemyBullet>().SetBulletSpeedAndDamage(bulletSpeed * 1.25f, bulletDamage);
+        bult.GetComponent<EnemyBullet>().SetBulletSpeedAndDamage(bulletSpeed * 0.75f, bulletDamage);
+    }
+
+    float CalculateTanAngle(Vector3 startPoint, Vector3 endPoint)
+    {
+
+        float zAngle;
+        zAngle = Mathf.Atan2(endPoint.x - startPoint.x, endPoint.y - startPoint.y);
+        return zAngle;
     }
 }

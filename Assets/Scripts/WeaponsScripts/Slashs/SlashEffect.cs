@@ -65,7 +65,7 @@ public class SlashEffect : MonoBehaviour
         {
             if (canReflectBullet)
             {
-                other.gameObject.GetComponent<EnemyBullet>()?.ReflectBullet();
+                other.gameObject.GetComponent<EnemyBullet>()?.ReflectBullet(transform.eulerAngles.z);
             }
             Destroy(other.gameObject);
         }
