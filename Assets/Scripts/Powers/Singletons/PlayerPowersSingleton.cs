@@ -105,6 +105,10 @@ public class PlayerPowersSingleton : MonoBehaviour
         PlayerSpeedMultiplier = 1f;
         RechargableBatteriesActive = false;
     }
+    public int GetPowersCount()
+    {
+        return playerPowers.Count;
+    }
     void DestroySingleton()
     {
         Debug.Log("Destroying player powers singleton");

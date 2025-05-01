@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4161302354021716662}
   - component: {fileID: 6695104006728038027}
   - component: {fileID: 8213227005981651289}
+  - component: {fileID: 4101336092616032637}
   m_Layer: 7
   m_Name: Box
   m_TagString: Breakable
@@ -177,3 +178,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!210 &4101336092616032637
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7309235750325817752}
+  m_Enabled: 1
+  m_SortingLayerID: 857639653
+  m_SortingLayer: 4
+  m_SortingOrder: 0
+  m_SortAtRoot: 1

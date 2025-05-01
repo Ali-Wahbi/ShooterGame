@@ -34,9 +34,9 @@ public class SharperBot : MonoBehaviour
     public int moveDirection = 1;
     public int prevMoveDirection = 1;
 
-    bool canWalk = true;
-    bool BotIsAggressive = false;
-    bool canAttack = true;
+    // bool canWalk = true;
+    // bool BotIsAggressive = false;
+    // bool canAttack = true;
     public GameObject target;
 
     bool BotIsDefeated = false;
@@ -185,7 +185,7 @@ public class SharperBot : MonoBehaviour
     {
         // Debug.Log("Player entered detection area");
         SetAnimationBool(isAggressive, true);
-        BotIsAggressive = true;
+        // BotIsAggressive = true;
         target = other.gameObject;
 
         botMovement.SetTarget(t: other.transform);
@@ -198,7 +198,7 @@ public class SharperBot : MonoBehaviour
         // set time before cooldown
         if (currentState != EnemyStates.Defeated)
         {
-            BotIsAggressive = false;
+            // BotIsAggressive = false;
             botMovement.SetTarget(t: null);
             target = null;
         }
@@ -207,7 +207,7 @@ public class SharperBot : MonoBehaviour
     public void OnAttackEnd()
     {
         attackArea.enabled = false;
-        canAttack = true;
+        // canAttack = true;
         SetAnimationTrigger(AttackEnd);
         // Debug.Log("Sharper Attack end.");
     }

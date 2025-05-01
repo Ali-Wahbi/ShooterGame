@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,12 +39,37 @@ public class PowerDisplayer : MonoBehaviour
         PowerSprites.Add(sprite);
 
 
-        GameObject child = new GameObject();
+        GameObject childHolder = new GameObject(sprite.name + "_holder", typeof(RectTransform));
+        GameObject child = new GameObject(sprite.name);
 
-        child.name = sprite.name;
-        child.transform.SetParent(powerDisplayContainer.transform);
+        childHolder.transform.SetParent(powerDisplayContainer.transform);
+        child.transform.SetParent(childHolder.transform);
+
+
         child.AddComponent<Image>();
         child.GetComponent<Image>().sprite = sprite;
+        TweenChildAppearance(child.GetComponent<Image>(), (RectTransform)child.transform);
+
+    }
+    float StartPosY = 40.0f, EndPosY = 0.0f;
+    void TweenChildAppearance(Image childImage, RectTransform childPos)
+    {
+        //using DoTween
+        float duration = 0.7f;
+
+        DOTween.To(() => StartPosY, y => childPos.anchoredPosition = childPos.anchoredPosition.With(y: y), EndPosY, duration).SetEase(Ease.OutSine);
+        DOTween.To(() => 0f, x => SetImageAlpha(childImage, x), 1.0f, duration * 0.85f).SetEase(Ease.OutSine);
+
+    }
+    void SetImageAlpha(Image image, float alpha)
+    {
+        Color temp = image.color;
+        temp.a = alpha;
+        image.color = temp;
+    }
+    public int GetPowersCount()
+    {
+        return PowerSprites.Count;
     }
 
 

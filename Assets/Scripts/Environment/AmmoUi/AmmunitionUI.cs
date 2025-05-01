@@ -2,10 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 public class AmmunitionUI : MonoBehaviour
 {
     [SerializeField] AmmoBarUI BulletBarUI;
     [SerializeField] AmmoBarUI ArrowBarUI;
+    [Header("Holder UI")]
+    [SerializeField] RectTransform Holder;
+    // [SerializeField] float YFirstPos = 270;
+    [SerializeField] float YSecondPos = 140;
+    [SerializeField] bool PutInSecondPos = false;
+
+    float HolderYPos
+    {
+        set
+        {
+            SetHolderPos(value);
+        }
+        get
+        {
+            return Holder.anchoredPosition.y;
+        }
+    }
+
+    private void Start()
+    {
+        if (PutInSecondPos) SetHolderPos(YSecondPos);
+
+        // ChangeUiPos();
+    }
 
     public void SetAmmo(WeaponType weaponType, int newAmmo)
     {
@@ -35,6 +60,20 @@ public class AmmunitionUI : MonoBehaviour
                 break;
         }
     }
+    public void ChangeUiPos()
+    {
+        DOTween.To(() => HolderYPos, x => HolderYPos = x, YSecondPos, 1.0f).SetEase(Ease.OutSine);
+        PutInSecondPos = true;
+    }
 
+    public void SetToSecondPos(bool toSecondPos)
+    {
+        PutInSecondPos = toSecondPos;
+    }
+
+    void SetHolderPos(float yPos)
+    {
+        Holder.anchoredPosition = Holder.anchoredPosition.With(y: yPos);
+    }
 
 }

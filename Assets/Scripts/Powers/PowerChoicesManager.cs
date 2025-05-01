@@ -145,6 +145,9 @@ public class PowerChoicesManager : MonoBehaviour
 
 
         PowerDisplayer.Pd.AddPowerSprite(sprite);
+        if (PowerDisplayer.Pd.GetPowersCount() == 1)
+            SetAmmoUiPos();
+
     }
 
     public void onPowerChoicesFinished()
@@ -161,6 +164,10 @@ public class PowerChoicesManager : MonoBehaviour
         {
             button.HideAnimation();
         }
+    }
+    void SetAmmoUiPos()
+    {
+        FindFirstObjectByType<AmmunitionUI>()?.ChangeUiPos();
     }
 
     private void OnEnable()

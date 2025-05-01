@@ -82,7 +82,7 @@ public class PlayerStats : MonoBehaviour
         {
             Debug.Log("Player Died");
             Healthbar.DecFromShield(1);
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            SetPlayerIsDefeated();
             ShowEndScreen();
             return;
         }
@@ -156,6 +156,14 @@ public class PlayerStats : MonoBehaviour
     {
         MaxSheild -= subtraction;
         // Handle UI
+    }
+
+    void SetPlayerIsDefeated()
+    {
+        GetComponent<PlayerMovement>().SetPlayerGotDefeated();
+
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
     }
 
     void ShowEndScreen()

@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private WeaponController weaponsController;
 
     [SerializeField] bool CanMove = true;
+    bool isDefeated = false;
 
     float MovementSpeedMultiplier
     {
@@ -50,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if (isDefeated) return;
+
         // cheat code
         if (Input.GetKeyDown(KeyCode.H))
         {
@@ -74,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Animate()
     {
+        if (Time.timeScale == 0) return;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         cursorHandler.SetCursorPos(mousePos);
@@ -102,6 +106,11 @@ public class PlayerMovement : MonoBehaviour
     {
         // weapon1.RotateSprite(playerPos: playerPos);
         weaponsController.RotateSprite(playerPos: playerPos);
+    }
+    public void SetPlayerGotDefeated()
+    {
+        isDefeated = true;
+        // play defeat animation
     }
 
     // input handling area
@@ -150,6 +159,7 @@ public class PlayerMovement : MonoBehaviour
     bool useAmmo = true;
     public void WeaponOneClicked(InputAction.CallbackContext context)
     {
+        if (Time.timeScale == 0 || isDefeated) return;
         // Debug.Log("Weapon 1 clicked");
         if (context.action.WasPressedThisFrame())
         {
@@ -201,6 +211,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void WeaponTwoClicked(InputAction.CallbackContext context)
     {
+        if (Time.timeScale == 0 || isDefeated) return;
         // Debug.Log("Weapon 2 clicked");
         if (context.action.WasPressedThisFrame())
         {

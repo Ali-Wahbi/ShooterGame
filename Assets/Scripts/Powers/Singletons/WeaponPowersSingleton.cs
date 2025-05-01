@@ -86,6 +86,11 @@ public class WeaponPowersSingleton : MonoBehaviour
         AmmoPower = 1f;
         ReturnAmmo = false;
     }
+
+    public int GetPowersCount()
+    {
+        return weaponPowers.Count;
+    }
     void DestroySingleton()
     {
         Debug.Log("Destroying weapon powers singleton");
