@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Follow: {fileID: 3561510578823224556}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 6
+    OrthographicSize: 8
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -319,6 +319,7 @@ MonoBehaviour:
   MaxSheild: 6
   CurrentShield: 0
   MissingShield: 0
+  canDie: 0
   BulletsAmmo: 0
   ArrowsAmmo: 0
   AmmoUIController: {fileID: 0}

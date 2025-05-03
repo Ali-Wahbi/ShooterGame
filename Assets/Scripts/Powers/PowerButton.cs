@@ -130,7 +130,7 @@ public class PowerButton : MonoBehaviour
             Debug.Log("Power not found: " + SelectedPower.name);
         }
 
-        if (manager) manager.OnSelectionMade(SelectedPower.power.PowerOutlinedIcon);
+        if (manager) manager.OnSelectionMade(SelectedPower.power);
         else Debug.LogError("PowerChoicesManager not assigned.");
     }
 }

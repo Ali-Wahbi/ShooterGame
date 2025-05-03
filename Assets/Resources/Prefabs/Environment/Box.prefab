@@ -146,6 +146,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Normal: {fileID: 21300000, guid: dad67dfeac3b64549b25d42b8b1bd5e9, type: 3}
+  FlashDuration: 0.07
+  FlashMaterial: {fileID: 2100000, guid: d181a97d3111e8546b7ff6b3ea5e02fa, type: 2}
   Broken:
   - {fileID: -55063441, guid: 2cb1aea960f48e44983f88280401f1e9, type: 3}
   - {fileID: 1099704502, guid: 2cb1aea960f48e44983f88280401f1e9, type: 3}

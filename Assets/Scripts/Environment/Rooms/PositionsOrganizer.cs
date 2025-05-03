@@ -11,7 +11,7 @@ public class PositionsOrganizer : MonoBehaviour
     public List<Vector2> PathsPositionsVector2;
 
     [SerializeField] float x_Width, y_Height;
-    [SerializeField] int rows = 3, columns = 3;
+    public int rows = 3, columns = 3;
 
 
 

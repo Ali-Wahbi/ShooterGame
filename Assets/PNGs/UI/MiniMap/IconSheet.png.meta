@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 45b31a3b5179f344c9629aa1fc624f7d
+guid: 3a9aa3c6e635e5449a2e08533c1f32dd
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: AmmoUI_BG
+      name: IconSheet_PathH
       rect:
         serializedVersion: 2
         x: 0
@@ -105,20 +105,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb44d8d1b03def24485ec2073ee3b9e0
-      internalID: -1579441073
+      spriteID: bd606d8cc950d71449461a6ab75e058e
+      internalID: -593361424
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AmmoUI_Bullet
+      name: IconSheet_PathV
       rect:
         serializedVersion: 2
         x: 16
@@ -126,20 +126,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9be645d8421e0ed429989476d2c4a0d1
-      internalID: -1947826434
+      spriteID: 59b4bacf84d215f419537ff63621cb44
+      internalID: -1767726423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AmmoUI_arrow
+      name: IconSheet_Room
       rect:
         serializedVersion: 2
         x: 32
@@ -147,20 +147,20 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b31cf3751da1bd4fbbdaaa9d7124e0f
-      internalID: -2128541789
+      spriteID: bb65ed80480665c4297fb8aed99ad245
+      internalID: -292654949
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: AmmoUI_bomb
+      name: IconSheet_ERoom
       rect:
         serializedVersion: 2
         x: 48
@@ -168,14 +168,14 @@ TextureImporter:
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9479c6494bbeed24cac2e1744e6f255b
-      internalID: 1515854409
+      spriteID: fdef26754ee49444c9ff4aabff92a9ef
+      internalID: -711491692
       vertices: []
       indices: 
       edges: []
@@ -191,10 +191,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      AmmoUI_BG: -1579441073
-      AmmoUI_Bullet: -1947826434
-      AmmoUI_arrow: -2128541789
-      AmmoUI_bomb: 1515854409
+      IconSheet_ERoom: -711491692
+      IconSheet_PathH: -593361424
+      IconSheet_PathV: -1767726423
+      IconSheet_Room: -292654949
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

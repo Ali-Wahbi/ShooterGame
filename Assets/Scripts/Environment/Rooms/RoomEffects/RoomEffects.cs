@@ -7,6 +7,7 @@ public class RoomEffects : MonoBehaviour
 {
     [SerializeField] private Curtain roomCurtain;
     [SerializeField] private CinemachineVirtualCamera roomCamera;
+    [SerializeField] private int CameraOrthoSize = 10;
     [SerializeField] bool UseCurtain = true;
     int HighPrior = 10;
     int LowPrior = 0;
@@ -27,6 +28,7 @@ public class RoomEffects : MonoBehaviour
     void Start()
     {
         roomCurtain.gameObject.SetActive(UseCurtain);
+        roomCamera.m_Lens.OrthographicSize = CameraOrthoSize;
     }
 
     // Update is called once per frame

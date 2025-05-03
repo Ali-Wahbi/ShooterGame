@@ -45,3 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPowers: 
+  ShieldExtra: 0
+  MaxMagazineSizeMultiplier: 1
+  DefaultCameraZoom: 8
+  PlayerSpeedMultiplier: 1
+  RechargableBatteriesActive: 0

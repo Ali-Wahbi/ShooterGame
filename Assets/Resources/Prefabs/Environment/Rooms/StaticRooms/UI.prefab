@@ -96,6 +96,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 707797450542378448, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1579441073, guid: 45b31a3b5179f344c9629aa1fc624f7d, type: 3}
+    - target: {fileID: 3922731826353890155, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1947826434, guid: 45b31a3b5179f344c9629aa1fc624f7d, type: 3}
+    - target: {fileID: 6252891705922033762, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}
+      propertyPath: Holder
+      value: 
+      objectReference: {fileID: 2996564913104830686}
+    - target: {fileID: 6252891705922033762, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}
+      propertyPath: YSecondPos
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 6304242695535003888, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2128541789, guid: 45b31a3b5179f344c9629aa1fc624f7d, type: 3}
+    - target: {fileID: 6482948505667195490, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1579441073, guid: 45b31a3b5179f344c9629aa1fc624f7d, type: 3}
+    - target: {fileID: 8526568987469433945, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 270
+      objectReference: {fileID: 0}
     - target: {fileID: 8551177977323761437, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}
       propertyPath: m_Name
       value: AmmunitionUI
@@ -116,6 +144,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6542faf9643dde44fbad8fad92d0f876, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2996564913104830686 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8526568987469433945, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}
+  m_PrefabInstance: {fileID: 6899966223383596167}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6427735189981849839 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 500600641179903080, guid: 24c6a1985ddc7484582e02b7e530d53b, type: 3}

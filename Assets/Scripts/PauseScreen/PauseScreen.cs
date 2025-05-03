@@ -10,6 +10,7 @@ public class PauseScreen : MonoBehaviour
     [SerializeField] private CanvasGroup canvasGroup;
 
     [SerializeField] private RectTransform resume, options, quit;
+    [SerializeField] PausePowerDisplayer pausePowerDisplayer;
 
     bool isPaused = false;
 
@@ -60,6 +61,8 @@ public class PauseScreen : MonoBehaviour
         isPaused = true;
 
         SetPauseStart();
+
+        pausePowerDisplayer.ShowPowers();
 
         Cursor.visible = true;
         Time.timeScale = 0f;

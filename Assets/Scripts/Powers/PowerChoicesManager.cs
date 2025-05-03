@@ -99,7 +99,9 @@ public class PowerChoicesManager : MonoBehaviour
         }
         // Set the selected power name and description text
         selectedPowerNameText.text = pName;
-        selectedPowerDescriptionText.text = FormatText(Pdesc);
+        // test this:
+        selectedPowerDescriptionText.text = GameAssets.g.FormatText(Pdesc);
+        // selectedPowerDescriptionText.text = FormatText(Pdesc);
 
     }
     void ShowText()
@@ -135,8 +137,8 @@ public class PowerChoicesManager : MonoBehaviour
     /// <summary>
     /// Called when a power is selected from the UI.
     /// </summary>
-    /// <param name="sprite"></param>
-    public void OnSelectionMade(Sprite sprite)
+    /// <param name="power">The power that was selected</param>
+    public void OnSelectionMade(Power power)
     {
         onPowerChoicesFinished();
 
@@ -144,7 +146,10 @@ public class PowerChoicesManager : MonoBehaviour
         PowerDisplayer dis = FindObjectOfType<PowerDisplayer>();
 
 
-        PowerDisplayer.Pd.AddPowerSprite(sprite);
+        // PowerDisplayer.Pd.AddPowerSprite(sprite); -D
+
+        PowerDisplayer.Pd.AddPower(power);
+
         if (PowerDisplayer.Pd.GetPowersCount() == 1)
             SetAmmoUiPos();
 

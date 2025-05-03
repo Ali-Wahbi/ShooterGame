@@ -31,8 +31,15 @@ public class PowerDisplayer : MonoBehaviour
         SceneChangeManager.Scm.AddToQuitEvents(ResetDisplay);
     }
     public HashSet<Sprite> PowerSprites;
+    public HashSet<Power> PowersSet;
 
-    public void AddPowerSprite(Sprite sprite)
+    public void AddPower(Power power)
+    {
+        if (PowersSet == null) PowersSet = new HashSet<Power>();
+        PowersSet.Add(power);
+        AddPowerSprite(power.PowerOutlinedIcon);
+    }
+    void AddPowerSprite(Sprite sprite)
     {
         // add the sprite to save between levels
         if (PowerSprites == null) PowerSprites = new HashSet<Sprite>();
@@ -51,6 +58,7 @@ public class PowerDisplayer : MonoBehaviour
         TweenChildAppearance(child.GetComponent<Image>(), (RectTransform)child.transform);
 
     }
+
     float StartPosY = 40.0f, EndPosY = 0.0f;
     void TweenChildAppearance(Image childImage, RectTransform childPos)
     {
@@ -67,9 +75,25 @@ public class PowerDisplayer : MonoBehaviour
         temp.a = alpha;
         image.color = temp;
     }
+
     public int GetPowersCount()
     {
-        return PowerSprites.Count;
+
+        if (PowersSet == null) PowersSet = new HashSet<Power>();
+        return PowersSet.Count;
+    }
+
+    public HashSet<Sprite> GetPowerSprites()
+    {
+        if (PowerSprites == null) PowerSprites = new HashSet<Sprite>();
+        return PowerSprites;
+    }
+
+
+    public HashSet<Power> GetPowersSet()
+    {
+        if (PowersSet == null) PowersSet = new HashSet<Power>();
+        return PowersSet;
     }
 
 

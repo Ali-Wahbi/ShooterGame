@@ -35,4 +35,28 @@ public class GameAssets : MonoBehaviour
 
     [Tooltip("used to show the progress bar when loading a scene.")]
     public Transform ProgressBarPrefap;
+
+
+    [Header("Format text colors")]
+    [SerializeField] Color SASColor = Color.cyan;
+    [SerializeField] Color AmmoColor;
+    [SerializeField] Color MeleeColor;
+    [SerializeField] Color RangedColor;
+
+    public string FormatText(string textToFormat)
+    {
+        string SasColorHex = ColorUtility.ToHtmlStringRGBA(SASColor);
+        string AmmoColorHex = ColorUtility.ToHtmlStringRGBA(AmmoColor);
+        string MeleeColorHex = ColorUtility.ToHtmlStringRGBA(MeleeColor);
+        string RangedColorHex = ColorUtility.ToHtmlStringRGBA(RangedColor);
+
+        string formattedText = textToFormat.Replace("SAS", $"<color=#{SasColorHex}>SAS</color>")
+                                            .Replace("Ammo", $"<color=#{AmmoColorHex}>Ammo</color>")
+                                            .Replace("ammo", $"<color=#{AmmoColorHex}>ammo</color>")
+                                            .Replace("Melee", $"<color=#{MeleeColorHex}>Melee</color>")
+                                            .Replace("melee", $"<color=#{MeleeColorHex}>melee</color>")
+                                            .Replace("ranged", $"<color=#{RangedColorHex}>ranged</color>")
+                                            .Replace("Ranged", $"<color=#{RangedColorHex}>Ranged</color>");
+        return formattedText;
+    }
 }

@@ -44,7 +44,7 @@ public class PlayerPowersSingleton : MonoBehaviour
     /// <summary>
     /// <b>Binoculars power:</b> increases the camera zoom from 6f to 7f
     /// </summary>
-    public float DefaultCameraZoom = 6f;
+    public float DefaultCameraZoom = 8f;
 
     /// <summary>
     /// <b>Enhanced sprinters power:</b> increases the player speed from 1 to 1.3f
@@ -75,7 +75,7 @@ public class PlayerPowersSingleton : MonoBehaviour
                 break;
 
             case PlayerPowersType.Binoculars:
-                DefaultCameraZoom = 7f;
+                DefaultCameraZoom = 9f;
                 playerStats.SetCameraZoom();
                 break;
 
@@ -101,7 +101,7 @@ public class PlayerPowersSingleton : MonoBehaviour
         playerPowers.Clear();
         ShieldExtra = 0;
         MaxMagazineSizeMultiplier = 1f;
-        DefaultCameraZoom = 6f;
+        DefaultCameraZoom = 8f;
         PlayerSpeedMultiplier = 1f;
         RechargableBatteriesActive = false;
     }
