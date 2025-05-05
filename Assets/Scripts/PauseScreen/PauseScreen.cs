@@ -11,6 +11,7 @@ public class PauseScreen : MonoBehaviour
 
     [SerializeField] private RectTransform resume, options, quit;
     [SerializeField] PausePowerDisplayer pausePowerDisplayer;
+    [SerializeField] PauseWeaponDisplayer pauseWeaponDisplayer;
 
     bool isPaused = false;
 
@@ -63,6 +64,7 @@ public class PauseScreen : MonoBehaviour
         SetPauseStart();
 
         pausePowerDisplayer.ShowPowers();
+        pauseWeaponDisplayer.ShowWeapons();
 
         Cursor.visible = true;
         Time.timeScale = 0f;

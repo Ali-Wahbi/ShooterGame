@@ -47,6 +47,7 @@ public class SceneChangeManager : MonoBehaviour
             if (asyncLoad.progress >= 0.9f)
             {
                 progressBarController.SetSliderValue(100);
+                await Task.Delay(450);
                 asyncLoad.allowSceneActivation = true;
             }
             await Task.Delay(delay);

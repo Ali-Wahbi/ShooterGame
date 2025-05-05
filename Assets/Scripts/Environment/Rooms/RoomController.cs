@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class RoomController : MonoBehaviour
 {
-    [SerializeField] BoxCollider2D bColldier;
-    public void DisableCollider()
+
+    public int RoomId = 0;
+    public bool IsSpecialRoom = false;
+    public void OnPlayerEnterRoom()
     {
-        bColldier.enabled = false;
+        // send to the mini map that the player entered room with Id RoomId
+        FindObjectOfType<MiniMapController>().ShowRoomInMap(RoomId, IsSpecialRoom);
     }
+    public void SetUpRoom(int id, bool isSpecial = false)
+    {
+        RoomId = id;
+        IsSpecialRoom = isSpecial;
+    }
+
+
 }

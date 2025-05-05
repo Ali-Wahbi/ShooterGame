@@ -143,12 +143,14 @@ public class PathsSpawner : MonoBehaviour
 
         if (isVert) InstantiateGameObject(_gameObject: VericPath);
 
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
-
+    public int PathId = 0;
     void InstantiateGameObject(GameObject _gameObject)
     {
         Instantiate(_gameObject, transform.position, Quaternion.identity);
+        _gameObject.GetComponent<PathController>().SetUpPath(PathId);
+
     }
 }
 

@@ -148,8 +148,28 @@ public class RandomRoomsGenerator : MonoBehaviour
 
     public void GenerateConnectedPaths()
     {
+        List<PathsSpawner> paths = pathOrganizer.paths;
         foreach (GameObject path in ConnectedPaths)
         {
+            int pathId = ConnectedPaths.IndexOf(path);
+            int pathIndex = 0;
+            for (int i = 0; i < paths.Count; i++)
+            {
+                if (paths[i] == null) continue;
+                Vector2 start = paths[i].gameObject.transform.position;
+                Vector2 end = path.transform.position;
+                float distance = Vector2.Distance(start, end);
+                if (distance <= 2)
+                {
+                    pathIndex = i - 10;
+                    break;
+                }
+                else Debug.LogError($"Distance = {distance}"); // test here
+            }
+            path.GetComponent<PathsSpawner>().PathId = pathId;
+            Debug.LogWarning($"At index {pathIndex} set id {pathId}");
+
+            FindAnyObjectByType<MiniMapController>().SetPathId(pathIndex, pathId);
             path.GetComponent<PathsSpawner>().SetPathObject();
         }
 
@@ -188,10 +208,17 @@ public class RandomRoomsGenerator : MonoBehaviour
                 // remove the room from the list of available rooms
                 AllRooms.RemoveAt(ranIndex);
             }
+            int roomId = RoomIdCounter++;
+            int roomIndex = RoomsPositions.IndexOf(room);
+            FindObjectOfType<MiniMapController>().SetRoomId(roomIndex, roomId);
+
+            if (roomPrefab.GetComponent<RoomController>() == null)
+                roomPrefab.AddComponent<RoomController>().SetUpRoom(roomId);
+            else
+                roomPrefab.GetComponent<RoomController>().SetUpRoom(roomId);
 
             // Instantiate the room with parent: transform to keep the hierarchy organized in the Unity editor
             Instantiate(roomPrefab, room.position, Quaternion.identity, parent: transform);
-
         }
     }
 
@@ -343,7 +370,7 @@ public class RandomRoomsGenerator : MonoBehaviour
             // No error needed if GetRoomIndex returned -1, as that means 'from' or 'to' was outside grid bounds (handled by caller)
         }
     }
-
+    int RoomIdCounter = 1;
     /// <summary>
     /// Generate the special rooms
     /// </summary>
@@ -363,8 +390,20 @@ public class RandomRoomsGenerator : MonoBehaviour
             // Check if the special room is null
             if (!spRoom) continue;
 
+            int spRoomId = RoomIdCounter++;
+            int spRoomIndex = RoomsPositions.IndexOf(RoomsPositions[ranIndex]);
+            FindObjectOfType<MiniMapController>().SetRoomId(spRoomIndex, spRoomId);
+
+            if (spRoom.GetComponent<RoomController>() == null)
+                spRoom.AddComponent<RoomController>().SetUpRoom(spRoomId, true);
+            else
+                spRoom.GetComponent<RoomController>().SetUpRoom(spRoomId, true);
+
             // Instantiate the special room with parent: transform to keep the hierarchy organized in the Unity editor
             Instantiate(spRoom, RoomsPositions[ranIndex].position, Quaternion.identity, parent: transform);
+
+
+
             i++;
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using System.Linq;
 
 public class PausePowerDisplayer : MonoBehaviour
 {
@@ -23,14 +24,21 @@ public class PausePowerDisplayer : MonoBehaviour
         // clear the text
         SetDisplayTexts("", "");
         AllPowers = PowerDisplayer.Pd.GetPowersSet();
-        foreach (Power pow in AllPowers)
+        // foreach (Power pow in AllPowers)
+        // {
+
+        //     InstantiateSprite(pow);
+        // }
+
+        for (int i = 0; i < AllPowers.Count; i++)
         {
-            InstantiateSprite(pow);
+            Power pow = AllPowers.ToArray()[i];
+            InstantiateSprite(pow, i);
         }
 
     }
 
-    void InstantiateSprite(Power pow)
+    void InstantiateSprite(Power pow, float index = 0f)
     {
         GameObject holder = new GameObject(pow.PowerIcon.name + "_holder", typeof(RectTransform));
         holder.transform.SetParent(transform);
@@ -43,7 +51,7 @@ public class PausePowerDisplayer : MonoBehaviour
 
         child.AddComponent<Button>();
         child.GetComponent<Button>().onClick.AddListener(() => OnButtonClick(child.GetComponent<Image>()));
-
+        TweenPowerSprite(child.GetComponent<Image>(), index);
     }
 
     public void OnButtonClick(Image image)
@@ -88,6 +96,20 @@ public class PausePowerDisplayer : MonoBehaviour
         description.text = Pdesc;
     }
 
+    void TweenPowerSprite(Image image, float index)
+    {
+
+        float startValue = 1f;
+        float endValue = 1.2f;
+        float delayValue = 0.2f;
+        float delay = delayValue + delayValue * index;
+
+        DOTween.To(() => startValue, y => image.rectTransform.localScale = new Vector3(y, y, y), endValue, 0.5f)
+        .SetDelay(delay)
+        .SetEase(Ease.OutBounce)
+        .SetUpdate(UpdateType.Normal, true);
+
+    }
     void TweenText(TextMeshProUGUI textHolder, string endText = "", float delay = 0f, bool tweenPos = true)
     {
         string startText = textHolder.text;

@@ -58,6 +58,7 @@ public class RoomEffects : MonoBehaviour
 
             SetCameraPriority(HighPrior);
             SetCameraFollow(other.transform);
+            GetComponentInParent<RoomController>()?.OnPlayerEnterRoom();
         }
         if (other.gameObject.CompareTag("Enemy"))
         {

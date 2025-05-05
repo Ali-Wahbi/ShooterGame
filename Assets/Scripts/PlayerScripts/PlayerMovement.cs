@@ -110,7 +110,10 @@ public class PlayerMovement : MonoBehaviour
     public void SetPlayerGotDefeated()
     {
         isDefeated = true;
+        rb.velocity = Vector2.zero;
+        weaponsController.gameObject.SetActive(false);
         // play defeat animation
+        playerAnim.SetIsDefeated();
     }
 
     // input handling area
