@@ -9,6 +9,9 @@ public class RoomEffects : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera roomCamera;
     [SerializeField] private int CameraOrthoSize = 10;
     [SerializeField] bool UseCurtain = true;
+    [SerializeField] bool toggleMinimap = true;
+    static MiniMapController miniMap;
+
     int HighPrior = 10;
     int LowPrior = 0;
     bool BattleHasEnded = false;
@@ -27,6 +30,7 @@ public class RoomEffects : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (miniMap == null) miniMap = FindObjectOfType<MiniMapController>();
         roomCurtain.gameObject.SetActive(UseCurtain);
         roomCamera.m_Lens.OrthographicSize = CameraOrthoSize;
     }
@@ -124,9 +128,17 @@ public class RoomEffects : MonoBehaviour
 
     void onBattleEnd()
     {
+        if (BattleHasEnded) return;
         Debug.Log($"Battle in room {name} has ended");
         BattleHasEnded = true;
         SetCameraPriority(LowPrior);
+        ToggleMiniMap();
+    }
+
+    void ToggleMiniMap()
+    {
+        if (!toggleMinimap) return;
+        if (miniMap) miniMap.ToggleMapvisability();
     }
 
 }

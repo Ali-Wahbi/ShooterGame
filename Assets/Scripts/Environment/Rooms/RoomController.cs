@@ -11,6 +11,7 @@ public class RoomController : MonoBehaviour
     {
         // send to the mini map that the player entered room with Id RoomId
         FindObjectOfType<MiniMapController>().ShowRoomInMap(RoomId, IsSpecialRoom);
+        if (!IsSpecialRoom) FindObjectOfType<MiniMapController>().ToggleMapvisability();
     }
     public void SetUpRoom(int id, bool isSpecial = false)
     {

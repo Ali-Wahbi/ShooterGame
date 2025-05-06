@@ -10,29 +10,27 @@ public class MiniMapController : MonoBehaviour
     [SerializeField] Sprite SpecielRoom;
     [SerializeField] List<Image> AllRooms;
     [SerializeField] List<Image> AllPaths;
+    [SerializeField] List<Image> StaticPaths;
+    [SerializeField] CanvasGroup HolderCG;
+    RectTransform HolderRC;
     public List<int> AllRoomsIds;
-    public List<int> AllPathsIds;
     private void Awake()
     {
         SetUpStartIds();
+        HolderRC = HolderCG.GetComponent<RectTransform>();
     }
     void SetUpStartIds()
     {
         for (int i = 0; i < AllRooms.Count; i++)
             AllRoomsIds.Add(0);
 
-        for (int i = 0; i < AllPaths.Count; i++)
-            AllPathsIds.Add(0);
     }
     // called by the random room generator
     public void SetRoomId(int index, int id)
     {
         AllRoomsIds[index] = id;
     }
-    public void SetPathId(int index, int id)
-    {
-        AllPathsIds[index] = id;
-    }
+
 
     // called when the player enters a room
     public void ShowRoomInMap(int id, bool isSpecial)
@@ -50,21 +48,13 @@ public class MiniMapController : MonoBehaviour
 
     public void ShowPathInMap(int id)
     {
-        for (int i = 0; i < AllPathsIds.Count; i++)
-        {
-            if (AllPathsIds[i] == id)
-            {
-                Debug.Log($"player entered pathId {id}.");
-                ShowPathInMiniMap(i);
-                break;
-            }
-        }
+        ShowPathInMiniMap(id);
     }
 
     void ShowRoomInMiniMap(int id, bool isSpecial)
     {
         Image selectedImage = AllRooms[id];
-
+        if (selectedImage.enabled) return;
         if (isSpecial) selectedImage.sprite = SpecielRoom;
         selectedImage.enabled = true;
 
@@ -72,7 +62,18 @@ public class MiniMapController : MonoBehaviour
     }
     void ShowPathInMiniMap(int id)
     {
-        Image selectedImage = AllPaths[id];
+        if (id == -1) return;
+        Image selectedImage;
+        if (id >= 100)
+        {
+            id -= 100;
+            selectedImage = StaticPaths[id];
+        }
+        else
+            selectedImage = AllPaths[id];
+
+
+        if (selectedImage.enabled) return;
 
         selectedImage.enabled = true;
 
@@ -85,6 +86,58 @@ public class MiniMapController : MonoBehaviour
         float endValue = 1f;
         DOTween.To(() => startValue, a => image.color = image.color.WithAlpha(a), endValue, 0.7f);
 
+    }
+
+    public bool visible = false;
+    public bool hidden = false;
+    bool canTweenPos = true;
+    bool canTweenVisable = true;
+    float Startx = 875f;
+    float Endx = 1300f;
+
+    // called by player when presses M
+    /// <summary>
+    /// Toggles the position of the map
+    /// </summary>
+    public void ToggleMap()
+    {
+        if (!canTweenPos) return;
+        if (hidden) return;
+
+        if (visible) TweenMapPosX(Endx);
+        else TweenMapPosX(Startx);
+
+        visible = !visible;
+    }
+    [SerializeField] Ease mapEasePos;
+    void TweenMapPosX(float end)
+    {
+        canTweenPos = false;
+        HolderRC.DOAnchorPosX(end, 0.7f).SetEase(mapEasePos)
+        .OnComplete(() => canTweenPos = true);
+    }
+
+    // called by the battle room when battle starts and ends
+    /// <summary>
+    /// Toggles the visibility of the map using the alpha
+    /// </summary>
+    public void ToggleMapvisability()
+    {
+        if (!canTweenVisable) return;
+
+        if (hidden) TweenMapVisibilty(1f);
+        else TweenMapVisibilty(0f);
+
+        hidden = !hidden;
+
+    }
+
+    void TweenMapVisibilty(float endAlpha)
+    {
+        canTweenVisable = false;
+        DOTween.To(() => HolderCG.alpha, a => HolderCG.alpha = a, endAlpha, 0.7f)
+        .SetEase(Ease.OutCubic)
+        .OnComplete(() => canTweenVisable = true);
     }
 
     void DisableMiniMapSprites()

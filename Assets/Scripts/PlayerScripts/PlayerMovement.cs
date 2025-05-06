@@ -59,9 +59,6 @@ public class PlayerMovement : MonoBehaviour
             playerStats.AddAmmo(WeaponType.Bullets, 100);
             playerStats.AddAmmo(WeaponType.Arrows, 100);
         }
-
-        // close the game, needs rework
-        if (Input.GetKeyDown(KeyCode.Escape)) Application.Quit();
         // movement and animations
         if (CanMove)
         {
@@ -143,6 +140,15 @@ public class PlayerMovement : MonoBehaviour
             PauseScreen.p.PauseGame();
         }
 
+    }
+
+    public void MapToggled(InputAction.CallbackContext context)
+    {
+        if (context.action.WasPressedThisFrame())
+        {
+            Debug.Log("Map Toggled");
+            FindObjectOfType<MiniMapController>().ToggleMap();
+        }
     }
     #endregion
 

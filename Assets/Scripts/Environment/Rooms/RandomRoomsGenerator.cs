@@ -111,6 +111,7 @@ public class RandomRoomsGenerator : MonoBehaviour
 
     public void GenerateAll()
     {
+        pathOrganizer.SetPathsIndex();
         GenerateRooms();
         GenerateEmptyPaths();
         GenerateAllWalls();
@@ -148,28 +149,10 @@ public class RandomRoomsGenerator : MonoBehaviour
 
     public void GenerateConnectedPaths()
     {
-        List<PathsSpawner> paths = pathOrganizer.paths;
+        // List<PathsSpawner> paths = pathOrganizer.paths;
+
         foreach (GameObject path in ConnectedPaths)
         {
-            int pathId = ConnectedPaths.IndexOf(path);
-            int pathIndex = 0;
-            for (int i = 0; i < paths.Count; i++)
-            {
-                if (paths[i] == null) continue;
-                Vector2 start = paths[i].gameObject.transform.position;
-                Vector2 end = path.transform.position;
-                float distance = Vector2.Distance(start, end);
-                if (distance <= 2)
-                {
-                    pathIndex = i - 10;
-                    break;
-                }
-                else Debug.LogError($"Distance = {distance}"); // test here
-            }
-            path.GetComponent<PathsSpawner>().PathId = pathId;
-            Debug.LogWarning($"At index {pathIndex} set id {pathId}");
-
-            FindAnyObjectByType<MiniMapController>().SetPathId(pathIndex, pathId);
             path.GetComponent<PathsSpawner>().SetPathObject();
         }
 

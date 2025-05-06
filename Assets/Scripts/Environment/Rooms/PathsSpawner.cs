@@ -83,6 +83,7 @@ public class PathsSpawner : MonoBehaviour
             {
                 if (hit.collider.gameObject.tag == "Path")
                 {
+                    hit.collider.gameObject.GetComponent<PathsSpawner>().SetUpPath(PathId);
                     Destroy(gameObject);
                     break;
                 }
@@ -139,18 +140,25 @@ public class PathsSpawner : MonoBehaviour
     public void SetPathObject()
     {
 
+
         if (isHoriz) InstantiateGameObject(_gameObject: HorizonPath);
 
         if (isVert) InstantiateGameObject(_gameObject: VericPath);
 
-        // Destroy(gameObject);
+        Destroy(gameObject);
     }
-    public int PathId = 0;
+
+    public int PathId;
+    // public int PathIndex = 0;
     void InstantiateGameObject(GameObject _gameObject)
     {
-        Instantiate(_gameObject, transform.position, Quaternion.identity);
-        _gameObject.GetComponent<PathController>().SetUpPath(PathId);
+        GameObject instanced = Instantiate(_gameObject, transform.position, Quaternion.identity);
+        instanced.GetComponent<PathController>().SetUpPath(PathId);
 
+    }
+    public void SetUpPath(int id)
+    {
+        PathId = id;
     }
 }
 
