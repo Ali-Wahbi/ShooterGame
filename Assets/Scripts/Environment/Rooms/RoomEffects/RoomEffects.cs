@@ -10,6 +10,7 @@ public class RoomEffects : MonoBehaviour
     [SerializeField] private int CameraOrthoSize = 10;
     [SerializeField] bool UseCurtain = true;
     [SerializeField] bool toggleMinimap = true;
+    public List<Alarm> alarms = new List<Alarm>();
     static MiniMapController miniMap;
 
     int HighPrior = 10;
@@ -69,6 +70,8 @@ public class RoomEffects : MonoBehaviour
             SetInRoomEnemies(enemy: other.GetComponent<EnemyStats>());
             // Debug.Log($"Enemy: {other.gameObject.name} entered the room");
         }
+
+
 
     }
 
@@ -133,12 +136,38 @@ public class RoomEffects : MonoBehaviour
         BattleHasEnded = true;
         SetCameraPriority(LowPrior);
         ToggleMiniMap();
+        StopAllAlarms();
     }
 
     void ToggleMiniMap()
     {
         if (!toggleMinimap) return;
         if (miniMap) miniMap.ToggleMapvisability();
+    }
+
+    void SetUpObstacles()
+    {
+        foreach (Transform child in transform)
+        {
+            Alarm alarm;
+            if (child.TryGetComponent(out alarm))
+            {
+                alarms.Add(alarm);
+            }
+        }
+    }
+
+    public void AddToAlarms(Alarm alarm)
+    {
+        alarms.Add(alarm);
+    }
+
+    void StopAllAlarms()
+    {
+        foreach (Alarm alarm in alarms)
+        {
+            alarm.StopAlarm();
+        }
     }
 
 }

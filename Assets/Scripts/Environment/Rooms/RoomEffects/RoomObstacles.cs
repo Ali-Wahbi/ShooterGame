@@ -57,7 +57,9 @@ public class RoomObstacles : MonoBehaviour
 
     void InstantiateGameObject(GameObject obj, Transform pos)
     {
-        Instantiate(obj, pos.position, Quaternion.identity, parent: this.transform);
+        GameObject instanced = Instantiate(obj, pos.position, Quaternion.identity, parent: this.transform);
+        Alarm alarm = instanced.GetComponent<Alarm>();
+        if (alarm) GetComponent<RoomEffects>().AddToAlarms(alarm);
     }
 
     GameObject PickRandomObject(List<GameObject> list)

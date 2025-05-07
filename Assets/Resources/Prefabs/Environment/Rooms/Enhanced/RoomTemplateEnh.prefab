@@ -74,7 +74,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.42050552, y: -3.9647799}
+  m_Offset: {x: -0.42050552, y: -2.8997478}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -85,7 +85,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 32.15899, y: 28.33956}
+  m_Size: {x: 32.15899, y: 30.469624}
   m_EdgeRadius: 0
 --- !u!114 &6868322507677194286
 MonoBehaviour:
@@ -103,6 +103,8 @@ MonoBehaviour:
   roomCamera: {fileID: 2789421726207177401}
   CameraOrthoSize: 10
   UseCurtain: 0
+  toggleMinimap: 1
+  alarms: []
   dire: 3
   inRoomEnemies: []
 --- !u!114 &1701884695322300291
