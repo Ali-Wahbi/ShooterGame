@@ -25,7 +25,7 @@ public class PopUpText : MonoBehaviour
     {
         Transform text = Instantiate(GameAssets.g.PopupPrefap, position: pos, rotation: Quaternion.identity);
         PopUpText popText = text.GetComponent<PopUpText>();
-        Debug.Log("Create popup: " + popText);
+        // Debug.Log("Create popup: " + popText);
         popText.Setup(textDamage: "" + damage, color: color, randomDirection: randomDirection);
     }
 
@@ -33,7 +33,7 @@ public class PopUpText : MonoBehaviour
     {
         Transform text = Instantiate(GameAssets.g.PopupPrefap, position: pos, rotation: Quaternion.identity);
         PopUpText popText = text.GetComponent<PopUpText>();
-        Debug.Log("Create popup: " + popText);
+        // Debug.Log("Create popup: " + popText);
         popText.Setup(textDamage: displayText, color: color, randomDirection: randomDirection);
     }
 

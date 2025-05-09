@@ -52,7 +52,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 2fb67b1886253884683dd26846f7af49, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef22774cf4534404d860f19a98ea76b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerBulletPrefab: {fileID: 4194414263129192231, guid: cf02b51570cc7234d81d477d39a4f191, type: 3}
 --- !u!70 &972731460671476195
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

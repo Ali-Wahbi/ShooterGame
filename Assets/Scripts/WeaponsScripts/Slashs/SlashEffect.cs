@@ -8,6 +8,24 @@ public class SlashEffect : MonoBehaviour
     [SerializeField] float speed = 1.2f;
     int damage;
     public List<GameObject> HitedTargets = new List<GameObject>();
+
+    float SlashSpeedMultiplierPower
+    {
+        get
+        {
+            return WeaponPowersSingleton.Instance.SlashSpeedMultiplierPower;
+        }
+    }
+
+    bool canReflectBullet
+    {
+        get
+        {
+            return WeaponPowersSingleton.Instance.CanReflect;
+        }
+    }
+
+
     private void Start()
     {
         anim.Play("SlashAnim");
@@ -21,7 +39,7 @@ public class SlashEffect : MonoBehaviour
 
     private void Update()
     {
-        transform.position += transform.right * Time.deltaTime * speed;
+        transform.position += transform.right * Time.deltaTime * speed * SlashSpeedMultiplierPower;
     }
 
 
@@ -45,6 +63,10 @@ public class SlashEffect : MonoBehaviour
         // Handle bullets
         if (other.gameObject.tag == "EnemyBullet")
         {
+            if (canReflectBullet)
+            {
+                other.gameObject.GetComponent<EnemyBullet>()?.ReflectBullet(transform.eulerAngles.z);
+            }
             Destroy(other.gameObject);
         }
 

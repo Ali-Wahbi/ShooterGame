@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
+// [RequireComponent(typeof(BotMovement))]
 public class EnemyStats : MonoBehaviour
 {
 
@@ -10,12 +11,18 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] bool UseFlash = true;
     [SerializeField, Range(0, 1)] float FlashDuration;
     [SerializeField] Material FlashMaterial;
+    [SerializeField] bool UseDissolve = true;
     private Material OriginalMaterial;
     private Coroutine FlashCoroutine;
     private SpriteRenderer sp;
     [Header("Events: ")]
     [SerializeField] UnityEvent DefeatEvents;
     [SerializeField] UnityEvent HittedEvents;
+
+    private void Reset()
+    {
+        gameObject.tag = "Enemy";
+    }
 
     private void Start()
     {
@@ -33,8 +40,28 @@ public class EnemyStats : MonoBehaviour
 
         Debug.Log(name + " took damage, health: " + health);
 
-        if (health <= 0) DefeatEvents.Invoke();
+        if (health <= 0) OnEnemyDefeat();
 
+    }
+
+    void OnEnemyDefeat()
+    {
+        DefeatEvents.Invoke();
+
+        if (UseDissolve) HandleDissolve();
+        HandleRechargeableBatteriesPower();
+    }
+
+    void HandleRechargeableBatteriesPower()
+    {
+        bool canRecharge = PlayerPowersSingleton.Instance.RechargableBatteriesActive;
+
+        float chance = Random.Range(0f, 100f);
+        float chanceToRecharge = 14f; // should be 14% chance to recharge
+        if (canRecharge && chance <= chanceToRecharge)
+        {
+            PlayerPowersSingleton.Instance.OnRechargeBatteriesCalled(transform.position);
+        }
     }
 
     public void AddToOnDestroy(UnityAction action)
@@ -63,5 +90,28 @@ public class EnemyStats : MonoBehaviour
         sp.material = OriginalMaterial;
 
         FlashCoroutine = null;
+    }
+
+    public void HandleDissolve()
+    {
+        // Material mat = GetComponent<SpriteRenderer>().material;
+        // dissolve the enemy
+        SpriteRenderer sr = GetComponent<SpriteRenderer>();
+        StartCoroutine(DissolveEnemy());
+
+        IEnumerator DissolveEnemy()
+        {
+            yield return new WaitForSeconds(2f);
+            // dissolve the enemy
+            float i = 0.01f;
+            while (i < 1.1f)
+            {
+                i += Time.deltaTime * 2f;
+                sr.material.SetFloat("_Fade", i);
+                yield return null;
+            }
+            Debug.Log("Robot fully disappeared");
+            Destroy(gameObject);
+        }
     }
 }

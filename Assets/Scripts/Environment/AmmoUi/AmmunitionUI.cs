@@ -2,72 +2,78 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using DG.Tweening;
 public class AmmunitionUI : MonoBehaviour
 {
-    // Bulltes: Replace the string with an icon
-    [SerializeField] private TextMeshProUGUI BullesText;
-    string BulletPrefix = "Bullets: ";
-    public Color originBulletColor;
+    [SerializeField] AmmoBarUI BulletBarUI;
+    [SerializeField] AmmoBarUI ArrowBarUI;
+    [Header("Holder UI")]
+    [SerializeField] RectTransform Holder;
+    // [SerializeField] float YFirstPos = 270;
+    [SerializeField] float YSecondPos = 140;
+    [SerializeField] bool PutInSecondPos = false;
 
-    // Arrows: Replace the string with an icon
-    [SerializeField] private TextMeshProUGUI ArrowsText;
-    string ArrowPrefix = "Arrows: ";
-    public Color originArrowColor;
-
-    [SerializeField] Color NoAmmoColor = Color.red;
+    float HolderYPos
+    {
+        set
+        {
+            SetHolderPos(value);
+        }
+        get
+        {
+            return Holder.anchoredPosition.y;
+        }
+    }
 
     private void Start()
     {
+        if (PutInSecondPos) SetHolderPos(YSecondPos);
 
-        // Set the original color of the texts UI
-        SetTextColor(BullesText, originBulletColor);
-        SetTextColor(ArrowsText, originArrowColor);
-
-        // SetAmmo(WeaponType.Bullets, bult);
-        // SetAmmo(WeaponType.Arrows, arrow);
-
-
+        // ChangeUiPos();
     }
+
     public void SetAmmo(WeaponType weaponType, int newAmmo)
     {
         switch (weaponType)
         {
             case WeaponType.Bullets:
-                SetBullets(newAmmo);
+                BulletBarUI.SetAmmo(newAmmo);
                 break;
             case WeaponType.Arrows:
-                SetArrows(newAmmo);
+                ArrowBarUI.SetAmmo(newAmmo);
                 break;
             default:
                 break;
         }
     }
-
-    private void SetBullets(int newAmmo)
+    public void SetMaxAmmo(WeaponType weaponType, int maxAmmo)
     {
-        BullesText.text = BulletPrefix + FormatNumberWithLeadingZeroes(newAmmo);
-        if (newAmmo == 0)
-            SetTextColor(BullesText, NoAmmoColor);
-        else
-            SetTextColor(BullesText, originBulletColor);
+        switch (weaponType)
+        {
+            case WeaponType.Bullets:
+                BulletBarUI.SetupBar(maxAmmo, 0);
+                break;
+            case WeaponType.Arrows:
+                ArrowBarUI.SetupBar(maxAmmo, 0);
+                break;
+            default:
+                break;
+        }
+    }
+    public void ChangeUiPos()
+    {
+        DOTween.To(() => HolderYPos, x => HolderYPos = x, YSecondPos, 1.0f).SetEase(Ease.OutSine);
+        PutInSecondPos = true;
     }
 
-    private void SetArrows(int newAmmo)
+    public void SetToSecondPos(bool toSecondPos)
     {
-        ArrowsText.text = ArrowPrefix + FormatNumberWithLeadingZeroes(newAmmo);
-        if (newAmmo == 0)
-            SetTextColor(ArrowsText, NoAmmoColor);
-        else
-            SetTextColor(ArrowsText, originArrowColor);
+        PutInSecondPos = toSecondPos;
     }
 
-    private string FormatNumberWithLeadingZeroes(int number, int totalLength = 3)
+    void SetHolderPos(float yPos)
     {
-        return number.ToString("D" + totalLength);
+        Holder.anchoredPosition = Holder.anchoredPosition.With(y: yPos);
     }
 
-    void SetTextColor(TextMeshProUGUI textMesh, Color color)
-    {
-        textMesh.color = color;
-    }
 }

@@ -23,4 +23,9 @@ public class PlayerAnim : MonoBehaviour
     {
         sprite.flipX = flipX;
     }
+
+    public void SetIsDefeated()
+    {
+        anim.SetTrigger("Defeated");
+    }
 }

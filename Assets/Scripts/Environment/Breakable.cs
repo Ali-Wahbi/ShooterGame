@@ -8,6 +8,11 @@ public class Breakable : MonoBehaviour
     [Tooltip("Normal sprite to display")]
     [SerializeField] Sprite Normal;
 
+    [Tooltip("Duration of the flash effect")]
+    [SerializeField, Range(0, 1)] float FlashDuration;
+    [SerializeField] Material FlashMaterial;
+    private Material OriginalMaterial;
+
     [Tooltip("Sprites of the object when it is broke. Pick randomly")]
     [SerializeField] List<Sprite> Broken;
 
@@ -28,12 +33,17 @@ public class Breakable : MonoBehaviour
         breakableCollider = GetComponent<BoxCollider2D>();
         SR = GetComponent<SpriteRenderer>();
         AtStart();
+
+
+        OriginalMaterial = SR.material;
     }
 
     public void OnBreak()
     {
         DisableCollider();
-        SetRandomSprite();
+
+        FlashHitEffect();
+
         SpawnDrops();
         // small exlposion then spawn drops
     }
@@ -82,6 +92,24 @@ public class Breakable : MonoBehaviour
         breakableCollider.enabled = true;
         SR.sprite = Normal;
     }
+
+
+    void FlashHitEffect()
+    {
+        StartCoroutine(FlashEffect());
+
+    }
+
+    private IEnumerator FlashEffect()
+    {
+        SR.material = FlashMaterial;
+        yield return new WaitForSeconds(FlashDuration);
+        SR.material = OriginalMaterial;
+
+
+        SetRandomSprite();
+    }
+
 
     #region Settings
 

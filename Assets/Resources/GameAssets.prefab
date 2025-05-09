@@ -49,3 +49,8 @@ MonoBehaviour:
   pickUpWeaponPrefap: {fileID: 7496498228760001417, guid: 74766e750c5d95345b3f23653b87b2c5, type: 3}
   WeaponInfo: {fileID: 9094075432796242107, guid: eacf0b2b3efd2004795661b5767e253f, type: 3}
   EndScreenPrefap: {fileID: 8296400341852345904, guid: 32b6a49b4ff230748874ff1a98968467, type: 3}
+  ProgressBarPrefap: {fileID: 4809636612620046058, guid: c85722a68e46e044aa8d98a21b5d2ec2, type: 3}
+  SASColor: {r: 0, g: 1, b: 1, a: 1}
+  AmmoColor: {r: 1, g: 0.61662406, b: 0.015723169, a: 1}
+  MeleeColor: {r: 0, g: 1, b: 0.51607585, a: 1}
+  RangedColor: {r: 1, g: 0, b: 0.47908497, a: 1}
