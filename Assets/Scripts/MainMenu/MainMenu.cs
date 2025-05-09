@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,8 +9,9 @@ public class MainMenu : MonoBehaviour
 {
 
     [SerializeField] private Animator animator;
+    [SerializeField] private InfoDisplayer infoDisplayer;
+    [SerializeField] private CanvasGroup infoButton;
     [SerializeField] private int NumberOfAnimations = 1;
-    [SerializeField] private ProgressBarController progressBarController;
 
     private string currentAnimation = "Enter";
 
@@ -17,11 +19,26 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TweenInfoButton(delay: 5f);
         currentAnimation += PickRandomAnim().ToString();
         animator.SetTrigger(currentAnimation);
         Cursor.visible = true;
     }
 
+    void TweenInfoButton(float fromValue = 0f, float toValue = 1f, float delay = 0f)
+    {
+        infoButton.alpha = fromValue;
+        infoButton.DOFade(toValue, 0.35f).SetDelay(delay);
+    }
+
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            OnInfoButtonClicked();
+        }
+    }
     void LoadFirstRoom()
     {
         // Load the game scene
@@ -29,6 +46,12 @@ public class MainMenu : MonoBehaviour
         SceneChangeManager.Scm.LoadLevel(1);
     }
 
+    public void OnInfoButtonClicked()
+    {
+        if (infoButton.alpha == 1) TweenInfoButton(fromValue: 1, toValue: 0);
+        infoDisplayer.ToggleInfoDisplayer();
+        if (infoButton.alpha == 0) TweenInfoButton(fromValue: 0, toValue: 1, delay: 2);
+    }
 
     public void OnPlayButtonClicked()
     {

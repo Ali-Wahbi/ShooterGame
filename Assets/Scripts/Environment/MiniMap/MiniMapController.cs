@@ -12,12 +12,16 @@ public class MiniMapController : MonoBehaviour
     [SerializeField] List<Image> AllPaths;
     [SerializeField] List<Image> StaticPaths;
     [SerializeField] CanvasGroup HolderCG;
+    [SerializeField] AudioClip OpenClip, CloseClip;
+
+    AudioSource audioSource;
     RectTransform HolderRC;
     public List<int> AllRoomsIds;
     private void Awake()
     {
         SetUpStartIds();
         HolderRC = HolderCG.GetComponent<RectTransform>();
+        audioSource = GetComponent<AudioSource>();
     }
     void SetUpStartIds()
     {
@@ -104,8 +108,8 @@ public class MiniMapController : MonoBehaviour
         if (!canTweenPos) return;
         if (hidden) return;
 
-        if (visible) TweenMapPosX(Endx);
-        else TweenMapPosX(Startx);
+        if (visible) { TweenMapPosX(Endx); PlaySound(CloseClip); }
+        else { TweenMapPosX(Startx); PlaySound(OpenClip); }
 
         visible = !visible;
     }
@@ -151,6 +155,12 @@ public class MiniMapController : MonoBehaviour
         {
             path.enabled = false;
         }
+    }
+
+    void PlaySound(AudioClip clip)
+    {
+        audioSource.clip = clip;
+        audioSource.Play();
     }
 
     // Start is called before the first frame update
