@@ -108,6 +108,7 @@ public class WeaponController : MonoBehaviour
 
     public WeaponType GetWeapon1Type() => weapon1 ? weapon1.weapon.WeaponType : WeaponType.Melee;
     public int GetWeapon1Ammo() => weapon1 ? weapon1.weapon.WeaponAmmo : 0;
+    public bool GetWeaponIsAutomatic() => weapon1 ? weapon1.GetWeaponIsAutomatic() : false;
     public WeaponType GetWeapon2Type() => weapon2 ? weapon2.weapon.WeaponType : WeaponType.Melee;
     public int GetWeapon2Ammo() => weapon2 ? weapon2.weapon.WeaponAmmo : 0;
 

@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72458a7e08d5aee4280630120b2d1ed7, type: 3}
-  m_Name: Vector 1
+  m_Name: Binum
   m_EditorClassIdentifier: 
-  WeaponName: Vector 1
-  WeaponSprite: {fileID: 21300000, guid: 9bd505b44fbc0a14db9f332246ec15be, type: 3}
+  WeaponName: Binum
+  WeaponSprite: {fileID: 21300000, guid: b9764d402cc81844ea938a5d04945922, type: 3}
   WeaponType: 0
-  WeaponClass: 0
+  WeaponClass: 2
   WeaponAnim: 2
   IsAutomatic: 1
-  WeaponAmmo: 1
-  WeaponDamage: 4
+  WeaponAmmo: 0
+  WeaponDamage: 0
   WeaponSpeed: 0.2
-  WeaponDiscription: "One bullet, one bot\u2014assuming your aim isn\u2019t as rotten
-    as your flesh!"
+  WeaponDiscription: 

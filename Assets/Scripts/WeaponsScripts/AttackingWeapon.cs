@@ -19,6 +19,7 @@ abstract public class AttackingWeapon : MonoBehaviour
     public WeaponType GetWeaponType() => weapon.WeaponType;
 
     public WeaponAnim GetWeaponAnim() => weapon.WeaponAnim;
+    public bool GetWeaponIsAutomatic() => weapon.IsAutomatic;
 
     public WeaponClasses GetWeaponClass() => weapon.WeaponClass;
     public int GetWeaponAmmo() => weapon.WeaponAmmo;

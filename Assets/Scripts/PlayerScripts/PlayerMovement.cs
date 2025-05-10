@@ -166,18 +166,33 @@ public class PlayerMovement : MonoBehaviour
     #region Weapons
     bool canUseWeapon = true;
     bool useAmmo = true;
+    bool weapon1Attcking;
     public void WeaponOneClicked(InputAction.CallbackContext context)
     {
         if (Time.timeScale == 0 || isDefeated) return;
         // Debug.Log("Weapon 1 clicked");
-        if (context.action.WasPressedThisFrame())
+
+        if (context.action.WasPressedThisFrame()) weapon1Attcking = true;
+        if (context.action.WasReleasedThisFrame()) weapon1Attcking = false;
+        bool flowControl = AttackWithWeaponOne();
+        if (!flowControl)
         {
+            return;
+        }
+
+    }
+
+    private bool AttackWithWeaponOne()
+    {
+        if (weapon1Attcking)
+        {
+            Debug.Log("Weapon 1 Attacking, weapon1Attcking " + weapon1Attcking);
             if (canPickUp)
             {
                 SwitchUsedWeapon();
                 // Prevent the player from attacking in the same frame when picking up the weapon
                 canUseWeapon = false;
-                return;
+                return false;
             }
             if (canUseWeapon)
             {
@@ -189,9 +204,9 @@ public class PlayerMovement : MonoBehaviour
                 int ammo = playerStats.GetAmmo(WT);
 
                 // no ammo
-                if (ammo <= 0) return;
+                // if (ammo <= 0) return;
                 // not enough ammo
-                if (ammo < w1Ammo) return;
+                if (ammo < w1Ammo) return false;
 
 
 
@@ -216,6 +231,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (weaponsController.GetWeaponIsAutomatic() && weapon1Attcking)
+            AttackWithWeaponOne();
+
+
+        return true;
     }
 
     public void WeaponTwoClicked(InputAction.CallbackContext context)

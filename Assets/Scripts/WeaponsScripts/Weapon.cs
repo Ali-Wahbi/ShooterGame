@@ -8,6 +8,7 @@ public class Weapon : ScriptableObject
     public WeaponType WeaponType;
     public WeaponClasses WeaponClass;
     public WeaponAnim WeaponAnim;
+    public bool IsAutomatic = false;
     public int WeaponAmmo;
     public float WeaponDamage;
     public float WeaponSpeed;
