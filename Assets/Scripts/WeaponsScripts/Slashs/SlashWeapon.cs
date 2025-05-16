@@ -7,8 +7,8 @@ abstract public class SlashWeapon : AttackingWeapon
     float rotateDeg = 120;
 
 
-    [SerializeField] Sprite MeleeNormal;
-    [SerializeField] Sprite MeleeFlibed;
+    [SerializeField] protected Sprite MeleeNormal;
+    [SerializeField] protected Sprite MeleeFlibed;
 
     [SerializeField] public GameObject slash;
     public override void DynamicAttack(Transform startTran, Transform startRot, Transform sprite, Vector2 CursorPos = new Vector2())

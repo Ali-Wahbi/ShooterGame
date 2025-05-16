@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
@@ -27,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     PlayerAnim playerAnim;
     PlayerCursor cursorHandler;
     PlayerStats playerStats;
-
+    PlayerInputs playerInput;
     Vector2 directions;
     Vector2 mousePos;
     Vector2 playerPos;
@@ -37,6 +38,10 @@ public class PlayerMovement : MonoBehaviour
     bool canPickUp;
     public PickupWeapon pickupWeapon;
 
+    private void Awake()
+    {
+        playerInput = new PlayerInputs();
+    }
 
 
     void Start()
@@ -115,6 +120,45 @@ public class PlayerMovement : MonoBehaviour
 
     // input handling area
     #region Input Sys
+
+    void OnEnables()
+    {
+
+        if (playerInput == null)
+        {
+            Debug.LogError("PlayerInput not found in the scene.");
+            return;
+        }
+        playerInput.Enable();
+
+        playerInput.Movement.Move.performed += OnMove;
+        playerInput.Movement.Aim.performed += OnAim;
+        playerInput.Movement.Pause.performed += PauseClicked;
+        playerInput.Movement.SwitchWeapons.performed += OnSwitch;
+        playerInput.Movement.ToggleMap.performed += MapToggled;
+
+        playerInput.Movement.Weapon1.performed += WeaponOneClicked;
+        playerInput.Movement.Weapon2.performed += WeaponTwoClicked;
+
+        // playerInput.Movement
+        // playerInput.actions.actionMaps[0].;
+    }
+
+    private void OnDisables()
+    {
+        playerInput.Movement.Move.performed -= OnMove;
+        playerInput.Movement.Aim.performed -= OnAim;
+        playerInput.Movement.Pause.performed -= PauseClicked;
+        playerInput.Movement.SwitchWeapons.performed -= OnSwitch;
+        playerInput.Movement.ToggleMap.performed -= MapToggled;
+
+        playerInput.Movement.Weapon1.performed -= WeaponOneClicked;
+        playerInput.Movement.Weapon2.performed -= WeaponTwoClicked;
+
+        playerInput.Disable();
+    }
+
+
     public void OnMove(InputAction.CallbackContext context)
     {
         directions = context.ReadValue<Vector2>();
@@ -166,57 +210,45 @@ public class PlayerMovement : MonoBehaviour
     #region Weapons
     bool canUseWeapon = true;
     bool useAmmo = true;
-    bool weapon1Attcking;
+    public bool weapon1Attcking;
+    public bool weapon2Attcking;
+    Coroutine weaponAttackCoroutine;
     public void WeaponOneClicked(InputAction.CallbackContext context)
     {
         if (Time.timeScale == 0 || isDefeated) return;
+        if (weapon2Attcking) return;
+        weapon1Attcking = true;
         // Debug.Log("Weapon 1 clicked");
 
-        if (context.action.WasPressedThisFrame()) weapon1Attcking = true;
-        if (context.action.WasReleasedThisFrame()) weapon1Attcking = false;
-        bool flowControl = AttackWithWeaponOne();
-        if (!flowControl)
+        // if (context.action.WasPressedThisFrame()) 
+        if (context.action.WasReleasedThisFrame())
         {
-            return;
+            weapon1Attcking = false;
+            weaponAttackCoroutine = null;
         }
-
-    }
-
-    private bool AttackWithWeaponOne()
-    {
+        Debug.Log("Weapon 1 Attacking, weapon1Attcking " + weapon1Attcking);
         if (weapon1Attcking)
         {
-            Debug.Log("Weapon 1 Attacking, weapon1Attcking " + weapon1Attcking);
             if (canPickUp)
             {
                 SwitchUsedWeapon();
                 // Prevent the player from attacking in the same frame when picking up the weapon
                 canUseWeapon = false;
-                return false;
+                return;
             }
             if (canUseWeapon)
             {
-                WeaponType WT = weaponsController.GetWeapon1Type();
-
-                // the ammo use of the weapon
-                int w1Ammo = weaponsController.GetWeapon1Ammo();
-                // the ammo the player has
-                int ammo = playerStats.GetAmmo(WT);
-
-                // no ammo
-                // if (ammo <= 0) return;
-                // not enough ammo
-                if (ammo < w1Ammo) return false;
-
-
 
                 // fix weapon uses ammo while on weapon cooldown
-                if (useAmmo && weaponsController.GetWeaponCanFire())
+                if (useAmmo && weaponsController.GetWeaponCanFire() && !weapon2Attcking)
                 {
-                    weaponsController.Weapon1Attack();
-                    playerStats.DecAmmo(weaponsController.GetWeapon1Type(), w1Ammo);
-                    Debug.Log("AmmoUsed: " + w1Ammo);
-                    useAmmo = false;
+                    if (weaponsController.GetWeapon1IsAutomatic())
+                    {
+                        Debug.Log($"Weapon one {weaponsController.GetWeapon1Type()} is automatic");
+                        if (weaponAttackCoroutine == null)
+                            weaponAttackCoroutine = StartCoroutine(weaponOneAttackCoroutine());
+                    }
+                    else AttackWithWeaponOne();
                 }
                 else
                 {
@@ -231,18 +263,23 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (weaponsController.GetWeaponIsAutomatic() && weapon1Attcking)
-            AttackWithWeaponOne();
-
-
-        return true;
     }
 
     public void WeaponTwoClicked(InputAction.CallbackContext context)
     {
         if (Time.timeScale == 0 || isDefeated) return;
+        if (weapon1Attcking) return;
+        weapon2Attcking = true;
+
+        if (context.action.WasReleasedThisFrame())
+        {
+            weapon2Attcking = false;
+            weaponAttackCoroutine = null;
+        }
+        Debug.Log("Weapon 2 Attacking, weapon2Attcking " + weapon2Attcking);
+
         // Debug.Log("Weapon 2 clicked");
-        if (context.action.WasPressedThisFrame())
+        if (weapon2Attcking)
         {
 
             if (canPickUp)
@@ -253,29 +290,22 @@ public class PlayerMovement : MonoBehaviour
             }
             if (canUseWeapon)
             {
-                WeaponType WT = weaponsController.GetWeapon2Type();
 
-                // the ammo use of the weapon
-                int w2Ammo = weaponsController.GetWeapon2Ammo();
-                // the ammo the player has
-                int ammo = playerStats.GetAmmo(WT);
-
-                // no ammo
-                if (ammo <= 0) return;
-                // not enough ammo
-                if (ammo < w2Ammo) return;
-                if (useAmmo && weaponsController.GetWeaponCanFire())
+                if (useAmmo && weaponsController.GetWeaponCanFire() && !weapon1Attcking)
                 {
-                    playerStats.DecAmmo(weaponsController.GetWeapon2Type(), w2Ammo);
-                    Debug.Log("AmmoUsed: " + w2Ammo);
-                    useAmmo = false;
+                    if (weaponsController.GetWeapon2IsAutomatic())
+                    {
+                        Debug.Log("Weapon two is automatic");
+                        if (weaponAttackCoroutine == null)
+                            weaponAttackCoroutine = StartCoroutine(weaponTwoAttackCoroutine());
+                    }
+                    else { AttackWithWeaponTwo(); Debug.Log("Weapon 2 is NOT automatic"); }
                 }
                 else
                 {
                     useAmmo = true;
                 }
 
-                weaponsController.Weapon2Attack();
                 cursorHandler.SetCursorSprite(weaponsController.GetWeaponType());
             }
             else
@@ -285,6 +315,66 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+    private void AttackWithWeaponOne()
+    {
+        WeaponType WT = weaponsController.GetWeapon1Type();
+        // the ammo use of the weapon
+        int w1Ammo = weaponsController.GetWeapon1Ammo();
+        // the ammo the player has
+        int ammo = playerStats.GetAmmo(WT);
+
+        // no ammo
+        if (ammo <= 0) return;
+        // not enough ammo
+        if (ammo < w1Ammo) return;
+        weaponsController.Weapon1Attack();
+        playerStats.DecAmmo(weaponsController.GetWeapon1Type(), w1Ammo);
+        Debug.Log("AmmoUsed: " + w1Ammo);
+        useAmmo = false;
+    }
+    private void AttackWithWeaponTwo()
+    {
+        WeaponType WT = weaponsController.GetWeapon2Type();
+        // the ammo use of the weapon
+        int w2Ammo = weaponsController.GetWeapon2Ammo();
+        // the ammo the player has
+        int ammo = playerStats.GetAmmo(WT);
+
+        // no ammo
+        if (ammo <= 0) return;
+        // not enough ammo
+        if (ammo < w2Ammo) return;
+        weaponsController.Weapon2Attack();
+        playerStats.DecAmmo(weaponsController.GetWeapon2Type(), w2Ammo);
+        Debug.Log("AmmoUsed: " + w2Ammo);
+        useAmmo = false;
+    }
+
+    IEnumerator weaponOneAttackCoroutine()
+    {
+        // Debug.Log("weapon1Coroutine is started: " + weaponAttackCoroutine);
+        while (weapon1Attcking)
+        {
+            // Debug.Log("weapon1Coroutine is working");
+            AttackWithWeaponOne();
+            yield return new WaitForSeconds(weaponsController.GetWeapon1Speed());
+        }
+    }
+    IEnumerator weaponTwoAttackCoroutine()
+    {
+        // Debug.Log("weapon2Coroutine is started: " + weaponAttackCoroutine);
+        while (weapon2Attcking)
+        {
+            // Debug.Log("weapon2Coroutine is working");
+            AttackWithWeaponTwo();
+            yield return new WaitForSeconds(weaponsController.GetWeapon2Speed());
+        }
+    }
+
+
+
+
 
     private void SwitchUsedWeapon()
     {

@@ -17,6 +17,7 @@ MonoBehaviour:
   WeaponType: 1
   WeaponClass: 2
   WeaponAnim: 2
+  IsAutomatic: 1
   WeaponAmmo: 1
   WeaponDamage: 6
   WeaponSpeed: 1

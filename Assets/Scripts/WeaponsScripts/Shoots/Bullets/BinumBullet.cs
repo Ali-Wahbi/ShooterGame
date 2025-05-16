@@ -5,7 +5,7 @@ using UnityEngine;
 public class BinumBullet : MonoBehaviour
 {
     [SerializeField] Sprite zero, one;
-    SpriteRenderer sp;
+    [SerializeField] SpriteRenderer sp;
     // SpriteRenderer sp;
     float bulletSpeed = 7;
     float bulletDamage;
@@ -15,8 +15,8 @@ public class BinumBullet : MonoBehaviour
         bulletSpeed = speed;
         bulletDamage = damage;
 
-        sp = GetComponentInChildren<SpriteRenderer>();
-
+        // rotate the sprite so it always appear correctly
+        sp.transform.Rotate(new Vector3(0, 0, -transform.eulerAngles.z));
         if (damage == 0)
             sp.sprite = zero;
         else
@@ -34,7 +34,7 @@ public class BinumBullet : MonoBehaviour
         if (other.tag == "Breakable")
         {
             other.gameObject.GetComponent<Breakable>().OnBreak();
-            // DestroySelf();
+            DestroySelf(2f);
         }
         if (other.gameObject.tag == "Enemy")
         {
@@ -47,7 +47,7 @@ public class BinumBullet : MonoBehaviour
 
     private void Start()
     {
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 3f);
     }
 
     void Update()

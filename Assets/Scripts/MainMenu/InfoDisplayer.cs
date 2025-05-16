@@ -29,6 +29,10 @@ public class InfoDisplayer : MonoBehaviour
     [SerializeField] Image MiniMapImage;
     [SerializeField] TextMeshProUGUI MiniMapInst;
 
+    [Header("Hide Info")]
+    [SerializeField] Image HideInfoImage;
+    [SerializeField] TextMeshProUGUI HideInfoInst;
+
 
 
     CanvasGroup Cg;
@@ -92,6 +96,7 @@ public class InfoDisplayer : MonoBehaviour
         ShowMouseInfo();
         ShowSpaceInfo();
         ShowMiniMapInfo();
+        ShowHideInfoUI(addDelay: 0.9f);
     }
 
     void HideInfoDisplayer()
@@ -100,6 +105,8 @@ public class InfoDisplayer : MonoBehaviour
         Cg.blocksRaycasts = false;
         canAnimateMouse = false;
         Cg.DOFade(0f, 0.5f).OnComplete(() => canToggle = true);
+        TweenPanelVisible(startValue: 1f, endValue: 0f, duration: 0.45f);
+
     }
     #endregion
     #region UI Tweens
@@ -160,6 +167,16 @@ public class InfoDisplayer : MonoBehaviour
         float InstDelay = 1.25f + addDelay;
         TweenTextAlpha(text: MiniMapInst, delay: InstDelay);
         TweenImagePosY(rect: MiniMapInst.rectTransform, delay: InstDelay, Yadd: 150f);
+    }
+    void ShowHideInfoUI(float addDelay = 0f)
+    {
+        //TODO: Impelement this
+        TweenImageAlpha(HideInfoImage, 0f + addDelay, duration: 1.25f);
+        TweenImagePosY(HideInfoImage.rectTransform, delay: 0.5f + addDelay, Yadd: 150f);
+
+        float InstDelay = 0.25f + addDelay;
+        TweenTextAlpha(text: HideInfoInst, delay: InstDelay);
+        TweenImagePosY(rect: HideInfoInst.rectTransform, delay: InstDelay, Yadd: 150f);
     }
     #endregion
     #region Tweens Helpers
@@ -245,6 +262,7 @@ public class InfoDisplayer : MonoBehaviour
             Mouse2,
             Space,
             MiniMapImage,
+            HideInfoImage,
         };
         HashSet<TextMeshProUGUI> allTextElements = new HashSet<TextMeshProUGUI>
         {
@@ -253,6 +271,7 @@ public class InfoDisplayer : MonoBehaviour
             Click2Inst,
             SpaceInst,
             MiniMapInst,
+            HideInfoInst,
         };
 
         foreach (Image image in WASD)

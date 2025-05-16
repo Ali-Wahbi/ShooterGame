@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TweenInfoButton(delay: 5f);
+        TweenInfoButton(delay: 3.3f);
         currentAnimation += PickRandomAnim().ToString();
         animator.SetTrigger(currentAnimation);
         Cursor.visible = true;
@@ -28,7 +28,8 @@ public class MainMenu : MonoBehaviour
     void TweenInfoButton(float fromValue = 0f, float toValue = 1f, float delay = 0f)
     {
         infoButton.alpha = fromValue;
-        infoButton.DOFade(toValue, 0.35f).SetDelay(delay);
+        infoButton.DOFade(toValue, 0.35f).SetDelay(delay)
+        .OnComplete(() => infoButtonShown = !infoButtonShown);
     }
 
 
@@ -46,11 +47,14 @@ public class MainMenu : MonoBehaviour
         SceneChangeManager.Scm.LoadLevel(1);
     }
 
+    public bool infoButtonShown = false;
+
     public void OnInfoButtonClicked()
     {
-        if (infoButton.alpha == 1) TweenInfoButton(fromValue: 1, toValue: 0);
+        if (!infoButtonShown) return;
+        // if (infoButton.alpha == 1) TweenInfoButton(fromValue: 1, toValue: 0);
         infoDisplayer.ToggleInfoDisplayer();
-        if (infoButton.alpha == 0) TweenInfoButton(fromValue: 0, toValue: 1, delay: 2);
+        // if (infoButton.alpha == 0) TweenInfoButton(fromValue: 0, toValue: 1, delay: 2);
     }
 
     public void OnPlayButtonClicked()

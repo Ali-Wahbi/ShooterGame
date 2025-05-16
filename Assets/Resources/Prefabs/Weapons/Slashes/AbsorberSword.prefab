@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &785911889708633702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3657984679591403492}
+  - component: {fileID: 2777112705402344963}
+  m_Layer: 0
+  m_Name: AbsorberSword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3657984679591403492
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785911889708633702}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1681.1099, y: -65.086945, z: -0.058610387}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2777112705402344963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 785911889708633702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97b1133d035606a49a3186c141b6aeca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 11400000, guid: 7ec78b872119fbf4db2dd9a14669a8c7, type: 2}
+  canFire: 1
+  MeleeNormal: {fileID: -1473464654, guid: 98c76431c8728b943bacbadccd9407b4, type: 3}
+  MeleeFlibed: {fileID: -1473464654, guid: f56ee4374888a114584e55bb9f2cde63, type: 3}
+  slash: {fileID: 895405205614543664, guid: fea4ae30591bef14da2e240a0ebab306, type: 3}
+  chargedSprite: {fileID: -1605447480, guid: 98c76431c8728b943bacbadccd9407b4, type: 3}
+  chargedSpriteFlipped: {fileID: -1605447480, guid: f56ee4374888a114584e55bb9f2cde63, type: 3}

@@ -54,8 +54,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Value: 1
-    - _XPos: -0.6683315
-    - _YPos: -0.31942028
+    - _Value: 0
+    - _XPos: -0.41083494
+    - _YPos: -0.3755003
     m_Colors: []
   m_BuildTextureStacks: []

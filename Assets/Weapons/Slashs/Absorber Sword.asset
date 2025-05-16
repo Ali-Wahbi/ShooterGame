@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72458a7e08d5aee4280630120b2d1ed7, type: 3}
-  m_Name: Vector 3
+  m_Name: Absorber Sword
   m_EditorClassIdentifier: 
-  WeaponName: Vector 3
-  WeaponSprite: {fileID: 21300000, guid: 3a2a598e498f6d54f93d3397f8f253e2, type: 3}
-  WeaponType: 0
-  WeaponClass: 1
-  WeaponAnim: 2
+  WeaponName: Absorber
+  WeaponSprite: {fileID: -1473464654, guid: 98c76431c8728b943bacbadccd9407b4, type: 3}
+  WeaponType: 2
+  WeaponClass: 2
+  WeaponAnim: 0
   IsAutomatic: 0
-  WeaponAmmo: 3
-  WeaponDamage: 8
-  WeaponSpeed: 1
-  WeaponDiscription: "Three bullets per trigger pull \u2014 because some robots just
-    need a little extra \u2018persuasion\u2019 to explode!"
+  WeaponAmmo: 0
+  WeaponDamage: 5
+  WeaponSpeed: 0.8
+  WeaponDiscription: absorbs energy from destroyed enemy bullets

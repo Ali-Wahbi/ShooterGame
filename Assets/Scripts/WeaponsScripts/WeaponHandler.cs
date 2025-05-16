@@ -16,7 +16,7 @@ public class WeaponController : MonoBehaviour
     private void Start()
     {
         SetUsedWeapon(weapon: weapon1);
-        SetSprite();
+        // SetSprite(); -D
     }
     void SetUsedWeapon(AttackingWeapon weapon)
     {
@@ -108,9 +108,12 @@ public class WeaponController : MonoBehaviour
 
     public WeaponType GetWeapon1Type() => weapon1 ? weapon1.weapon.WeaponType : WeaponType.Melee;
     public int GetWeapon1Ammo() => weapon1 ? weapon1.weapon.WeaponAmmo : 0;
-    public bool GetWeaponIsAutomatic() => weapon1 ? weapon1.GetWeaponIsAutomatic() : false;
+    public float GetWeapon1Speed() => weapon1 ? weapon1.weapon.WeaponSpeed : 0;
+    public bool GetWeapon1IsAutomatic() => weapon1 ? weapon1.GetWeaponIsAutomatic() : false;
     public WeaponType GetWeapon2Type() => weapon2 ? weapon2.weapon.WeaponType : WeaponType.Melee;
     public int GetWeapon2Ammo() => weapon2 ? weapon2.weapon.WeaponAmmo : 0;
+    public float GetWeapon2Speed() => weapon2 ? weapon2.weapon.WeaponSpeed : 0;
+    public bool GetWeapon2IsAutomatic() => weapon2 ? weapon2.GetWeaponIsAutomatic() : false;
 
     public bool GetWeaponCanFire() => usedWeapon ? usedWeapon.GetWeaponCanFire() : false;
 
@@ -144,6 +147,11 @@ public class WeaponController : MonoBehaviour
             SlashSprite.sprite = null;
         }
 
+    }
+
+    public void SetMeleeSprite(Sprite sprite)
+    {
+        SlashSprite.sprite = sprite;
     }
 
     public void FlipSprite(bool flip)
