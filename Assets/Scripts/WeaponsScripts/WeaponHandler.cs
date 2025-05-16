@@ -153,6 +153,10 @@ public class WeaponController : MonoBehaviour
     {
         SlashSprite.sprite = sprite;
     }
+    public Sprite GetMeleeSprite()
+    {
+        return SlashSprite.sprite;
+    }
 
     public void FlipSprite(bool flip)
     {

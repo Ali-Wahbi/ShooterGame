@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 6243944307249055424}
   - component: {fileID: 4446761935079973878}
   - component: {fileID: 7277374971119777443}
+  - component: {fileID: 571438564610909987}
   m_Layer: 0
   m_Name: Mimics
   m_TagString: Enemy
@@ -157,6 +158,7 @@ MonoBehaviour:
   UseFlash: 1
   FlashDuration: 0.3
   FlashMaterial: {fileID: 2100000, guid: d181a97d3111e8546b7ff6b3ea5e02fa, type: 2}
+  UseDissolve: 1
   DefeatEvents:
     m_PersistentCalls:
       m_Calls:
@@ -340,6 +342,33 @@ PolygonCollider2D:
       - {x: 0.46235275, y: 1.0193977}
       - {x: 0.6796341, y: 1.1740265}
   m_UseDelaunayMesh: 0
+--- !u!50 &571438564610909987
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4748422065548412425}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &6710388095867137456
 GameObject:
   m_ObjectHideFlags: 0

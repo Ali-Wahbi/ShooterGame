@@ -247,6 +247,7 @@ public class CleanerBot : MonoBehaviour
     int incRadius = 3;
     void StartCalmingDown()
     {
+        if (BotIsDefeated) return;
         StartCoroutine(CalmingDown());
 
         IEnumerator CalmingDown()

@@ -114,12 +114,13 @@ public class RoomEffects : MonoBehaviour
     void SetInRoomEnemies(EnemyStats enemy)
     {
         inRoomEnemies.Add(enemy);
-        enemy.AddToOnDestroy(action: OnEnemyDestroied);
+        enemy.AddToOnDestroy(action: OnEnemyDestroyed);
     }
 
-    void OnEnemyDestroied()
+    void OnEnemyDestroyed()
     {
         // remove one enemy from the list
+        if (inRoomEnemies.Count <= 0) return;
         inRoomEnemies.RemoveAt(0);
         CheckBattleEnded();
     }

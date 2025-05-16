@@ -48,6 +48,7 @@ MonoBehaviour:
   canFire: 1
   MeleeNormal: {fileID: -1473464654, guid: 98c76431c8728b943bacbadccd9407b4, type: 3}
   MeleeFlibed: {fileID: -1473464654, guid: f56ee4374888a114584e55bb9f2cde63, type: 3}
-  slash: {fileID: 895405205614543664, guid: fea4ae30591bef14da2e240a0ebab306, type: 3}
+  slash: {fileID: 7461185612583562016, guid: dc54d320b36bc2a4ab00c83e8f244624, type: 3}
+  AbsorberSlash: {fileID: 895405205614543664, guid: fea4ae30591bef14da2e240a0ebab306, type: 3}
   chargedSprite: {fileID: -1605447480, guid: 98c76431c8728b943bacbadccd9407b4, type: 3}
   chargedSpriteFlipped: {fileID: -1605447480, guid: f56ee4374888a114584e55bb9f2cde63, type: 3}

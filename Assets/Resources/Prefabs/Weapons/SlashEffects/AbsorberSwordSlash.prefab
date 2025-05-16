@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 53, y: -50.7, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 12, y: 12, z: 12}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 83489131839930191}
-  speed: 1.4
+  speed: 1.5
   HitedTargets: []
 --- !u!114 &8844238333255205677
 MonoBehaviour:
@@ -143,7 +143,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: -1070680731, guid: bde21848aa109aa4481aa18d3497d9f7, type: 3}
-  m_Color: {r: 0.5503144, g: 1, b: 0.9929391, a: 1}
+  m_Color: {r: 0.35686275, g: 0.92549026, b: 0.9450981, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
