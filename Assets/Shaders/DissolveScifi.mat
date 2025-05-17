@@ -64,6 +64,8 @@ Material:
     - _EnableExternalAlpha: 0
     - _Fade: 0.0001
     - _GlowWidth: 0.05
+    - _RemapOutX: -1.7
+    - _RemapOutY: 1.7
     - _Reverse: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}

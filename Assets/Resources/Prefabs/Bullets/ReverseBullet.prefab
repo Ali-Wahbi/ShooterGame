@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 7466852886170286211}
   m_Layer: 0
   m_Name: ReverseBullet
-  m_TagString: Untagged
+  m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 8093893297404660906}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.390008, w: 0.92081153}
-  m_LocalPosition: {x: 2.6557927, y: -0.5576479, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -132,8 +132,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   childTransform: {fileID: 5506956620382116208}
-  endPos: {x: 0, y: 0}
-  distance: 0
 --- !u!50 &251227851581008255
 Rigidbody2D:
   serializedVersion: 4

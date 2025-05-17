@@ -133,6 +133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 173a1d53c35b5564e9f9056ffdc7b2ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickWeapon: {fileID: 8504007228485975113, guid: 44e09c580b07e4846ae570ab2feb2120, type: 3}
+  pickWeapon: {fileID: 7150600608153379491, guid: 187c34f8418245e4782ba3ef08e9e5b8, type: 3}
   Randomize: 1
   infoOffsetY: 5
