@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
+using Exentsions;
 public class AmmunitionUI : MonoBehaviour
 {
     [SerializeField] AmmoBarUI BulletBarUI;

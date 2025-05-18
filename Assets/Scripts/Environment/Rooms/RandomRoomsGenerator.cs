@@ -17,7 +17,6 @@ public class RandomRoomsGenerator : MonoBehaviour
     [Header("Special Rooms")]
 
     [SerializeField] GameObject[] SpecialRooms;
-    [SerializeField, Tooltip("Number of special rooms to spawn")] int SpecialRoomsCount;
 
     [Space]
     [Header("Level Organizing")]
@@ -360,8 +359,8 @@ public class RandomRoomsGenerator : MonoBehaviour
     private void GenerateSpecialRooms()
     {
         usedPositions.Clear(); // clear the used positions list
-        SpecialRoomsCount = SpecialRooms.Length; // set the number of special rooms to spawn
-        for (int i = 0; i < SpecialRoomsCount;)
+
+        foreach (GameObject spRoom in SpecialRooms)
         {
             // set at random position in the map
             int ranIndex = Random.Range(0, RoomsPositions.Count);
@@ -369,7 +368,6 @@ public class RandomRoomsGenerator : MonoBehaviour
 
             usedPositions.Add(RoomsPositions[ranIndex].position);
 
-            GameObject spRoom = SpecialRooms[SpecialRoomsCount - 1];
             // Check if the special room is null
             if (!spRoom) continue;
 
@@ -385,9 +383,6 @@ public class RandomRoomsGenerator : MonoBehaviour
             // Instantiate the special room with parent: transform to keep the hierarchy organized in the Unity editor
             Instantiate(spRoom, RoomsPositions[ranIndex].position, Quaternion.identity, parent: transform);
 
-
-
-            i++;
         }
     }
 

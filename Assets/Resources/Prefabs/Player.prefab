@@ -289,6 +289,8 @@ MonoBehaviour:
   CanMove: 1
   flipWeapon: 0
   pickupWeapon: {fileID: 0}
+  weapon1Attcking: 0
+  weapon2Attcking: 0
 --- !u!114 &7372791995548981180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -743,8 +745,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 857639653
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

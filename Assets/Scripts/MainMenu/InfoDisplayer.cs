@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.VisualScripting;
+using Exentsions;
 
 public class InfoDisplayer : MonoBehaviour
 {
@@ -182,8 +182,6 @@ public class InfoDisplayer : MonoBehaviour
     #region Tweens Helpers
     void TweenImageAlpha(Image image, float delay, float duration = 0.75f)
     {
-        // DOTween.To(() => 0f, x => image.color = image.color.WithAlpha(x), 1f, duration)
-        // .SetEase(AlphaEase).SetDelay(delay);
 
         image.color = image.color.WithAlpha(0f);
         image.DOFade(1f, duration)
@@ -191,9 +189,6 @@ public class InfoDisplayer : MonoBehaviour
     }
     void TweenTextAlpha(TextMeshProUGUI text, float delay)
     {
-        // DOTween.To(() => 0f, x => text.color = text.color.WithAlpha(x), 1f, 0.5f)
-        // .SetEase(AlphaEase).SetDelay(delay);
-
         text.color = text.color.WithAlpha(0f);
         text.DOFade(1f, 0.5f)
         .SetEase(AlphaEase).SetDelay(delay);
@@ -284,16 +279,6 @@ public class InfoDisplayer : MonoBehaviour
             text.color = text.color.WithAlpha(0);
 
 
-        // WasdInst.color = WasdInst.color.WithAlpha(0);
-
-        // Mouse1.color = Mouse1.color.WithAlpha(0);
-        // Mouse2.color = Mouse2.color.WithAlpha(0);
-
-        // Click1Inst.color = Click1Inst.color.WithAlpha(0);
-        // Click2Inst.color = Click2Inst.color.WithAlpha(0);
-
-        // Space.color = Space.color.WithAlpha(0);
-        // SpaceInst.color = SpaceInst.color.WithAlpha(0);
 
     }
 

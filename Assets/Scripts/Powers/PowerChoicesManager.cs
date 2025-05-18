@@ -33,8 +33,15 @@ public class PowerChoicesManager : MonoBehaviour
         // ShowPowerChoices();
     }
     PowerChamber chamber;
+    bool IsPowerSelected = false;
+    public bool AllowMultiPick = false;
     public void ShowPowerChoices(PowerChamber _chamber)
     {
+        // if power is already seleced, dont show the powers again
+        if (IsPowerSelected && !AllowMultiPick) return;
+
+        Cursor.visible = true;
+
         chamber = _chamber;
         Info.SetActive(true);
         animator.SetTrigger("ShowInfo");
@@ -141,12 +148,9 @@ public class PowerChoicesManager : MonoBehaviour
     public void OnSelectionMade(Power power)
     {
         onPowerChoicesFinished();
-
+        IsPowerSelected = true;
         // Hide the power selection UI
         PowerDisplayer dis = FindObjectOfType<PowerDisplayer>();
-
-
-        // PowerDisplayer.Pd.AddPowerSprite(sprite); -D
 
         PowerDisplayer.Pd.AddPower(power);
 

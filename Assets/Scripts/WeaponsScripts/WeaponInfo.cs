@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Unity.Mathematics;
 
+using Exentsions;
 public class WeaponInfo : MonoBehaviour
 {
     [SerializeField] SpriteRenderer Frame;

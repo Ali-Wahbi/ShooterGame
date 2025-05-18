@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+using Exentsions;
 public class CleanerBot : MonoBehaviour
 {
     [SerializeField] int damage;
