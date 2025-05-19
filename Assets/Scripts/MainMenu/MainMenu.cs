@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private InfoDisplayer infoDisplayer;
     [SerializeField] private CanvasGroup infoButton;
+    [SerializeField] private RectTransform DemoInst;
     [SerializeField] private int NumberOfAnimations = 1;
 
     private string currentAnimation = "Enter";
@@ -23,6 +24,11 @@ public class MainMenu : MonoBehaviour
         currentAnimation += PickRandomAnim().ToString();
         animator.SetTrigger(currentAnimation);
         Cursor.visible = true;
+
+        float originalPos = DemoInst.anchoredPosition.x;
+        
+        DemoInst.DOAnchorPosX(-230f, 0f);
+        DemoInst.DOAnchorPosX(originalPos, 1f).SetEase(Ease.OutCubic).SetDelay(3f);
     }
 
     void TweenInfoButton(float fromValue = 0f, float toValue = 1f, float delay = 0f)
