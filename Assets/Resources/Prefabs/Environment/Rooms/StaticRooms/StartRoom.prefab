@@ -138,10 +138,6 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4736511633445609472, guid: 9001b1c6bfc170b4c80b5e75e4c9bb42, type: 3}
-      propertyPath: cursorSensitivity
-      value: 0.95
-      objectReference: {fileID: 0}
     - target: {fileID: 9054053225869874789, guid: 9001b1c6bfc170b4c80b5e75e4c9bb42, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.7

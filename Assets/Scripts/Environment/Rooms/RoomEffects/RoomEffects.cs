@@ -36,13 +36,9 @@ public class RoomEffects : MonoBehaviour
         roomCamera.m_Lens.OrthographicSize = CameraOrthoSize;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     [SerializeField] List<EnemyStats> inRoomEnemies;
+    public Vector2 playerPosToRoom;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -51,6 +47,7 @@ public class RoomEffects : MonoBehaviour
             if (BattleHasEnded) return;
 
             // get the player position relative to the room as up, down, left or right
+
             Vector2 playerPos = other.transform.position - transform.position;
             Debug.Log($"Player: {other.name} entered the room, position: {playerPos}");
             dire = GetPlayerDirection(playerPos);
@@ -84,7 +81,7 @@ public class RoomEffects : MonoBehaviour
     {
         // up: y > 0, down: y < 0, left: x < 0, right: x > 0
         float standard = 10.0f;
-        float offset = 2.0f;
+        float offset = 4.0f;
         if (playerPos.y > standard && math.abs(playerPos.x) < offset)
         {
             Debug.Log("Player is up");
@@ -106,7 +103,7 @@ public class RoomEffects : MonoBehaviour
             return CurtainDirection.Right;
         }
 
-
+        Debug.Log("Player is Not in any direction.");
         return CurtainDirection.Up;
     }
 

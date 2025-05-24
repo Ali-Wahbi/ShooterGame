@@ -110,8 +110,8 @@ public class EyerBot : MonoBehaviour
 
         Vector2 endPos = target ? target.transform.position : roamingPos;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, endPos, distance: 5);
-        Debug.DrawRay(transform.position, endPos, Color.yellow);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, endPos, distance: 0.2f);
+        Debug.DrawRay(transform.position, endPos, Color.yellow, 0.2f);
         if (hit)
         {
             if (hit.transform.tag == "Wall" || hit.transform.tag == "Breakable")

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Elevator : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class Elevator : MonoBehaviour
     void ShowEndLevelMessage()
     {
         RectUIELementsParent.gameObject.SetActive(true);
+        Cursor.visible = true;
         for (int i = 0; i < RectUIELements.Count; i++)
             TweenRect(rect: RectUIELements[i], Delay: i * 0.3f);
 
@@ -47,7 +49,7 @@ public class Elevator : MonoBehaviour
     }
 
     // called by buttons UI
-    public void OnReplayClicked() => SceneChangeManager.Scm.RetryFromStart();
+    public void OnReplayClicked() => SceneChangeManager.Scm.LoadLevel(SceneManager.GetActiveScene().buildIndex);
 
     public void OnQuitClicked() => SceneChangeManager.Scm.QuitToMainScreen();
 

@@ -6,12 +6,11 @@ using UnityEngine;
 /// </summary>
 public class Curtain : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     float currentCurtainValue = 0f;
     // Start is called before the first frame update
     void Start()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.enabled = true;
         spriteRenderer.sortingOrder = 10;
         SetMaterialValue(0f);
@@ -79,6 +78,7 @@ public class Curtain : MonoBehaviour
     /// <param name="time">in seconds, 0.7s by default</param>
     public void MakeCurtainAppear(float time = 0.7f, float toValue = 0.0f)
     {
+        // TODO: Use Tween instead of Coroutine
         float originalTime = time;
         StartCoroutine(AppearCoroutine());
 
@@ -113,9 +113,11 @@ public class Curtain : MonoBehaviour
     /// <summary>
     /// Set the material vector to the direction of the curtain
     /// </summary>
-    /// <param name="dir"></param>
+    /// <param name="dir">the direction of the player given in Vector 4 form</param>
     private void SetMaterialVector(Vector4 dir)
     {
+        if (spriteRenderer == null)
+            spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.material.SetVector("_Directions", dir);
     }
 

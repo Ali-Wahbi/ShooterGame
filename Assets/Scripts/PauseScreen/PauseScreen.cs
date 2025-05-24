@@ -92,12 +92,16 @@ public class PauseScreen : MonoBehaviour
         quit.anchoredPosition = new Vector2(ButtonsXStart, quit.anchoredPosition.y);
     }
 
+    #region Clicks
     public void OnResumeButtonClicked()
     {
-        // resume the game and hide the pause screen
-        Time.timeScale = 1f;
         // animator.SetTrigger("Hide");
-        DOTween.To(() => canvasGroup.alpha, x => canvasGroup.alpha = x, 0f, 0.35f);
+        DOTween.To(() => canvasGroup.alpha, x => canvasGroup.alpha = x, 0f, 0.35f)
+        .OnComplete(() =>
+        {
+            // resume the game and hide the pause screen
+            Time.timeScale = 1f;
+        });
         // hide the power list when the game is resumed
 
         Cursor.visible = false;
@@ -117,4 +121,5 @@ public class PauseScreen : MonoBehaviour
         Debug.Log("Settings Clicked");
         // Show Settings Menu - WIP
     }
+    #endregion
 }

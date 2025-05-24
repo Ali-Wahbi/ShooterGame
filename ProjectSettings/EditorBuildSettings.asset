@@ -9,9 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 5923bf98ebdf6eb428b31dda360aac99
   - enabled: 1
-    path: Assets/Scenes/Lap/LapLevel-1.unity
+    path: Assets/Scenes/Lap/LapLevel-Easy.unity
     guid: 1def5f2a4816c3e438d2d727218083a3
   - enabled: 1
+    path: Assets/Scenes/Lap/LapLevel-Medium.unity
+    guid: 0e88e6cef64f62b479b07ce652fd72c0
+  - enabled: 0
     path: Assets/Scenes/Lap/LapLevel-2.unity
     guid: ceb63173898688042878a6eab36c60a8
   - enabled: 0

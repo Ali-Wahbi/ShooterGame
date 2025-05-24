@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerCursor : MonoBehaviour
@@ -29,7 +30,8 @@ public class PlayerCursor : MonoBehaviour
 
     public void SetCursorPos(Vector2 pos)
     {
-        cursor.transform.position = pos * cursorSensitivity;
+        // cursor.transform.position = pos * cursorSensitivity;
+        cursor.transform.DOMove(pos * cursorSensitivity, 0f);
     }
     public Vector3 GetCursorPos()
     {

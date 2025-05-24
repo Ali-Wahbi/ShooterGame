@@ -57,7 +57,7 @@ Material:
     - _BUILTIN_QueueControl: 0
     - _BUILTIN_QueueOffset: 0
     - _ShowOutline: 1
-    - _outlineWidth: 0.002
+    - _outlineWidth: 0.04
     m_Colors:
     - _OutlineColor: {r: 1, g: 0.8368819, b: 0, a: 1}
   m_BuildTextureStacks: []

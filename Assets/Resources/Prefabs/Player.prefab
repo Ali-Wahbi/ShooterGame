@@ -321,7 +321,7 @@ MonoBehaviour:
   MaxSheild: 6
   CurrentShield: 0
   MissingShield: 0
-  canDie: 0
+  canDie: 1
   BulletsAmmo: 0
   ArrowsAmmo: 0
   AmmoUIController: {fileID: 0}
@@ -339,7 +339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cursor: {fileID: 8067882212742728812}
-  cursorSensitivity: 0.7
+  cursorSensitivity: 1
   cursorSprite: {fileID: 4911352203550808892}
   BulletSprite: {fileID: 21300000, guid: ad2460f99d08c7f4fa70bdf14ecdc6f2, type: 3}
   ArrowSprite: {fileID: 21300000, guid: 54b42dce4b7744643826755797e1991f, type: 3}

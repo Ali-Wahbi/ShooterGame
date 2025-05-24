@@ -4,6 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
+using UnityEngine.SceneManagement;
 public class EndScreen : MonoBehaviour
 {
     [SerializeField] private Image panelImage;
@@ -102,8 +103,12 @@ public class EndScreen : MonoBehaviour
     public void OnRetryClicked()
     {
         // Retry the level
-        Debug.Log("Retry from start level");
-        SceneChangeManager.Scm.RetryFromStart();
+        Debug.Log("Retry current level");
+        // SceneChangeManager.Scm.RetryFromStart();
+
+        // for demo :
+        SceneChangeManager.Scm.LoadLevel(levelIndex: SceneManager.GetActiveScene().buildIndex);
+
         // SceneManager.LoadSceneAsync("LapLevel-1");
         // SceneManager.LoadSceneAsync(0);
     }

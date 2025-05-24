@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private InfoDisplayer infoDisplayer;
     [SerializeField] private CanvasGroup infoButton;
     [SerializeField] private RectTransform DemoInst;
+    [SerializeField] private GameObject playPanel;
     [SerializeField] private int NumberOfAnimations = 1;
 
     private string currentAnimation = "Enter";
@@ -20,13 +21,14 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playPanel.SetActive(false);
         TweenInfoButton(delay: 3.3f);
         currentAnimation += PickRandomAnim().ToString();
         animator.SetTrigger(currentAnimation);
         Cursor.visible = true;
 
         float originalPos = DemoInst.anchoredPosition.x;
-        
+
         DemoInst.DOAnchorPosX(-230f, 0f);
         DemoInst.DOAnchorPosX(originalPos, 1f).SetEase(Ease.OutCubic).SetDelay(3f);
     }
@@ -46,11 +48,17 @@ public class MainMenu : MonoBehaviour
             OnInfoButtonClicked();
         }
     }
-    void LoadFirstRoom()
+    void LoadEasyRoom()
     {
         // Load the game scene
-        Debug.Log("Loading First Room");
+        Debug.Log("Loading Easy Room");
         SceneChangeManager.Scm.LoadLevel(1);
+    }
+    void LoadMediumRoom()
+    {
+        // Load the game scene
+        Debug.Log("Loading Medium Room");
+        SceneChangeManager.Scm.LoadLevel(2);
     }
 
     public bool infoButtonShown = false;
@@ -67,10 +75,22 @@ public class MainMenu : MonoBehaviour
     {
         // Load the game scene
         Debug.Log("Play Clicked");
-
-        GetComponentInChildren<Canvas>().gameObject.SetActive(false);
-        LoadFirstRoom();
+        playPanel.SetActive(true);
+        if (infoButtonShown)
+            TweenInfoButton(fromValue: 1, toValue: 0);
+        infoButtonShown = false;
     }
+    public void OnEasyButtonClicked()
+    {
+        GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+        LoadEasyRoom();
+    }
+    public void OnMediumButtonClicked()
+    {
+        GetComponentInChildren<Canvas>().gameObject.SetActive(false);
+        LoadMediumRoom();
+    }
+
     public void OnQuitButtonClicked()
     {
         Debug.Log("Quit Clicked");

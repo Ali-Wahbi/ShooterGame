@@ -10,6 +10,8 @@ public class PickupWeapon : MonoBehaviour
     SpriteRenderer sp;
     void Start()
     {
+
+        OutlineVisability(visible: false);
         // randomize the wepon for the player
         if (Randomize) GetRandomWeapon();
         // Set the ouline color based on the weapon class

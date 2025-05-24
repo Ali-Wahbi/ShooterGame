@@ -7,6 +7,10 @@ public class PlayerStats : MonoBehaviour
 {
     void Start()
     {
+
+#if UNITY_EDITOR
+        canDie = false;
+#endif
         SetUiElements();
         Healthbar.AddFirstFilled();
         // Set the UI start stats
